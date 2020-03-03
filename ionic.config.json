@@ -1,0 +1,7 @@
+{
+  "name": "TapAndTake v1.0",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
