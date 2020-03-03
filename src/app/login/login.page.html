@@ -1,0 +1,50 @@
+<ion-header class="">
+  <span class="TapWord">Tap&nbsp;</span><span class="TakeWord">& Take</span>
+</ion-header>
+
+<ion-content>
+  <ion-row class="Login">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col>
+      <span>Логин</span>
+    </ion-col>
+  </ion-row>
+  <ion-row class="Description">
+    <ion-col size="1">
+    </ion-col>
+    <ion-col>
+      <span>Пожалуйста войдите</span>
+    </ion-col>
+  </ion-row>
+  <ion-row class="Email">
+    <ion-col size="1" class="icons">
+      <i class="far fa-envelope"></i>
+    </ion-col>
+    <ion-col>
+      <input type="input" class="form__field" placeholder="Email" name="email" id='email' required />
+      <label for="email" class="form__label">Email</label>
+    </ion-col>
+  </ion-row>
+  <ion-row class="Password">
+    <ion-col size="1" class="icons">
+      <i class="fas fa-unlock-alt"></i>
+    </ion-col>
+    <ion-col>
+      <input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' required />
+      <label for="pass" class="form__label">Пароль</label>
+      <div class="forgot" (click)="forgotPass()">
+        <span>ЗАБЫЛИ?</span>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row class="rowButton">
+    <ion-button (click)="Login()">Войти
+      <div class="arrow">
+      </div>
+    </ion-button>
+  </ion-row>
+  <ion-row class="text" id="text">
+    <span>Не зарегистрированы?&nbsp;</span><span (click)="Register()">Регистрация</span>
+  </ion-row>
+</ion-content>
