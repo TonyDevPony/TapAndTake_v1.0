@@ -4,10 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { RegisterPageRoutingModule } from './register-routing.module';
 
-import { LoginPage } from './login.page';
-import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { RegisterPage } from './register.page';
 import { HeaderComponentModule } from '../header/header.component.module';
 
 @NgModule({
@@ -15,12 +14,9 @@ import { HeaderComponentModule } from '../header/header.component.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    RegisterPageRoutingModule,
     HeaderComponentModule,
   ],
-  providers: [
-    Keyboard
-  ],
-  declarations: [LoginPage]
+  declarations: [RegisterPage]
 })
-export class LoginPageModule {}
+export class RegisterPageModule {}
