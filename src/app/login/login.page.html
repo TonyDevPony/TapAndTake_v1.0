@@ -1,6 +1,3 @@
-<!-- <ion-header class="">
-  <span class="TapWord">Tap&nbsp;</span><span class="TakeWord">& Take</span>
-</ion-header> -->
 <app-header></app-header>
 <ion-content>
   <ion-row class="Login" id="login">
@@ -22,8 +19,6 @@
       <i class="far fa-envelope"></i>
     </ion-col>
     <ion-col>
-      <!-- <input type="email" class="form__field" placeholder="Email" name="email" id='email'  pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"/>
-      <label for="email" class="form__label">Email</label> -->
       <input type="password" class="form__field" placeholder="Пароль" name="emailInp" id='emailInp' />
       <label for="emailInp" class="form__label">Email</label>
     </ion-col>
@@ -50,3 +45,4 @@
     <span>Не зарегистрированы?&nbsp;</span><span (click)="Register()">Регистрация</span>
   </ion-row>
 </ion-content>
+<app-register-alert></app-register-alert>
