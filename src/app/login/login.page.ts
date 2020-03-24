@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+  arrow: any;
   constructor(private statusBar: StatusBar, 
     private keyboard: Keyboard, 
     public alertController: AlertController, ) { }
@@ -18,7 +18,10 @@ export class LoginPage implements OnInit {
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
-
+  ionViewWillEnter(){
+    // this.arrow = document.querySelector('#back_arrow') as HTMLElement;
+    // this.arrow.style.display = 'none';
+  }
 
   forgotPass() {
     alert('__method___->__forgotPass()');
@@ -29,5 +32,10 @@ export class LoginPage implements OnInit {
   }
   Login() {
     alert('__method___->__Login()');
+  }
+
+  ionViewWillLeave(){
+      console.log('willLeave');
+      //this.arrow.style.display = 'block';
   }
 }

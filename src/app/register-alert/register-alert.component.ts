@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register-alert',
@@ -7,13 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterAlertComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private nav: NavController) { }
 
   ngOnInit() {
-
-
+    let business = document.querySelectorAll('.business');
+    business.forEach(item => (
+          item.addEventListener('click', () => {
+            this.goRegistration('bisnesess');
+          })
+        ));
+    let client = document.querySelectorAll('.client');
+    client.forEach(item => {
+          item.addEventListener('click', () => {
+            this.goRegistration('client');
+          })
+    });
+    
   }
-  closeModal(){
+
+  goRegistration(role: string){
+    this.closeModal();
+    //this.router.navigate(['/register', { role }]);
+    this.nav.navigateRoot(['/register', { role }]);
+  }
+
+  async closeModal(){
     let alertDiv = document.querySelector('.alert');
     let backgroundDiv = document.querySelector('.background_opacity');
 
@@ -23,7 +43,6 @@ export class RegisterAlertComponent implements OnInit {
     setTimeout(() => {
       backgroundDiv.classList.remove('background_active');
       backgroundDiv.setAttribute('style', '');
-    }, 500);
-    
+    }, 800); 
   }
 }
