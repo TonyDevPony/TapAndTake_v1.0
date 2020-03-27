@@ -1,5 +1,5 @@
 <app-header></app-header>
-<ion-content>
+<ion-content class="animated fadeInLeft fast">
   <ion-row class="Login" id="login">
     <ion-col size="1">
     </ion-col>
@@ -19,7 +19,7 @@
       <i class="far fa-envelope"></i>
     </ion-col>
     <ion-col>
-      <input type="password" class="form__field" placeholder="Пароль" name="emailInp" id='emailInp' />
+      <input type="text" class="form__field" placeholder="Email" name="emailInp" id='emailInp'  pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"/>
       <label for="emailInp" class="form__label">Email</label>
     </ion-col>
   </ion-row>

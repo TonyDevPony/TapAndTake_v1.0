@@ -40,9 +40,7 @@ export class RegisterAlertComponent implements OnInit {
     backgroundDiv.setAttribute('style', "opacity: 0;");
     alertDiv.classList.remove('active');
 
-    setTimeout(() => {
-      backgroundDiv.classList.remove('background_active');
-      backgroundDiv.setAttribute('style', '');
-    }, 800); 
+    backgroundDiv.classList.remove('background_active');
+    backgroundDiv.setAttribute('style', '');
   }
 }

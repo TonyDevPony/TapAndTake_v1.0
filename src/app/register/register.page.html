@@ -1,5 +1,84 @@
 <app-header></app-header>
 
-<ion-content>
-    
+<ion-content class="animated fadeInLeft fast">
+
+
+    <ion-row class="Register" id="Register">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col>
+          <span>Регистрация</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="Description">
+        <ion-col size="1">
+        </ion-col>
+        <ion-col>
+          <p>Зарегестрирйтесь как  <span (click)="register_alert()" class="role">{{ this.role == 'client' ? 'Клиент' : 'Бизнес' }}</span></p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form_item" id="email">
+        <ion-col size="1" class="icons">
+          <i class="fas fa-signature"></i>
+        </ion-col>
+        <ion-col>
+          <ng-container *ngIf="this.role == 'client'" >
+            <input type="text" class="form__field" placeholder="full name" name="full_name" id='full_name'  pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"/>
+            <label for="full_name" class="form__label">Полное имя</label>
+          </ng-container>
+          <ng-container *ngIf="this.role == 'bisnesess'">
+            <input type="text" class="form__field" placeholder="Name" name="Name" id='Name_of_bussiness' />
+            <label for="Name_of_bussiness" class="form__label">Название</label>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form_item" id="email">
+        <ion-col size="1" class="icons">
+          <i class="far fa-envelope"></i>
+        </ion-col>
+        <ion-col>
+            <input type="email" class="form__field" placeholder="Email" name="Email" id='Email' />
+            <label for="Email" class="form__label">Email</label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form_item" id="email">
+        <ion-col size="1" class="icons">
+          <i class="fas fa-mobile-alt"></i>
+        </ion-col>
+        <ion-col>
+            <input type="number" class="form__field" placeholder="phone_number" name="phone_number" id='phone_number' />
+            <label for="phone_number" class="form__label">Номер телефона</label>
+        </ion-col>
+      </ion-row>
+      
+
+
+      <ion-row class="form_item">
+        <ion-col size="1" class="icons">
+          <i class="fas fa-unlock-alt"></i>
+        </ion-col>
+        <ion-col>
+          <input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' />
+          <label for="pass" class="form__label">Пароль</label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form_item">
+        <ion-col size="1" class="icons">
+          <i class="fas fa-unlock-alt"></i>
+        </ion-col>
+        <ion-col>
+          <input type="password" class="form__field" placeholder="Подтверждения пароля" name="confirm_pass" id='confirm_pass' />
+          <label for="confirm_pass" class="form__label">Подтверждения пароля</label>
+        </ion-col>
+      </ion-row>
+      <ion-row class="rowButton">
+        <ion-button >Зарегестрироватся
+          <div class="arrow">
+          </div>
+        </ion-button>
+      </ion-row>
+      <ion-row class="text" id="text">
+        <span>Уже есть аккаунт?&nbsp;</span><span (click)="Login()">Войти</span>
+      </ion-row>
 </ion-content>
+<app-register-alert></app-register-alert>

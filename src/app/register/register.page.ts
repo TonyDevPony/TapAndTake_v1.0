@@ -15,12 +15,11 @@ export class RegisterPage implements OnInit {
     this.role = this.activatedRoute.snapshot.paramMap.get('role');
     console.log(this.role);
   }
-  // ionViewWillEnter(){
-  //   document.querySelector('.back_arrow').addEventListener('click', () => {
-  //     // this.nav.navigateRoot(['/login']);
-  //     console.log('login');
-      
-  //    });
-  // }
-
+  Login() {
+    this.nav.navigateRoot(['/login']);
+  }
+  register_alert() {
+    document.querySelector('app-register-alert').firstElementChild.classList.add('active');
+    document.querySelector('app-register-alert').lastElementChild.classList.add('background_active');
+  }
 }
