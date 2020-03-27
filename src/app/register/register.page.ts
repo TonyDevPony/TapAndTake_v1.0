@@ -22,4 +22,7 @@ export class RegisterPage implements OnInit {
     document.querySelector('app-register-alert').firstElementChild.classList.add('active');
     document.querySelector('app-register-alert').lastElementChild.classList.add('background_active');
   }
+  goHome(){
+    this.nav.navigateRoot(['/home']);
+  }
 }

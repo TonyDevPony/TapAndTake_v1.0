@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,8 @@ export class LoginPage implements OnInit {
   arrow: any;
   constructor(private statusBar: StatusBar, 
     private keyboard: Keyboard, 
-    public alertController: AlertController, ) { }
+    public alertController: AlertController, 
+    private nav: NavController,) { }
 
   ngOnInit() {
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
@@ -28,6 +29,9 @@ export class LoginPage implements OnInit {
   }
   Login() {
     alert('__method___->__Login()');
+  }
+  goHome(){
+    this.nav.navigateRoot(['/home']);
   }
 
 }
