@@ -8,8 +8,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { HeaderComponentModule } from '../header/header.component.module';
-import { RegisterAlertComponentModule } from '../register-alert/register-alert.component.module';
+import { HeaderComponentModule } from '../header.component/header.component.module';
+import { RegisterAlertComponentModule } from '../register-alert.component/register-alert.component.module';
 
 @NgModule({
   imports: [
