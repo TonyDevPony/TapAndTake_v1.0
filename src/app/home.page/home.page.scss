@@ -1,0 +1,74 @@
+ion-content{
+    position: relative;
+}
+.toolbar{
+    width: 140px;
+    height: 70px;
+    position: absolute;
+    left: 0; right: 50px; bottom: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.qr_code, .settings{
+    border-radius: 50px;
+    background: linear-gradient(to bottom, #FBDC95, #FBA232);
+    box-shadow:
+        0 1px rgba(255,255,255,.2),
+        0 3px 5px rgba(0,1,6,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.qr_code{
+    width: 70px;
+    height: 70px;
+    
+}
+.settings{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+.toolbar_img{
+    width: 60%;
+    height: 60%;
+}
+#settings>img{
+    width: 70%;
+    height: 70%;
+}
+ion-slides{
+    width: 100%;
+}
+.row_buttons{
+    margin-top: 40px;
+    height: 50px;
+}
+.col_buttons{
+    display: flex;
+    
+}
+.col_buttons:first-child{
+    justify-content: flex-start;
+    margin-left: 10px;
+}
+.col_buttons:last-child{
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+.choise_button{
+    width: 135px;
+    background: none;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #929292;
+    transition: 0.2s ease;
+    padding: 4px;
+}
+.active{
+    color: #484848;
+    border-bottom: 1px solid #484848;
+    outline: none;
+}

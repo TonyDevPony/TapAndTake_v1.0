@@ -39,6 +39,27 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "window.Keyboard"
       ]
+    },
+    {
+      "id": "phonegap-plugin-barcodescanner.BarcodeScanner",
+      "file": "plugins/phonegap-plugin-barcodescanner/www/barcodescanner.js",
+      "pluginId": "phonegap-plugin-barcodescanner",
+      "clobbers": [
+        "cordova.plugins.barcodeScanner"
+      ]
+    },
+    {
+      "id": "cordova-base64-to-gallery.object.assign-polyfill",
+      "file": "plugins/cordova-base64-to-gallery/www/object.assign-polyfill.js",
+      "pluginId": "cordova-base64-to-gallery"
+    },
+    {
+      "id": "cordova-base64-to-gallery.base64ToGallery",
+      "file": "plugins/cordova-base64-to-gallery/www/base64ToGallery.js",
+      "pluginId": "cordova-base64-to-gallery",
+      "clobbers": [
+        "cordova.base64ToGallery"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -47,6 +68,8 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-device": "2.0.3",
     "cordova-plugin-splashscreen": "5.0.3",
     "cordova-plugin-ionic-webview": "4.1.3",
-    "cordova-plugin-ionic-keyboard": "2.2.0"
+    "cordova-plugin-ionic-keyboard": "2.2.0",
+    "phonegap-plugin-barcodescanner": "8.1.0",
+    "cordova-base64-to-gallery": "4.1.3"
   };
 });

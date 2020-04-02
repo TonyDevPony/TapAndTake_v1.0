@@ -809,10 +809,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: 'home',
       loadChildren: function loadChildren() {
         return __webpack_require__.e(
-        /*! import() | home-home-module */
-        "home-home-module").then(__webpack_require__.bind(null,
-        /*! ./home/home.module */
-        "./src/app/home/home.module.ts")).then(function (m) {
+        /*! import() | home-page-home-module */
+        "home-page-home-module").then(__webpack_require__.bind(null,
+        /*! ./home.page/home.module */
+        "./src/app/home.page/home.module.ts")).then(function (m) {
           return m.HomePageModule;
         });
       }
@@ -820,10 +820,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: 'login',
       loadChildren: function loadChildren() {
         return Promise.all(
-        /*! import() | login-login-module */
-        [__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null,
-        /*! ./login/login.module */
-        "./src/app/login/login.module.ts")).then(function (m) {
+        /*! import() | login-page-login-module */
+        [__webpack_require__.e("default~login-page-login-module~register-page-register-module"), __webpack_require__.e("login-page-login-module")]).then(__webpack_require__.bind(null,
+        /*! ./login.page/login.module */
+        "./src/app/login.page/login.module.ts")).then(function (m) {
           return m.LoginPageModule;
         });
       }
@@ -831,11 +831,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       path: 'register',
       loadChildren: function loadChildren() {
         return Promise.all(
-        /*! import() | register-register-module */
-        [__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null,
-        /*! ./register/register.module */
-        "./src/app/register/register.module.ts")).then(function (m) {
+        /*! import() | register-page-register-module */
+        [__webpack_require__.e("default~login-page-login-module~register-page-register-module"), __webpack_require__.e("register-page-register-module")]).then(__webpack_require__.bind(null,
+        /*! ./register.page/register.module */
+        "./src/app/register.page/register.module.ts")).then(function (m) {
           return m.RegisterPageModule;
+        });
+      }
+    }, {
+      path: 'qr',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | qr-page-qr-module */
+        "qr-page-qr-module").then(__webpack_require__.bind(null,
+        /*! ./qr.page/qr.module */
+        "./src/app/qr.page/qr.module.ts")).then(function (m) {
+          return m.QRPageModule;
         });
       }
     }];
@@ -1062,6 +1073,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @ionic-native/keyboard/ngx */
     "./node_modules/@ionic-native/keyboard/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! @ionic-native/barcode-scanner/ngx */
+    "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! @ionic-native/base64-to-gallery/ngx */
+    "./node_modules/@ionic-native/base64-to-gallery/ngx/index.js");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
@@ -1074,7 +1097,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"], {
         provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"],
         useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"]
-      }],
+      }, _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_10__["BarcodeScanner"], _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_11__["Base64ToGallery"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })], AppModule);
     /***/

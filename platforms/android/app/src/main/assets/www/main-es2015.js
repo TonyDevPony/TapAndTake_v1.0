@@ -708,14 +708,18 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: 'home', loadChildren: () => __webpack_require__.e(/*! import() | home-home-module */ "home-home-module").then(__webpack_require__.bind(null, /*! ./home/home.module */ "./src/app/home/home.module.ts")).then(m => m.HomePageModule) },
+    { path: 'home', loadChildren: () => __webpack_require__.e(/*! import() | home-page-home-module */ "home-page-home-module").then(__webpack_require__.bind(null, /*! ./home.page/home.module */ "./src/app/home.page/home.module.ts")).then(m => m.HomePageModule) },
     {
         path: 'login',
-        loadChildren: () => Promise.all(/*! import() | login-login-module */[__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("login-login-module")]).then(__webpack_require__.bind(null, /*! ./login/login.module */ "./src/app/login/login.module.ts")).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() | login-page-login-module */[__webpack_require__.e("default~login-page-login-module~register-page-register-module"), __webpack_require__.e("login-page-login-module")]).then(__webpack_require__.bind(null, /*! ./login.page/login.module */ "./src/app/login.page/login.module.ts")).then(m => m.LoginPageModule)
     },
     {
         path: 'register',
-        loadChildren: () => Promise.all(/*! import() | register-register-module */[__webpack_require__.e("default~login-login-module~register-register-module"), __webpack_require__.e("register-register-module")]).then(__webpack_require__.bind(null, /*! ./register/register.module */ "./src/app/register/register.module.ts")).then(m => m.RegisterPageModule)
+        loadChildren: () => Promise.all(/*! import() | register-page-register-module */[__webpack_require__.e("default~login-page-login-module~register-page-register-module"), __webpack_require__.e("register-page-register-module")]).then(__webpack_require__.bind(null, /*! ./register.page/register.module */ "./src/app/register.page/register.module.ts")).then(m => m.RegisterPageModule)
+    },
+    {
+        path: 'qr',
+        loadChildren: () => __webpack_require__.e(/*! import() | qr-page-qr-module */ "qr-page-qr-module").then(__webpack_require__.bind(null, /*! ./qr.page/qr.module */ "./src/app/qr.page/qr.module.ts")).then(m => m.QRPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -826,6 +830,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
+/* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
+/* harmony import */ var _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/base64-to-gallery/ngx */ "./node_modules/@ionic-native/base64-to-gallery/ngx/index.js");
+
+
 
 
 
@@ -847,7 +855,9 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
             _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"],
-            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] }
+            { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] },
+            _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_10__["BarcodeScanner"],
+            _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_11__["Base64ToGallery"],
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })

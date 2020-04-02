@@ -1,0 +1,30 @@
+<app-header></app-header>
+
+<ion-content>
+    <ion-row class="row_buttons">
+        <ion-col class="col_buttons animated fadeInLeft fast">
+            <button (click)="viewFavorites()" class="choise_button active" id="favorites">Избранные</button>
+        </ion-col>
+        <ion-col class="col_buttons animated fadeInRight fast">
+            <button (click)="viewCoffeeHouses()" class="choise_button" id="coffee_house">Кофейни</button>
+        </ion-col>
+    </ion-row>
+    <ion-row class="animated fadeIn fast">
+        <ion-slides [options]="slideOpts" #mySlider (ionSlideDidChange)="setButton()">
+            <ion-slide>
+              <app-favorites></app-favorites>
+            </ion-slide>
+            <ion-slide>
+              <app-coffee-house></app-coffee-house>
+            </ion-slide>
+          </ion-slides>
+    </ion-row>
+</ion-content>
+<div class="toolbar animated fadeInUp fast">
+    <div class="settings" id="settings">
+        <img src="../../assets/img/home/settings.svg" alt="" class="toolbar_img">
+    </div>
+    <div class="qr_code" id="qr_code" (click)="goQrPage()">
+        <img src="../../assets/img/home/qr-code.svg" alt="" class="toolbar_img">
+    </div>
+</div>

@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
+ 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -18,7 +21,9 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
     StatusBar,
     SplashScreen,
     Keyboard,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BarcodeScanner,
+    Base64ToGallery,
   ],
   bootstrap: [AppComponent]
 })
