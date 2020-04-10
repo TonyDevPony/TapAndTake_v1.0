@@ -8,7 +8,6 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
 import { HeaderComponentModule } from '../header.component/header.component.module';
-import { RegisterAlertComponentModule } from '../register-alert.component/register-alert.component.module';
 
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { RegisterAlertComponentModule } from '../register-alert.component/regist
     IonicModule,
     RegisterPageRoutingModule,
     HeaderComponentModule,
-    RegisterAlertComponentModule,
   ],
   declarations: [RegisterPage]
 })

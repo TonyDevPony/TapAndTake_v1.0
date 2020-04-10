@@ -24,8 +24,7 @@ export class LoginPage implements OnInit {
     alert('__method___->__forgotPass()');
   }
   Register() {
-    document.querySelector('app-register-alert').firstElementChild.classList.add('active');
-    document.querySelector('app-register-alert').lastElementChild.classList.add('background_active');
+    this.nav.navigateRoot(['/register']);
   }
   Login() {
     alert('__method___->__Login()');

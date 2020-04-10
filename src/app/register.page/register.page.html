@@ -14,7 +14,7 @@
         <ion-col size="1">
         </ion-col>
         <ion-col>
-          <p>Зарегестрирйтесь как  <span (click)="register_alert()" class="role">{{ this.role == 'client' ? 'Клиент' : 'Бизнес' }}</span></p>
+          <p>Заполните поля для регистрации</p>
         </ion-col>
       </ion-row>
       <ion-row class="form_item" id="email">
@@ -22,14 +22,8 @@
           <i class="fas fa-signature"></i>
         </ion-col>
         <ion-col>
-          <ng-container *ngIf="this.role == 'client'" >
             <input type="text" class="form__field" placeholder="full name" name="full_name" id='full_name'  pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"/>
             <label for="full_name" class="form__label">Полное имя</label>
-          </ng-container>
-          <ng-container *ngIf="this.role == 'bisnesess'">
-            <input type="text" class="form__field" placeholder="Name" name="Name" id='Name_of_bussiness' />
-            <label for="Name_of_bussiness" class="form__label">Название</label>
-          </ng-container>
         </ion-col>
       </ion-row>
       <ion-row class="form_item" id="email">
@@ -81,4 +75,3 @@
         <span>Уже есть аккаунт?&nbsp;</span><span (click)="Login()">Войти</span>
       </ion-row>
 </ion-content>
-<app-register-alert></app-register-alert>

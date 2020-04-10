@@ -8,12 +8,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  role: any;
   constructor(private activatedRoute: ActivatedRoute, private nav: NavController) { }
 
   ngOnInit() {
-    this.role = this.activatedRoute.snapshot.paramMap.get('role');
-    console.log(this.role);
   }
   Login() {
     this.nav.navigateRoot(['/login']);
