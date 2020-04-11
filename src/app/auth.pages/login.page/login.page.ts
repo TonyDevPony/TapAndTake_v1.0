@@ -21,16 +21,30 @@ export class LoginPage implements OnInit {
   }
 
   forgotPass() {
-    alert('__method___->__forgotPass()');
+    this.nav.navigateRoot(['/forgot-password']);
+
   }
   Register() {
     this.nav.navigateRoot(['/register']);
   }
+
   Login() {
     alert('__method___->__Login()');
   }
   goHome(){
     this.nav.navigateRoot(['/home']);
+  }
+  ionViewWillEnter() {
+    // this.backButton.style.display = 'flex';
+    // if(this.noBackButtonRoute.includes(this.router.url.slice(1))) {
+    //   console.log('ngOnInit');
+      
+    //   this.backButton.style.display = 'none';
+    // }
+    // console.log('ionViewDidEnter');
+    console.log('ionViewWillEnter');
+    
+    
   }
 
 }

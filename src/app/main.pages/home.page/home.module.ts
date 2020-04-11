@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { HeaderComponentModule } from '../header.component/header.component.module';
-import { CoffeeHouseComponentModule } from '../coffee-house.component/coffee-house.component.module';
-import { FavoritesComponentModule } from '../favorites.component/favorites.component.module';
+import { HeaderComponentModule } from '../../components/header.component/header.component.module';
+import { CoffeeHouseComponentModule } from '../../components/coffee-house.component/coffee-house.component.module';
+import { FavoritesComponentModule } from '../../components/favorites.component/favorites.component.module';
 
 
 @NgModule({

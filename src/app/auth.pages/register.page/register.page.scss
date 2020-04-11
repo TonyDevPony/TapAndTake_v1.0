@@ -1,18 +1,15 @@
-.Login {
-    margin-top: 15vh;
-    font-size: 30pt;
+.Register {
+    margin-top: 15%;
+    font-size: 26pt;
     font-weight: bold;
 }
 .Description {
     font-size: 14pt;
     color: #A4B0BE;
 }
-.Email, .Password{
+.form_item{
     height: 50px;
     margin-top: 10px;
-}
-.Email>ion-col, .Password>ion-col{
-    height: 100%;
 }
 i{
     color: #A4B0BE;
@@ -99,7 +96,7 @@ i{
 }
 .rowButton>ion-button{
     --background: linear-gradient(to right, #FBDC95, #FBA232);
-    width: 120px;
+    width: 240px;
     height: 45px;
     --border-radius: 20px;
     font-weight: bold;
@@ -124,11 +121,13 @@ i{
     width: 20px;
     height: 20px;
     position: relative;
-    background-image: url('../../assets/img/arrow.png');
+    background-image: url('../../../assets/img/arrow.png');
     background-repeat: no-repeat;
     background-position: center;
 }
 .text_hide{
     display: none;
 }
-
+.role{
+    color: #FBA232;
+}

@@ -3,18 +3,22 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home.page/home.module').then( m => m.HomePageModule)},
+  { path: 'home', loadChildren: () => import('./main.pages/home.page/home.module').then( m => m.HomePageModule)},
   {
     path: 'login',
-    loadChildren: () => import('./login.page/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./auth.pages/login.page/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./register.page/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./auth.pages/register.page/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'qr',
-    loadChildren: () => import('./qr.page/qr.module').then( m => m.QRPageModule)
+    loadChildren: () => import('./main.pages/qr.page/qr.module').then( m => m.QRPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./auth.pages/forgot-password.page/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
 ];
 
