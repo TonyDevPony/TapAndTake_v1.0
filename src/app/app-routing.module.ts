@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'forgot-password',
     loadChildren: () => import('./auth.pages/forgot-password.page/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
+  {
+    path: 'password-reset',
+    loadChildren: () => import('./auth.pages/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
 ];
 
 @NgModule({
