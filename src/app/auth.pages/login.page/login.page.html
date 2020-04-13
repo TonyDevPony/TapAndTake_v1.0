@@ -19,7 +19,7 @@
       <i class="far fa-envelope"></i>
     </ion-col>
     <ion-col>
-      <input type="text" class="form__field" placeholder="Email" name="emailInp" id='emailInp'  pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"/>
+      <input type="text" class="form__field" placeholder="Email" name="emailInp" id='emailInp' pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"/>
       <label for="emailInp" class="form__label">Email</label>
     </ion-col>
   </ion-row>
@@ -41,7 +41,7 @@
       </div>
     </ion-button>
   </ion-row>
-  <ion-row class="text" id="text">
+  <ion-row class="text animated fadeInDown fast" id="text">
     <span>Не зарегистрированы?&nbsp;</span><span (click)="Register()">Регистрация</span>
   </ion-row>
 </ion-content>

@@ -1,29 +1,11 @@
-.forgot_section {
-    margin-top: 15vh;
-}
-.forgot_section_item > h4 {
-    padding: 0 0 10px 10px;
-    font-size: 25pt;
+h4{
+    font-size: 20pt;
     font-weight: bold;
-    margin: 0;
+    padding: 20px 0 5px 10px;
 }
-.forgot_section_item > p {
-    font-size: 14pt;
-    color: #A4B0BE;
-    padding-left: 10px;
-    margin: 0;
-}
-.Email{
+.section_row_item{
     height: 50px;
     margin-top: 10px;
-}
-i{
-    color: #A4B0BE;
-    margin-top: 5px;
-    display: block;
-}
-.Email>ion-col{
-    height: 100%;
 }
 .form__label{
     position: absolute;
@@ -39,6 +21,7 @@ i{
     border: none;
     border-bottom: 1px solid #A4B0BE;
     height: 100%;
+    color: #484848;
     &::placeholder {
         color: transparent;
     }
@@ -72,55 +55,45 @@ i{
       //   font-size: 5pt;
         color: #FBA232;
         font-weight: 700;
-    } 
+    }
     border-bottom: 1px solid #FBA232;
 }
-
+input[type="tel"]:focus::placeholder{
+    color: #484848;
+    font-size: 14pt;
+}
 .form__field{
     &:required,&:invalid { border-bottom: 1px solid red; }
 }
-.icons {
+.icons{
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.rowButton{
-    margin-top: 35px;
-    margin-right: 20px;
-    display: flex;
-    justify-content: flex-end;
-}
-.rowButton>ion-button{
-    --background: linear-gradient(to right, #FBDC95, #FBA232);
-    width: 170px;
-    height: 45px;
-    --border-radius: 20px;
-    font-weight: bold;
-}
-.text{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-}
-.text>span{
-    display: block;
+i{
     color: #A4B0BE;
+    margin-top: 5px;
+    display: block;
 }
-.text>span:last-child{
+input[type="date"]{
+    background: none;
+}
+.date_label{
     color: #FBA232;
 }
-.arrow{
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-    position: relative;
-    background-image: url('../../../assets/img/arrow.png');
-    background-repeat: no-repeat;
-    background-position: center;
+.date{
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 15px;
 }
-.text_hide{
-    display: none;
+
+ion-datetime {
+    padding: 10px 0 5px 0;
+    width: 95%;
+    border-bottom: 1px solid #A4B0BE;
+    font-size: 14pt;
+    --placeholder-color: #A4B0BE;
+}
+ion-datetime:not(::placeholder){
+    color: #484848;
 }

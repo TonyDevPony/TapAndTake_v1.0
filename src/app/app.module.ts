@@ -12,11 +12,12 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
- 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,],
   providers: [
     StatusBar,
     SplashScreen,

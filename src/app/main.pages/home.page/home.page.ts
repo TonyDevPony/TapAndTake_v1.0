@@ -57,5 +57,8 @@ export class HomePage {
   goQrPage(){
     this.nav.navigateRoot(['/qr']);
   }
+  goUserSettings() {
+    this.nav.navigateRoot(['/user-settings']);
+  }
 
 }

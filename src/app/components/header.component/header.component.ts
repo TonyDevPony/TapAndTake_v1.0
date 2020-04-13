@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  private noBackButtonRoute = ['forgot-password' ,'qr'];
+  private noBackButtonRoute = ['forgot-password' ,'qr', 'password-reset', 'user-settings'];
   private buttonIsActive: boolean;
 
   constructor(

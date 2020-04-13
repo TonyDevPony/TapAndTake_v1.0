@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'qr',
-    loadChildren: () => import('./main.pages/qr.page/qr.module').then( m => m.QRPageModule)
+    loadChildren: () => import('./main.pages/user/qr.page/qr.module').then( m => m.QRPageModule)
   },
   {
     path: 'forgot-password',
@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'password-reset',
     loadChildren: () => import('./auth.pages/password-reset/password-reset.module').then( m => m.PasswordResetPageModule)
+  },
+  {
+    path: 'user-settings',
+    loadChildren: () => import('./main.pages/user/user-settings/user-settings.module').then( m => m.UserSettingsPageModule)
   },
 ];
 

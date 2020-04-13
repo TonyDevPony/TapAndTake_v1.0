@@ -4,19 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PasswordResetPageRoutingModule } from './password-reset-routing.module';
+import { UserSettingsPageRoutingModule } from './user-settings-routing.module';
 
-import { PasswordResetPage } from './password-reset.page';
+import { UserSettingsPage } from './user-settings.page';
 import { HeaderComponentModule } from 'src/app/components/header.component/header.component.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PasswordResetPageRoutingModule,
+    UserSettingsPageRoutingModule,
     HeaderComponentModule,
+    TextMaskModule,
   ],
-  declarations: [PasswordResetPage]
+  declarations: [UserSettingsPage]
 })
-export class PasswordResetPageModule {}
+export class UserSettingsPageModule {}

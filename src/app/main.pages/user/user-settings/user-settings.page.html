@@ -1,0 +1,45 @@
+<app-header></app-header>
+
+<ion-content>
+  <section>
+    <ion-row>
+      <h4>Настройки</h4>
+    </ion-row>
+    <ion-row class="section_row_item" id="user_name">
+      <ion-col size="1" class="icons">
+        <i class="far fa-user"></i>
+      </ion-col>
+      <ion-col>
+        <input type="text" class="form__field" placeholder="FullName" name="fullname" id='fullname'/>
+        <label for="fullname" class="form__label">Имя/Фамилия</label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="section_row_item" id="email">
+      <ion-col size="1" class="icons">
+        <i class="far fa-envelope"></i>
+      </ion-col>
+      <ion-col>
+        <input type="text" class="form__field" placeholder="Email" name="emailInp" id='emailInp'  pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"/>
+        <label for="emailInp" class="form__label">Email</label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="section_row_item" id="phone_number">
+      <ion-col size="1" class="icons">
+        <i class="fas fa-mobile-alt"></i>
+      </ion-col>
+      <ion-col>
+        <input [textMask]="{mask: mask}" type="tel" class="form__field" placeholder="(___)___-___" name="Tellephone" id='tellephone'  pattern="^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$"/>
+        <label for="tellephone" class="form__label">Телефон</label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="section_row_item" id="birthday">
+      <ion-col size="1" class="icons date">
+        <i class="far fa-calendar-alt"></i>
+      </ion-col>
+      <ion-col>
+        <ion-label class="date_label">Дата рождения</ion-label>
+        <ion-datetime displayFormat="MM.DD.YYYY" placeholder="Выберете Дату"></ion-datetime>
+      </ion-col>
+    </ion-row>
+  </section>
+</ion-content>
