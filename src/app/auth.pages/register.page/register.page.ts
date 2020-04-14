@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 @Component({
   selector: 'app-register',
@@ -8,16 +9,16 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  constructor(private activatedRoute: ActivatedRoute, private nav: NavController) { }
+  constructor(private activatedRoute: ActivatedRoute,
+     private keyboard: Keyboard,
+     private nav: NavController) { }
 
   ngOnInit() {
+    this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
+    this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
   Login() {
     this.nav.navigateRoot(['/login']);
-  }
-  register_alert() {
-    document.querySelector('app-register-alert').firstElementChild.classList.add('active');
-    document.querySelector('app-register-alert').lastElementChild.classList.add('background_active');
   }
   goHome(){
     this.nav.navigateRoot(['/home']);

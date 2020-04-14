@@ -5,7 +5,7 @@
     <ion-row>
       <h4>Настройки</h4>
     </ion-row>
-    <ion-row class="section_row_item" id="user_name">
+    <ion-row class="section_row_item animated fadeInLeft fast" id="user_name">
       <ion-col size="1" class="icons">
         <i class="far fa-user"></i>
       </ion-col>
@@ -14,7 +14,7 @@
         <label for="fullname" class="form__label">Имя/Фамилия</label>
       </ion-col>
     </ion-row>
-    <ion-row class="section_row_item" id="email">
+    <ion-row class="section_row_item animated fadeInRight fast" id="email">
       <ion-col size="1" class="icons">
         <i class="far fa-envelope"></i>
       </ion-col>
@@ -23,7 +23,7 @@
         <label for="emailInp" class="form__label">Email</label>
       </ion-col>
     </ion-row>
-    <ion-row class="section_row_item" id="phone_number">
+    <ion-row class="section_row_item animated fadeInLeft fast" id="phone_number">
       <ion-col size="1" class="icons">
         <i class="fas fa-mobile-alt"></i>
       </ion-col>
@@ -32,14 +32,35 @@
         <label for="tellephone" class="form__label">Телефон</label>
       </ion-col>
     </ion-row>
-    <ion-row class="section_row_item" id="birthday">
+    <ion-row class="section_row_item animated fadeInRight fast" id="birthday">
       <ion-col size="1" class="icons date">
         <i class="far fa-calendar-alt"></i>
       </ion-col>
       <ion-col>
         <ion-label class="date_label">Дата рождения</ion-label>
-        <ion-datetime displayFormat="MM.DD.YYYY" placeholder="Выберете Дату"></ion-datetime>
+        <ion-datetime displayFormat="MM.DD.YYYY" placeholder="Выберете Дату" cancelText="Отменить" doneText="Применить"></ion-datetime>
       </ion-col>
+    </ion-row>
+    <ion-row class="section_row_item animated fadeInLeft fast" id="gender">
+      <ion-col size="1" class="icons gender">
+        <i class="fas fa-venus-mars"></i>
+      </ion-col>
+      <ion-col>
+        <ion-label class="gender_label">Пол</ion-label>
+        <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Не выбрано" class="select_button" cancelText="Отменить">
+            <ion-select-option value="male">Мужской</ion-select-option>
+            <ion-select-option value="female">Женский</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowButton animated fadeInRight fast">
+      <ion-button (click)="saveSettings()">Сохранить
+        <div class="arrow">
+        </div>
+      </ion-button>
+    </ion-row>
+    <ion-row class="text animated fadeInDown fast" id="text">
+      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>
     </ion-row>
   </section>
 </ion-content>
