@@ -60,5 +60,8 @@ export class HomePage {
   goUserSettings() {
     this.nav.navigateRoot(['/user-settings']);
   }
+  goToAdminCoffeeHouses() {
+    this.nav.navigateRoot(['/admin-coffee-houses']);
+  }
 
 }

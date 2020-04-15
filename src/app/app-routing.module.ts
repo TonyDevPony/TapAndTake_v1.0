@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'user-settings',
     loadChildren: () => import('./main.pages/user/user-settings/user-settings.module').then( m => m.UserSettingsPageModule)
   },
+  {
+    path: 'admin-coffee-houses',
+    loadChildren: () => import('./main.pages/admin/admin-coffee-houses/admin-coffee-houses.module').then( m => m.AdminCoffeeHousesPageModule)
+  },
 ];
 
 @NgModule({
