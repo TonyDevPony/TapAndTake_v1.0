@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'admin-coffee-houses',
     loadChildren: () => import('./main.pages/admin/admin-coffee-houses/admin-coffee-houses.module').then( m => m.AdminCoffeeHousesPageModule)
   },
+  {
+    path: 'admin-settings',
+    loadChildren: () => import('./main.pages/admin/admin-settings/admin-settings.module').then( m => m.AdminSettingsPageModule)
+  },
 ];
 
 @NgModule({

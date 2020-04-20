@@ -9,7 +9,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 })
 export class UserSettingsPage implements OnInit {
   pickerOPTS: any;
-  mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
+  mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
   constructor(private keyboard: Keyboard) { }
 
   ngOnInit() {
@@ -31,6 +31,5 @@ export class UserSettingsPage implements OnInit {
       }, 200);
     });
   }
-
 
 }

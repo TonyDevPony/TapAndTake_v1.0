@@ -9,6 +9,8 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { HeaderComponentModule } from '../../components/header.component/header.component.module';
+import { AlertComponentModule } from 'src/app/components/alert.component/alert.component.module';
+import { AlertComponent } from 'src/app/components/alert.component/alert.component';
 
 @NgModule({
   imports: [
@@ -17,9 +19,11 @@ import { HeaderComponentModule } from '../../components/header.component/header.
     IonicModule,
     LoginPageRoutingModule,
     HeaderComponentModule,
+    AlertComponentModule,
   ],
   providers: [
-    Keyboard
+    Keyboard,
+    AlertComponent,
   ],
   declarations: [LoginPage]
 })

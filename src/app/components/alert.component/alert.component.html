@@ -1,0 +1,20 @@
+<div class="alert animated fadeIn faster">
+  <ion-row class="alert_header">
+    <h4>Упс...</h4>
+  </ion-row>
+  <ion-row class="alert_body" *ngFor="let item of errors">
+    <ion-col size="1" class="error_icon">
+      <i class="fas fa-exclamation-circle"></i>
+    </ion-col>
+    <ion-col class="alert_error">
+      <p class="error">{{ item }}</p>
+    </ion-col>
+  </ion-row>
+  <ion-row class="alert_footer">
+    <ion-button class="submit_button" (click)="closeModal()">Ok</ion-button>
+  </ion-row>
+</div>
+
+<div class="background_opacity" (click)="closeModal()">
+
+</div>

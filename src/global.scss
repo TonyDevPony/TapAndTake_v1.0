@@ -30,3 +30,17 @@
     font-weight: normal;
     src: url('./assets/fonts/FredokaOne-Regular.ttf');
 }
+.spinerColor {
+    --spinner-color: #FBA232 !important;
+}
+.alert>.alert-head {
+    font-size: 14pt !important;
+}
+.alertButton {
+    color: #FBA232 !important;
+    font-size: 14pt !important;
+}
+.toast {
+    --color: #FBA232;
+    font-size: 12pt;
+}

@@ -22,7 +22,7 @@
           <i class="fas fa-signature"></i>
         </ion-col>
         <ion-col>
-            <input type="text" class="form__field" placeholder="full name" name="full_name" id='full_name'/>
+            <input type="text" class="form__field" [(ngModel)]="name" placeholder="full name" name="full_name" id='full_name' pattern="^[^-0-9]{1,}$"/>
             <label for="full_name" class="form__label">Полное имя</label>
         </ion-col>
       </ion-row>
@@ -31,8 +31,8 @@
           <i class="far fa-envelope"></i>
         </ion-col>
         <ion-col>
-            <input type="email" class="form__field" placeholder="Email" name="Email" id='Email' pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"/>
-            <label for="Email" class="form__label">Email</label>
+            <input type="email" class="form__field" placeholder="Email"  [(ngModel)]="email" name="Email" id='emailInp' pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"/>
+            <label for="emailInp" class="form__label">Email</label>
         </ion-col>
       </ion-row>
       <ion-row class="form_item" id="email">
@@ -40,7 +40,7 @@
           <i class="fas fa-mobile-alt"></i>
         </ion-col>
         <ion-col>
-            <input type="number" class="form__field" placeholder="phone_number" name="phone_number" id='phone_number' />
+            <input type="tel" [textMask]="{mask: mask}" class="form__field" [(ngModel)]="phone" placeholder="phone_number" name="phone_number" id='phone_number' pattern="\(\d{3,5}\)\s+\d{3}-\d{2}-\d{2}"/>
             <label for="phone_number" class="form__label">Номер телефона</label>
         </ion-col>
       </ion-row>
@@ -52,7 +52,7 @@
           <i class="fas fa-unlock-alt"></i>
         </ion-col>
         <ion-col>
-          <input type="password" class="form__field" placeholder="Пароль" name="pass" id='pass' />
+          <input type="password" class="form__field" placeholder="Пароль" minlength="6" [(ngModel)]="password" name="pass" id='pass' />
           <label for="pass" class="form__label">Пароль</label>
         </ion-col>
       </ion-row>
@@ -61,12 +61,12 @@
           <i class="fas fa-unlock-alt"></i>
         </ion-col>
         <ion-col>
-          <input type="password" class="form__field" placeholder="Подтверждения пароля" name="confirm_pass" id='confirm_pass' />
+          <input type="password" class="form__field" placeholder="Подтверждения пароля" minlength="6" [(ngModel)]="confirmpass" name="confirm_pass" id='confirm_pass' />
           <label for="confirm_pass" class="form__label">Подтверждения пароля</label>
         </ion-col>
       </ion-row>
       <ion-row class="rowButton">
-        <ion-button (click)="goHome()">Зарегестрироватся
+        <ion-button (click)="Register()">Зарегестрироватся
           <div class="arrow">
           </div>
         </ion-button>

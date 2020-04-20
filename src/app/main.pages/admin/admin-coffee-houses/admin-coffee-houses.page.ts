@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-admin-coffee-houses',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminCoffeeHousesPage implements OnInit {
 
-  constructor() { }
+  constructor(private nav: NavController) { }
 
   ngOnInit() {
   }
-
+  goCreateCoffehouse() {
+    this.nav.navigateRoot(['/admin-settings']);
+  }
 }

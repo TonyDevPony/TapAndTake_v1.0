@@ -14,7 +14,8 @@ export class HeaderComponent implements OnInit {
     'qr', 
     'password-reset', 
     'user-settings',
-    'admin-coffee-houses'
+    'admin-coffee-houses',
+    'admin-settings',
   ];
   private buttonIsActive: boolean;
 
