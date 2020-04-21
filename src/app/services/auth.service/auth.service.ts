@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ export class AuthService {
   // Записать юзера в сторейдж при входе 
 
 
-  constructor() { 
+  constructor(private storage: Storage) { 
     this.user = null;
   }
 
-  setUser(user: object) {
+  setUser(user) {
     this.user = user;
   }
 

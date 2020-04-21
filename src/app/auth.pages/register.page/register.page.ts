@@ -14,6 +14,7 @@ export class RegisterPage implements OnInit {
 
   mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
   regExp = '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{2}\-[0-9]{2}\s$';
+
   private name: string; 
   private email: string; 
   private phone: string; 
@@ -59,7 +60,9 @@ export class RegisterPage implements OnInit {
     
     form_input.forEach(item => {
       item as HTMLInputElement;
-      if (item.value == '' && count_err == 0) { 
+      if (item.value == '' && count_err == 0 && item.id != 'code') { 
+        console.log(item);
+        
         this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Не все поля заполнены');
         count_err++;
       }
@@ -128,7 +131,7 @@ export class RegisterPage implements OnInit {
           return;
         }
         if(this.err_message.length == 0) {
-          this.nav.navigateRoot(['/home']);
+          this.alert();
         }  
       }).catch(error => {
         console.log(error.error);
@@ -136,6 +139,10 @@ export class RegisterPage implements OnInit {
     }
   }
 
+  alert() {
+    document.querySelector('app-alert').firstElementChild.classList.add('active');
+    document.querySelector('app-alert').lastElementChild.classList.add('background_active');
+  }
 
   Login() {
     this.nav.navigateRoot(['/login']);

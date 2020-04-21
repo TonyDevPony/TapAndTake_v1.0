@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-import { AlertController, NavController, LoadingController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, LoadingController, ToastController, Platform } from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
+import { AuthService } from 'src/app/services/auth.service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,16 @@ export class LoginPage implements OnInit {
     private http: HTTP,
     private loadingController: LoadingController,
     public toastController: ToastController,
+    private plt: Platform,
+    private authService: AuthService,
     ) {
 
     }
 
   ngOnInit() {
+    this.plt.ready().then(() => {
+      // this.loadStoredUser();
+    });
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
@@ -126,6 +132,7 @@ export class LoginPage implements OnInit {
           return;
         }
         if(this.err_message.length == 0) {
+          this.authService.setUser(dataJson);
           this.nav.navigateRoot(['/home']);
           setTimeout(() => {
             this.presentToast(dataJson.name);
@@ -134,6 +141,7 @@ export class LoginPage implements OnInit {
       });
     }
   }
+
   goHome(){
     this.nav.navigateRoot(['/home']);
   }

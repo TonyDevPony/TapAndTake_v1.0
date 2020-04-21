@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { AlertComponent } from './alert.component';
 import { TextMaskModule } from 'angular2-text-mask';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    TextMaskModule
+    TextMaskModule,
+     FormsModule,
   ],
   declarations: [AlertComponent],
   exports: [AlertComponent]

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content class=\"animated fadeInLeft fast\">\n\n\n    <ion-row class=\"Register\" id=\"Register\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <span>Регистрация</span>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"Description\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <p>Заполните поля для регистрации</p>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-signature\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"text\" class=\"form__field\" [(ngModel)]=\"name\" placeholder=\"full name\" name=\"full_name\" id='full_name' pattern=\"^[^-0-9]{1,}$\"/>\n            <label for=\"full_name\" class=\"form__label\">Полное имя</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"far fa-envelope\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"email\" class=\"form__field\" placeholder=\"Email\"  [(ngModel)]=\"email\" name=\"Email\" id='emailInp' pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\"/>\n            <label for=\"emailInp\" class=\"form__label\">Email</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-mobile-alt\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"tel\" [textMask]=\"{mask: mask}\" class=\"form__field\" [(ngModel)]=\"phone\" placeholder=\"phone_number\" name=\"phone_number\" id='phone_number' pattern=\"\\(\\d{3,5}\\)\\s+\\d{3}-\\d{2}-\\d{2}\"/>\n            <label for=\"phone_number\" class=\"form__label\">Номер телефона</label>\n        </ion-col>\n      </ion-row>\n      \n\n\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Пароль\" minlength=\"6\" [(ngModel)]=\"password\" name=\"pass\" id='pass' />\n          <label for=\"pass\" class=\"form__label\">Пароль</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Подтверждения пароля\" minlength=\"6\" [(ngModel)]=\"confirmpass\" name=\"confirm_pass\" id='confirm_pass' />\n          <label for=\"confirm_pass\" class=\"form__label\">Подтверждения пароля</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"rowButton\">\n        <ion-button (click)=\"Register()\">Зарегестрироватся\n          <div class=\"arrow\">\n          </div>\n        </ion-button>\n      </ion-row>\n      <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n        <span>Уже есть аккаунт?&nbsp;</span><span (click)=\"Login()\">Войти</span>\n      </ion-row>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content class=\"animated fadeInLeft fast\">\n\n\n    <ion-row class=\"Register\" id=\"Register\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <span>Регистрация</span>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"Description\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <p>Заполните поля для регистрации</p>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-signature\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"text\" class=\"form__field\" [(ngModel)]=\"name\" placeholder=\"full name\" name=\"full_name\" id='full_name' pattern=\"^[^-0-9]{1,}$\"/>\n            <label for=\"full_name\" class=\"form__label\">Полное имя</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"far fa-envelope\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"email\" class=\"form__field\" placeholder=\"Email\"  [(ngModel)]=\"email\" name=\"Email\" id='emailInp' pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\"/>\n            <label for=\"emailInp\" class=\"form__label\">Email</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-mobile-alt\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"tel\" [textMask]=\"{mask: mask}\" class=\"form__field\" [(ngModel)]=\"phone\" placeholder=\"phone_number\" name=\"phone_number\" id='phone_number' pattern=\"\\(\\d{3,5}\\)\\s+\\d{3}-\\d{2}-\\d{2}\"/>\n            <label for=\"phone_number\" class=\"form__label\">Номер телефона</label>\n        </ion-col>\n      </ion-row>\n      \n\n\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Пароль\" minlength=\"6\" [(ngModel)]=\"password\" name=\"pass\" id='pass' />\n          <label for=\"pass\" class=\"form__label\">Пароль</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Подтверждения пароля\" minlength=\"6\" [(ngModel)]=\"confirmpass\" name=\"confirm_pass\" id='confirm_pass' />\n          <label for=\"confirm_pass\" class=\"form__label\">Подтверждения пароля</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"rowButton\">\n        <ion-button (click)=\"Register()\">Зарегестрироватся\n          <div class=\"arrow\">\n          </div>\n        </ion-button>\n      </ion-row>\n      <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n        <span>Уже есть аккаунт?&nbsp;</span><span (click)=\"Login()\">Войти</span>\n      </ion-row>\n</ion-content>\n<app-alert></app-alert>");
 
 /***/ }),
 
@@ -70,6 +70,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_header_component_header_component_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/header.component/header.component.module */ "./src/app/components/header.component/header.component.module.ts");
 /* harmony import */ var angular2_text_mask__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! angular2-text-mask */ "./node_modules/angular2-text-mask/dist/angular2TextMask.js");
 /* harmony import */ var angular2_text_mask__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(angular2_text_mask__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var src_app_components_alert_component_alert_component_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/app/components/alert.component/alert.component.module */ "./src/app/components/alert.component/alert.component.module.ts");
+
 
 
 
@@ -89,6 +91,7 @@ RegisterPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
             _register_routing_module__WEBPACK_IMPORTED_MODULE_5__["RegisterPageRoutingModule"],
             _components_header_component_header_component_module__WEBPACK_IMPORTED_MODULE_7__["HeaderComponentModule"],
+            src_app_components_alert_component_alert_component_module__WEBPACK_IMPORTED_MODULE_9__["AlertComponentModule"],
             angular2_text_mask__WEBPACK_IMPORTED_MODULE_8__["TextMaskModule"],
         ],
         declarations: [_register_page__WEBPACK_IMPORTED_MODULE_6__["RegisterPage"]]
@@ -172,7 +175,8 @@ let RegisterPage = class RegisterPage {
         let count_err = 0;
         form_input.forEach(item => {
             item;
-            if (item.value == '' && count_err == 0) {
+            if (item.value == '' && count_err == 0 && item.id != 'code') {
+                console.log(item);
                 this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Не все поля заполнены');
                 count_err++;
             }
@@ -214,16 +218,6 @@ let RegisterPage = class RegisterPage {
             return true;
         }
     }
-    presentToast(name) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message: `Приветсвую, ${name}`,
-                duration: 1000,
-                cssClass: 'toast',
-            });
-            toast.present();
-        });
-    }
     Register() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const { name, email, phone, password, confirmpass } = this;
@@ -247,16 +241,17 @@ let RegisterPage = class RegisterPage {
                         return;
                     }
                     if (this.err_message.length == 0) {
-                        this.nav.navigateRoot(['/home']);
-                        setTimeout(() => {
-                            this.presentToast(dataJson.name);
-                        }, 300);
+                        this.alert();
                     }
                 }).catch(error => {
                     console.log(error.error);
                 });
             }
         });
+    }
+    alert() {
+        document.querySelector('app-alert').firstElementChild.classList.add('active');
+        document.querySelector('app-alert').lastElementChild.classList.add('background_active');
     }
     Login() {
         this.nav.navigateRoot(['/login']);

@@ -821,7 +821,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | auth-pages-login-page-login-module */
-        [__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("auth-pages-login-page-login-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module"), __webpack_require__.e("auth-pages-login-page-login-module")]).then(__webpack_require__.bind(null,
         /*! ./auth.pages/login.page/login.module */
         "./src/app/auth.pages/login.page/login.module.ts")).then(function (m) {
           return m.LoginPageModule;
@@ -832,7 +832,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       loadChildren: function loadChildren() {
         return Promise.all(
         /*! import() | auth-pages-register-page-register-module */
-        [__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("auth-pages-register-page-register-module")]).then(__webpack_require__.bind(null,
+        [__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module"), __webpack_require__.e("auth-pages-register-page-register-module")]).then(__webpack_require__.bind(null,
         /*! ./auth.pages/register.page/register.module */
         "./src/app/auth.pages/register.page/register.module.ts")).then(function (m) {
           return m.RegisterPageModule;
