@@ -1,3 +1,29 @@
-<p>
-  coffee-house works!
-</p>
+<section class="section_coffee_houses" (ionScroll)="scrol()">
+    <ng-container *ngFor="let houses of coffeeHouses">
+
+      <ion-row class="card_coffeehouses_main animated fadeInLeft fast">
+        <ion-col class="card_coffeehouses_main_logo_wraper" size="4">
+          <div class="card_coffeehouses_main_logo"></div>
+        </ion-col>
+        <ion-col class="card_body">
+          <div class="name_coffehouse">Sharikava</div>
+          <div class="coffee_cups">
+            <ng-container *ngFor="let cup of coffeeCupsTest">
+              <ng-container *ngIf="cup.is_full">
+                <div class="cupps full_cup"></div>
+              </ng-container>
+              <ng-container *ngIf="!cup.is_full">
+                <div class="cupps empty_cup"></div>
+              </ng-container>
+            </ng-container>
+          </div>
+        </ion-col>
+        <ion-col size="3" class="result_cup_wrapper">
+          <ng-container>
+            <div class="relsult_cup empty_cup"></div>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      
+    </ng-container>
+</section>

@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<ion-content>
+<ion-content scrollY="false">
     <ion-row class="row_buttons">
         <ion-col class="col_buttons animated fadeInLeft fast">
             <button (click)="viewFavorites()" class="choise_button active" id="favorites">Избранные</button>
@@ -20,7 +20,7 @@
           </ion-slides>
     </ion-row>
 </ion-content>
-<div class="toolbar animated fadeInUp fast">
+<div class="toolbar animated fadeInUp fast" id="toolbar">
     <div class="settings" id="settings" (click)="goUserSettings()">
         <img src="../../assets/img/home/settings.svg" alt="" class="toolbar_img">
     </div>

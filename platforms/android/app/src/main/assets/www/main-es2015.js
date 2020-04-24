@@ -711,11 +711,11 @@ const routes = [
     { path: 'home', loadChildren: () => __webpack_require__.e(/*! import() | main-pages-home-page-home-module */ "main-pages-home-page-home-module").then(__webpack_require__.bind(null, /*! ./main.pages/home.page/home.module */ "./src/app/main.pages/home.page/home.module.ts")).then(m => m.HomePageModule) },
     {
         path: 'login',
-        loadChildren: () => Promise.all(/*! import() | auth-pages-login-page-login-module */[__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("auth-pages-login-page-login-module")]).then(__webpack_require__.bind(null, /*! ./auth.pages/login.page/login.module */ "./src/app/auth.pages/login.page/login.module.ts")).then(m => m.LoginPageModule)
+        loadChildren: () => Promise.all(/*! import() | auth-pages-login-page-login-module */[__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module"), __webpack_require__.e("auth-pages-login-page-login-module")]).then(__webpack_require__.bind(null, /*! ./auth.pages/login.page/login.module */ "./src/app/auth.pages/login.page/login.module.ts")).then(m => m.LoginPageModule)
     },
     {
         path: 'register',
-        loadChildren: () => Promise.all(/*! import() | auth-pages-register-page-register-module */[__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("auth-pages-register-page-register-module")]).then(__webpack_require__.bind(null, /*! ./auth.pages/register.page/register.module */ "./src/app/auth.pages/register.page/register.module.ts")).then(m => m.RegisterPageModule)
+        loadChildren: () => Promise.all(/*! import() | auth-pages-register-page-register-module */[__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module"), __webpack_require__.e("auth-pages-register-page-register-module")]).then(__webpack_require__.bind(null, /*! ./auth.pages/register.page/register.module */ "./src/app/auth.pages/register.page/register.module.ts")).then(m => m.RegisterPageModule)
     },
     {
         path: 'qr',

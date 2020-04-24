@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content class=\"animated fadeInLeft fast\">\n\n\n    <ion-row class=\"Register\" id=\"Register\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <span>Регистрация</span>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"Description\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <p>Заполните поля для регистрации</p>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-signature\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"text\" class=\"form__field\" [(ngModel)]=\"name\" placeholder=\"full name\" name=\"full_name\" id='full_name' pattern=\"^[^-0-9]{1,}$\"/>\n            <label for=\"full_name\" class=\"form__label\">Полное имя</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"far fa-envelope\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"email\" class=\"form__field\" placeholder=\"Email\"  [(ngModel)]=\"email\" name=\"Email\" id='emailInp' pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\"/>\n            <label for=\"emailInp\" class=\"form__label\">Email</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-mobile-alt\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"tel\" [textMask]=\"{mask: mask}\" class=\"form__field\" [(ngModel)]=\"phone\" placeholder=\"phone_number\" name=\"phone_number\" id='phone_number' pattern=\"\\(\\d{3,5}\\)\\s+\\d{3}-\\d{2}-\\d{2}\"/>\n            <label for=\"phone_number\" class=\"form__label\">Номер телефона</label>\n        </ion-col>\n      </ion-row>\n      \n\n\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Пароль\" minlength=\"6\" [(ngModel)]=\"password\" name=\"pass\" id='pass' />\n          <label for=\"pass\" class=\"form__label\">Пароль</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Подтверждения пароля\" minlength=\"6\" [(ngModel)]=\"confirmpass\" name=\"confirm_pass\" id='confirm_pass' />\n          <label for=\"confirm_pass\" class=\"form__label\">Подтверждения пароля</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"rowButton\">\n        <ion-button (click)=\"Register()\">Зарегестрироватся\n          <div class=\"arrow\">\n          </div>\n        </ion-button>\n      </ion-row>\n      <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n        <span>Уже есть аккаунт?&nbsp;</span><span (click)=\"Login()\">Войти</span>\n      </ion-row>\n</ion-content>";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content class=\"animated fadeInLeft fast\">\n\n\n    <ion-row class=\"Register\" id=\"Register\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <span>Регистрация</span>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"Description\">\n        <ion-col size=\"1\">\n        </ion-col>\n        <ion-col>\n          <p>Заполните поля для регистрации</p>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-signature\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"text\" class=\"form__field\" [(ngModel)]=\"name\" placeholder=\"full name\" name=\"full_name\" id='full_name' pattern=\"^[^-0-9]{1,}$\"/>\n            <label for=\"full_name\" class=\"form__label\">Полное имя</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"far fa-envelope\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"email\" class=\"form__field\" placeholder=\"Email\"  [(ngModel)]=\"email\" name=\"Email\" id='emailInp' pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\"/>\n            <label for=\"emailInp\" class=\"form__label\">Email</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\" id=\"email\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-mobile-alt\"></i>\n        </ion-col>\n        <ion-col>\n            <input type=\"tel\" [textMask]=\"{mask: mask}\" class=\"form__field\" [(ngModel)]=\"phone\" placeholder=\"phone_number\" name=\"phone_number\" id='phone_number' pattern=\"\\(\\d{3,5}\\)\\s+\\d{3}-\\d{2}-\\d{2}\"/>\n            <label for=\"phone_number\" class=\"form__label\">Номер телефона</label>\n        </ion-col>\n      </ion-row>\n      \n\n\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Пароль\" minlength=\"6\" [(ngModel)]=\"password\" name=\"pass\" id='pass' />\n          <label for=\"pass\" class=\"form__label\">Пароль</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"form_item\">\n        <ion-col size=\"1\" class=\"icons\">\n          <i class=\"fas fa-unlock-alt\"></i>\n        </ion-col>\n        <ion-col>\n          <input type=\"password\" class=\"form__field\" placeholder=\"Подтверждения пароля\" minlength=\"6\" [(ngModel)]=\"confirmpass\" name=\"confirm_pass\" id='confirm_pass' />\n          <label for=\"confirm_pass\" class=\"form__label\">Подтверждения пароля</label>\n        </ion-col>\n      </ion-row>\n      <ion-row class=\"rowButton\">\n        <ion-button (click)=\"Register()\">Зарегестрироватся\n          <div class=\"arrow\">\n          </div>\n        </ion-button>\n      </ion-row>\n      <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n        <span>Уже есть аккаунт?&nbsp;</span><span (click)=\"Login()\">Войти</span>\n      </ion-row>\n</ion-content>\n<app-alert></app-alert>";
     /***/
   },
 
@@ -162,13 +162,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
     var angular2_text_mask__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(angular2_text_mask__WEBPACK_IMPORTED_MODULE_8__);
+    /* harmony import */
+
+
+    var src_app_components_alert_component_alert_component_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    /*! src/app/components/alert.component/alert.component.module */
+    "./src/app/components/alert.component/alert.component.module.ts");
 
     var RegisterPageModule = function RegisterPageModule() {
       _classCallCheck(this, RegisterPageModule);
     };
 
     RegisterPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _register_routing_module__WEBPACK_IMPORTED_MODULE_5__["RegisterPageRoutingModule"], _components_header_component_header_component_module__WEBPACK_IMPORTED_MODULE_7__["HeaderComponentModule"], angular2_text_mask__WEBPACK_IMPORTED_MODULE_8__["TextMaskModule"]],
+      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"], _register_routing_module__WEBPACK_IMPORTED_MODULE_5__["RegisterPageRoutingModule"], _components_header_component_header_component_module__WEBPACK_IMPORTED_MODULE_7__["HeaderComponentModule"], src_app_components_alert_component_alert_component_module__WEBPACK_IMPORTED_MODULE_9__["AlertComponentModule"], angular2_text_mask__WEBPACK_IMPORTED_MODULE_8__["TextMaskModule"]],
       declarations: [_register_page__WEBPACK_IMPORTED_MODULE_6__["RegisterPage"]]
     })], RegisterPageModule);
     /***/
@@ -323,7 +329,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           form_input.forEach(function (item) {
             item;
 
-            if (item.value == '' && count_err == 0) {
+            if (item.value == '' && count_err == 0 && item.id != 'code') {
+              console.log(item);
+
               _this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Не все поля заполнены');
 
               count_err++;
@@ -374,43 +382,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
       }, {
-        key: "presentToast",
-        value: function presentToast(name) {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var toast;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    _context2.next = 2;
-                    return this.toastController.create({
-                      message: "\u041F\u0440\u0438\u0432\u0435\u0442\u0441\u0432\u0443\u044E, ".concat(name),
-                      duration: 1000,
-                      cssClass: 'toast'
-                    });
-
-                  case 2:
-                    toast = _context2.sent;
-                    toast.present();
-
-                  case 4:
-                  case "end":
-                    return _context2.stop();
-                }
-              }
-            }, _callee2, this);
-          }));
-        }
-      }, {
         key: "Register",
         value: function Register() {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
             var _this2 = this;
 
             var name, email, phone, password, confirmpass, loading;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
                     name = this.name, email = this.email, phone = this.phone, password = this.password, confirmpass = this.confirmpass;
                     this.data = {
@@ -422,12 +402,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     };
 
                     if (!this.validate(this.data)) {
-                      _context3.next = 10;
+                      _context2.next = 10;
                       break;
                     }
 
                     console.log(this.data);
-                    _context3.next = 6;
+                    _context2.next = 6;
                     return this.loadingController.create({
                       cssClass: 'spinerColor',
                       message: "Вход...",
@@ -435,13 +415,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 6:
-                    loading = _context3.sent;
-                    _context3.next = 9;
+                    loading = _context2.sent;
+                    _context2.next = 9;
                     return loading.present();
 
                   case 9:
                     this.http.post('https://sc.grekagreka25.had.su/reg/in', this.data, {}).then(function (data) {
                       loading.dismiss();
+                      console.log(data.data);
                       var dataJson = JSON.parse(data.data);
                       console.log(dataJson);
 
@@ -454,11 +435,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }
 
                       if (_this2.err_message.length == 0) {
-                        _this2.nav.navigateRoot(['/home']);
-
-                        setTimeout(function () {
-                          _this2.presentToast(dataJson.name);
-                        }, 300);
+                        _this2.alert();
                       }
                     }).catch(function (error) {
                       console.log(error.error);
@@ -466,11 +443,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 10:
                   case "end":
-                    return _context3.stop();
+                    return _context2.stop();
                 }
               }
-            }, _callee3, this);
+            }, _callee2, this);
           }));
+        }
+      }, {
+        key: "alert",
+        value: function alert() {
+          document.querySelector('app-alert').firstElementChild.classList.add('active');
+          document.querySelector('app-alert').lastElementChild.classList.add('background_active');
         }
       }, {
         key: "Login",

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n  <section class=\"forgot_section\">\n    <ion-row class=\"forgot_section_item animated fadeInLeft fast\">\n      <h4>Восстановление</h4>\n    </ion-row>\n    <ion-row class=\"forgot_section_item animated fadeInLeft fast\">\n      <p>Введите пожалуйста вашу почту</p>\n    </ion-row>\n    <ion-row class=\"forgot_section_item Email animated fadeInRight fast\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-envelope\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" placeholder=\"Email\" name=\"emailInp\" id='emailInp'\n          pattern=\"/^([A-Za-z0-9_\\-\\.])+\\@([A-Za-z0-9_\\-\\.])+\\.([A-Za-z]{2,4})$/\" />\n        <label for=\"emailInp\" class=\"form__label\">Email</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton animated fadeInLeft fast\">\n      <ion-button (click)=\"goResetPass()\">Продолжить\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n    <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>\n    </ion-row>\n  </section>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n  <section class=\"forgot_section\">\n    <ion-row class=\"forgot_section_item animated fadeInLeft fast\">\n      <h4>Восстановление</h4>\n    </ion-row>\n    <ion-row class=\"forgot_section_item animated fadeInLeft fast\">\n      <p>Введите пожалуйста вашу почту</p>\n    </ion-row>\n    <ion-row class=\"forgot_section_item Email animated fadeInRight fast\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-envelope\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" placeholder=\"Email\" [(ngModel)]=\"email\" name=\"emailInp\" id='emailInp'\n        pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\" />\n        <label for=\"emailInp\" class=\"form__label\">Email</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton animated fadeInLeft fast\">\n      <ion-button (click)=\"goResetPass()\">Продолжить\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n    <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>\n    </ion-row>\n  </section>\n</ion-content>");
 
 /***/ }),
 
@@ -135,26 +135,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
 
 
 
 
 let ForgotPasswordPage = class ForgotPasswordPage {
-    constructor(keyboard, nav) {
+    constructor(keyboard, nav, alertController, http) {
         this.keyboard = keyboard;
         this.nav = nav;
+        this.alertController = alertController;
+        this.http = http;
+        this.err_message = [];
     }
     ngOnInit() {
         this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
         this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
     }
+    openAlert(message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Упс...',
+                message,
+                cssClass: 'alert',
+                buttons: [{
+                        text: 'OK',
+                        cssClass: 'alertButton'
+                    }]
+            });
+            yield alert.present();
+            this.err_message = [];
+        });
+    }
     goResetPass() {
-        this.nav.navigateRoot(['/password-reset']);
+        const { email } = this;
+        this.data = { email };
+        let count_err = 0;
+        let input_invalid = document.querySelector('.form__field:invalid');
+        if (document.querySelector('#emailInp').value == '') {
+            this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Заполните все поля');
+            count_err++;
+        }
+        else if (input_invalid && input_invalid.id == 'emailInp') {
+            this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Неверно введен email');
+            count_err++;
+        }
+        if (count_err != 0) {
+            this.openAlert(this.err_message);
+        }
+        if (this.err_message.length == 0) {
+            this.http.post('https://sc.grekagreka25.had.su/auth/send_pass/', this.data, {}).then(data => {
+                let parseData = JSON.parse(data.data);
+                if (parseData.error == 909) {
+                    this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такой email не зарегестрирован');
+                    this.openAlert(this.err_message);
+                    return;
+                }
+                else {
+                    // this.nav.navigateRoot(['/password-reset']);
+                }
+            });
+        }
     }
 };
 ForgotPasswordPage.ctorParameters = () => [
     { type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"] }
 ];
 ForgotPasswordPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -162,7 +211,10 @@ ForgotPasswordPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./forgot-password.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/auth.pages/forgot-password.page/forgot-password.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./forgot-password.page.scss */ "./src/app/auth.pages/forgot-password.page/forgot-password.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"]])
 ], ForgotPasswordPage);
 
 

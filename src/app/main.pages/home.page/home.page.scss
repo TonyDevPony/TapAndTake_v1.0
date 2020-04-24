@@ -1,5 +1,6 @@
 ion-content{
     position: relative;
+    overflow: hidden;
 }
 .toolbar{
     width: 100%;
@@ -10,6 +11,7 @@ ion-content{
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.3s ease;
 }
 .qr_code, .settings, .business{
     border-radius: 50px;
@@ -85,3 +87,7 @@ ion-slides{
     border-bottom: 1px solid #484848;
     outline: none;
 }
+.hidden_toolbar {
+    bottom: -100px;
+}
+
