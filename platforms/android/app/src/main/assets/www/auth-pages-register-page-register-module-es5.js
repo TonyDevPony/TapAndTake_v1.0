@@ -255,9 +255,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! src/app/services/network.connection.service/network-connection.service */
+    "./src/app/services/network.connection.service/network-connection.service.ts");
+    /* harmony import */
+
+
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/ngx/index.js");
 
     var RegisterPage = /*#__PURE__*/function () {
-      function RegisterPage(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController) {
+      function RegisterPage(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController, authService, plt, networkService, network) {
         _classCallCheck(this, RegisterPage);
 
         this.activatedRoute = activatedRoute;
@@ -267,6 +285,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.toastController = toastController;
+        this.authService = authService;
+        this.plt = plt;
+        this.networkService = networkService;
+        this.network = network;
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
         this.regExp = '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{2}\-[0-9]{2}\s$';
         this.err_message = [];
@@ -275,6 +297,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(RegisterPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          var _this = this;
+
+          this.plt.ready().then(function () {
+            if (!_this.networkService.initializeConnection()) {
+              var massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+
+              _this.openAlert(massage);
+
+              _this.conection = false;
+            } else {
+              _this.conection = true;
+            }
+
+            _this.network.onConnect().subscribe(function () {
+              _this.conection = true;
+            });
+
+            _this.network.onDisconnect().subscribe(function () {
+              _this.conection = false;
+            });
+          });
           this.keyboard.onKeyboardWillShow().subscribe(function () {
             document.getElementById('text').style.display = 'none';
           });
@@ -319,9 +362,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
+        key: "checkConection",
+        value: function checkConection() {
+          var massage = '<i class="fas fa-exclamation-circle"></i>&#32;Проверте подключение к интернету';
+
+          if (this.conection) {
+            return true;
+          }
+
+          this.openAlert(massage);
+          return false;
+        }
+      }, {
         key: "validate",
         value: function validate(data) {
-          var _this = this;
+          var _this2 = this;
 
           var form_input = document.querySelectorAll('input');
           var form_input_invalid = document.querySelectorAll('.form__field:invalid');
@@ -332,7 +387,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             if (item.value == '' && count_err == 0 && item.id != 'code') {
               console.log(item);
 
-              _this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Не все поля заполнены');
+              _this2.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Не все поля заполнены');
 
               count_err++;
             }
@@ -345,25 +400,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           form_input_invalid.forEach(function (item) {
             if (item.id == 'full_name') {
-              _this.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Пожалуйста, введите настоящее имя');
+              _this2.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Пожалуйста, введите настоящее имя');
 
               count_err++;
             }
 
             if (item.id == 'emailInp') {
-              _this.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Неверно введен email');
+              _this2.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Неверно введен email');
 
               count_err++;
             }
 
             if (item.id == 'phone_number') {
-              _this.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Неверно введен номер телефона');
+              _this2.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Неверно введен номер телефона');
 
               count_err++;
             }
 
             if (item.id == 'pass') {
-              _this.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Пароль меньше 6 символов');
+              _this2.err_message.push('<br/><i class="fas fa-exclamation-circle"></i>&#32;Пароль меньше 6 символов');
 
               count_err++;
             }
@@ -385,7 +440,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "Register",
         value: function Register() {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-            var _this2 = this;
+            var _this3 = this;
 
             var name, email, phone, password, confirmpass, loading;
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -401,7 +456,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       confirmpass: confirmpass
                     };
 
-                    if (!this.validate(this.data)) {
+                    if (!(this.checkConection() && this.validate(this.data))) {
                       _context2.next = 10;
                       break;
                     }
@@ -427,15 +482,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       console.log(dataJson);
 
                       if (dataJson.error == 902) {
-                        _this2.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такой пользователь уже существует!!!');
+                        _this3.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такой пользователь уже существует!!!');
 
-                        _this2.openAlert(_this2.err_message);
+                        _this3.openAlert(_this3.err_message);
 
                         return;
                       }
 
-                      if (_this2.err_message.length == 0) {
-                        _this2.alert();
+                      if (_this3.err_message.length == 0) {
+                        _this3.alert();
                       }
                     }).catch(function (error) {
                       console.log(error.error);
@@ -480,6 +535,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]
+      }, {
+        type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"]
+      }, {
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"]
       }];
     };
 
@@ -491,7 +554,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./register.page.scss */
       "./src/app/auth.pages/register.page/register.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_4__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])], RegisterPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_4__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"]])], RegisterPage);
     /***/
   }
 }]);

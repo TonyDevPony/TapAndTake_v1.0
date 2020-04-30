@@ -74,6 +74,10 @@
             {
               "xml": "<feature name=\"CordovaHttpPlugin\"><param name=\"android-package\" value=\"com.silkimen.cordovahttp.CordovaHttpPlugin\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -146,6 +150,10 @@
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
               "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+              "count": 1
             }
           ],
           "application": [
@@ -200,6 +208,9 @@
     },
     "cordova-plugin-advanced-http": {
       "OKHTTP_VERSION": "3.10.0",
+      "PACKAGE_NAME": "io.ionic.starter"
+    },
+    "cordova-plugin-network-information": {
       "PACKAGE_NAME": "io.ionic.starter"
     }
   },
@@ -559,6 +570,23 @@
       "clobbers": [
         "cordova.plugin.http"
       ]
+    },
+    {
+      "id": "cordova-plugin-network-information.network",
+      "file": "plugins/cordova-plugin-network-information/www/network.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "navigator.connection",
+        "navigator.network.connection"
+      ]
+    },
+    {
+      "id": "cordova-plugin-network-information.Connection",
+      "file": "plugins/cordova-plugin-network-information/www/Connection.js",
+      "pluginId": "cordova-plugin-network-information",
+      "clobbers": [
+        "Connection"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -574,6 +602,7 @@
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-filepath": "1.5.8",
     "cordova-sqlite-storage": "5.0.0",
-    "cordova-plugin-advanced-http": "2.4.1"
+    "cordova-plugin-advanced-http": "2.4.1",
+    "cordova-plugin-network-information": "2.0.2"
   }
 }

@@ -994,15 +994,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/keyboard/ngx */
     "./node_modules/@ionic-native/keyboard/ngx/index.js");
+    /* harmony import */
+
+
+    var _services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ./services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var _services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! ./services/fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+
+    var STORAGE_KEY = 'user_info';
 
     var AppComponent = /*#__PURE__*/function () {
-      function AppComponent(platform, splashScreen, statusBar, keyboard) {
+      function AppComponent(platform, splashScreen, statusBar, keyboard, authService, FileStorageUser) {
         _classCallCheck(this, AppComponent);
 
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.keyboard = keyboard;
+        this.authService = authService;
+        this.FileStorageUser = FileStorageUser;
         this.initializeApp();
       }
 
@@ -1034,6 +1050,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]
       }, {
         type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_5__["Keyboard"]
+      }, {
+        type: _services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]
+      }, {
+        type: _services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_7__["FileStorageForUserService"]
       }];
     };
 
@@ -1045,7 +1065,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./app.component.scss */
       "./src/app/app.component.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_5__["Keyboard"]])], AppComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_5__["Keyboard"], _services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"], _services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_7__["FileStorageForUserService"]])], AppComponent);
     /***/
   },
 
@@ -1197,6 +1217,204 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_10__["BarcodeScanner"], _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_11__["Base64ToGallery"], _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_14__["Camera"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_15__["File"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_16__["WebView"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_17__["FilePath"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_18__["HTTP"]],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
     })], AppModule);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/auth.service/auth.service.ts":
+  /*!*******************************************************!*\
+    !*** ./src/app/services/auth.service/auth.service.ts ***!
+    \*******************************************************/
+
+  /*! exports provided: AuthService */
+
+  /***/
+  function srcAppServicesAuthServiceAuthServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "AuthService", function () {
+      return AuthService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+
+    ;
+
+    var AuthService = /*#__PURE__*/function () {
+      function AuthService(FileStorForuser) {
+        _classCallCheck(this, AuthService);
+
+        this.FileStorForuser = FileStorForuser;
+      }
+
+      _createClass(AuthService, [{
+        key: "setUser",
+        value: function setUser(user) {
+          // this.FileStorForuser.writeToFile(user);
+          this.FileStorForuser.readFile();
+        }
+      }, {
+        key: "getUser",
+        value: function getUser() {
+          return this.user;
+        }
+      }]);
+
+      return AuthService;
+    }();
+
+    AuthService.ctorParameters = function () {
+      return [{
+        type: _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"]
+      }];
+    };
+
+    AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"]])], AuthService);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts":
+  /*!**************************************************************************************!*\
+    !*** ./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts ***!
+    \**************************************************************************************/
+
+  /*! exports provided: FileStorageForUserService */
+
+  /***/
+  function srcAppServicesFileStorageForUserServiceFileStorageForUserServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "FileStorageForUserService", function () {
+      return FileStorageForUserService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/file-path/ngx */
+    "./node_modules/@ionic-native/file-path/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/file/ngx */
+    "./node_modules/@ionic-native/file/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/fesm2015/http.js");
+
+    var FileStorageForUserService = /*#__PURE__*/function () {
+      function FileStorageForUserService(file, filePath, http) {
+        _classCallCheck(this, FileStorageForUserService);
+
+        this.file = file;
+        this.filePath = filePath;
+        this.http = http;
+      }
+
+      _createClass(FileStorageForUserService, [{
+        key: "createFile",
+        value: function createFile() {
+          var _this2 = this;
+
+          this.file.checkFile(this.file.dataDirectory, 'user_info').then(function (massage) {
+            if (massage) {
+              console.log('file exists already exists\n' + massage);
+              return;
+            }
+          }, function (error) {
+            _this2.file.createFile(_this2.file.dataDirectory, 'user_info', true).then(function (massage) {
+              console.log("Create file\n" + massage);
+            });
+          });
+        }
+      }, {
+        key: "writeToFile",
+        value: function writeToFile(user) {
+          this.data = new Blob([user], {
+            type: 'text/plain'
+          });
+          this.file.writeFile(this.file.dataDirectory, 'user_info', this.data, {
+            replace: true,
+            append: false
+          }).then(function (massage) {
+            console.log("Write to file\n" + massage);
+          });
+        }
+      }, {
+        key: "readFile",
+        value: function readFile() {
+          this.file.readAsText(this.file.dataDirectory, 'user_info').then(function (data) {
+            console.log(data);
+          });
+        }
+      }, {
+        key: "removeFile",
+        value: function removeFile(fileName) {
+          this.file.removeFile(this.file.dataDirectory, fileName).then(function () {
+            console.log("File " + fileName + "is removed");
+          });
+        }
+      }]);
+
+      return FileStorageForUserService;
+    }();
+
+    FileStorageForUserService.ctorParameters = function () {
+      return [{
+        type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__["File"]
+      }, {
+        type: _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"]
+      }, {
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]
+      }];
+    };
+
+    FileStorageForUserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__["File"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])], FileStorageForUserService);
     /***/
   },
 

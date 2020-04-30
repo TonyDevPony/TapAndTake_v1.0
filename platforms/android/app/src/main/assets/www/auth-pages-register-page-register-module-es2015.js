@@ -131,6 +131,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+
+
+
 
 
 
@@ -138,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RegisterPage = class RegisterPage {
-    constructor(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController) {
+    constructor(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController, authService, plt, networkService, network) {
         this.activatedRoute = activatedRoute;
         this.keyboard = keyboard;
         this.nav = nav;
@@ -146,11 +152,31 @@ let RegisterPage = class RegisterPage {
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.toastController = toastController;
+        this.authService = authService;
+        this.plt = plt;
+        this.networkService = networkService;
+        this.network = network;
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
         this.regExp = '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{2}\-[0-9]{2}\s$';
         this.err_message = [];
     }
     ngOnInit() {
+        this.plt.ready().then(() => {
+            if (!this.networkService.initializeConnection()) {
+                let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+                this.openAlert(massage);
+                this.conection = false;
+            }
+            else {
+                this.conection = true;
+            }
+            this.network.onConnect().subscribe(() => {
+                this.conection = true;
+            });
+            this.network.onDisconnect().subscribe(() => {
+                this.conection = false;
+            });
+        });
         this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
         this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
     }
@@ -168,6 +194,14 @@ let RegisterPage = class RegisterPage {
             yield alert.present();
             this.err_message = [];
         });
+    }
+    checkConection() {
+        let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Проверте подключение к интернету';
+        if (this.conection) {
+            return true;
+        }
+        this.openAlert(massage);
+        return false;
     }
     validate(data) {
         let form_input = document.querySelectorAll('input');
@@ -222,7 +256,7 @@ let RegisterPage = class RegisterPage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const { name, email, phone, password, confirmpass } = this;
             this.data = { name, email, phone, password, confirmpass };
-            if (this.validate(this.data)) {
+            if (this.checkConection() && this.validate(this.data)) {
                 console.log(this.data);
                 const loading = yield this.loadingController.create({
                     cssClass: 'spinerColor',
@@ -264,7 +298,11 @@ RegisterPage.ctorParameters = () => [
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
+    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"] }
 ];
 RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -278,7 +316,11 @@ RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
+        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
+        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"]])
 ], RegisterPage);
 
 

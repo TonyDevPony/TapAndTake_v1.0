@@ -131,6 +131,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+
 
 
 
@@ -138,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RegisterPage = class RegisterPage {
-    constructor(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController) {
+    constructor(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController, authService) {
         this.activatedRoute = activatedRoute;
         this.keyboard = keyboard;
         this.nav = nav;
@@ -146,6 +148,7 @@ let RegisterPage = class RegisterPage {
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.toastController = toastController;
+        this.authService = authService;
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
         this.regExp = '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{2}\-[0-9]{2}\s$';
         this.err_message = [];
@@ -264,7 +267,8 @@ RegisterPage.ctorParameters = () => [
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"] }
 ];
 RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -278,7 +282,8 @@ RegisterPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
+        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]])
 ], RegisterPage);
 
 

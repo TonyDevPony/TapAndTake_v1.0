@@ -134,15 +134,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
-/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 
 
 
 
 
 
+
+const STORAGE_KEY = 'user_info';
 let LoginPage = class LoginPage {
-    constructor(keyboard, alertController, nav, http, loadingController, toastController, plt, authService) {
+    constructor(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network) {
         this.keyboard = keyboard;
         this.alertController = alertController;
         this.nav = nav;
@@ -150,14 +153,29 @@ let LoginPage = class LoginPage {
         this.loadingController = loadingController;
         this.toastController = toastController;
         this.plt = plt;
-        this.authService = authService;
+        this.networkService = networkService;
+        this.network = network;
         this.email = '';
         this.password = '';
         this.err_message = [];
+        this.user = `{"name":"Maksym Black","email":"dieslog@gmail.com","phone":"+380971679796","password":"b59c67bf196a4758191e42f76670ceba"}`;
     }
     ngOnInit() {
         this.plt.ready().then(() => {
-            // this.loadStoredUser();
+            if (!this.networkService.initializeConnection()) {
+                let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+                this.openAlert(massage);
+                this.conection = false;
+            }
+            else {
+                this.conection = true;
+            }
+            this.network.onConnect().subscribe(() => {
+                this.conection = true;
+            });
+            this.network.onDisconnect().subscribe(() => {
+                this.conection = false;
+            });
         });
         this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
         this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
@@ -167,6 +185,14 @@ let LoginPage = class LoginPage {
     }
     Register() {
         this.nav.navigateRoot(['/register']);
+    }
+    checkConection() {
+        let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Проверте подключение к интернету';
+        if (this.conection) {
+            return true;
+        }
+        this.openAlert(massage);
+        return false;
     }
     validate() {
         let form_input_invalid = document.querySelectorAll('.form__field:invalid');
@@ -232,8 +258,7 @@ let LoginPage = class LoginPage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const { email, password } = this;
             this.data = { email, password };
-            if (this.validate()) {
-                console.log(this.data);
+            if (this.checkConection() && this.validate()) {
                 const loading = yield this.loadingController.create({
                     cssClass: 'spinerColor',
                     message: "Вход...",
@@ -250,18 +275,19 @@ let LoginPage = class LoginPage {
                         return;
                     }
                     if (this.err_message.length == 0) {
-                        this.authService.setUser(dataJson);
-                        this.nav.navigateRoot(['/home']);
-                        setTimeout(() => {
-                            this.presentToast(dataJson.name);
-                        }, 300);
+                        // this.authService.setUser(dataJson);
+                        // this.authService.getUser();
+                        this.goHome(dataJson);
                     }
                 });
             }
         });
     }
-    goHome() {
+    goHome(data) {
         this.nav.navigateRoot(['/home']);
+        setTimeout(() => {
+            this.presentToast(data.name);
+        }, 300);
     }
 };
 LoginPage.ctorParameters = () => [
@@ -272,7 +298,8 @@ LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] }
+    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__["NetworkConnectionService"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"] }
 ];
 LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -287,7 +314,8 @@ LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
-        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])
+        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__["NetworkConnectionService"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"]])
 ], LoginPage);
 
 

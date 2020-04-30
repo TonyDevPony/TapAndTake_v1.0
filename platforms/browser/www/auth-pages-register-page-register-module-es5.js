@@ -255,9 +255,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
 
     var RegisterPage = /*#__PURE__*/function () {
-      function RegisterPage(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController) {
+      function RegisterPage(activatedRoute, keyboard, nav, http, alertController, loadingController, toastController, authService) {
         _classCallCheck(this, RegisterPage);
 
         this.activatedRoute = activatedRoute;
@@ -267,6 +273,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.toastController = toastController;
+        this.authService = authService;
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
         this.regExp = '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{2}\-[0-9]{2}\s$';
         this.err_message = [];
@@ -480,6 +487,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]
       }];
     };
 
@@ -491,7 +500,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./register.page.scss */
       "./src/app/auth.pages/register.page/register.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_4__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])], RegisterPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_4__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_6__["AuthService"]])], RegisterPage);
     /***/
   }
 }]);

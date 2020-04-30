@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { AuthService } from 'src/app/services/auth.service/auth.service';
 
 
 @Component({
@@ -8,12 +9,17 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   styleUrls: ['./user-settings.page.scss'],
 })
 export class UserSettingsPage implements OnInit {
+
+  userSettingsInfo: any;
   pickerOPTS: any;
   mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
-  constructor(private keyboard: Keyboard) { }
+  constructor(
+    private keyboard: Keyboard,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit() {
-
+    // this.userSettingsInfo = JSON.parse(this.authService.getUser());
     // Set hidden to bottom text when keyboard is show
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
@@ -31,5 +37,6 @@ export class UserSettingsPage implements OnInit {
       }, 200);
     });
   }
+
 
 }

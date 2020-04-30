@@ -258,9 +258,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! src/app/services/auth.service/auth.service */
     "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+
+    var STORAGE_KEY = 'user_info';
 
     var LoginPage = /*#__PURE__*/function () {
-      function LoginPage(keyboard, alertController, nav, http, loadingController, toastController, plt, authService) {
+      function LoginPage(keyboard, alertController, nav, http, loadingController, toastController, plt, authService, FileStService) {
         _classCallCheck(this, LoginPage);
 
         this.keyboard = keyboard;
@@ -271,16 +279,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.toastController = toastController;
         this.plt = plt;
         this.authService = authService;
+        this.FileStService = FileStService;
         this.email = '';
         this.password = '';
         this.err_message = [];
+        this.user = "{\"name\":\"Maksym Black\",\"email\":\"dieslog@gmail.com\",\"phone\":\"+380971679796\",\"password\":\"b59c67bf196a4758191e42f76670ceba\"}";
       }
 
       _createClass(LoginPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.plt.ready().then(function () {// this.loadStoredUser();
-          });
+          this.plt.ready().then(function () {});
           this.keyboard.onKeyboardWillShow().subscribe(function () {
             document.getElementById('text').style.display = 'none';
           });
@@ -447,11 +456,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       if (_this.err_message.length == 0) {
                         _this.authService.setUser(dataJson);
 
-                        _this.nav.navigateRoot(['/home']);
+                        _this.authService.getUser();
 
-                        setTimeout(function () {
-                          _this.presentToast(dataJson.name);
-                        }, 300);
+                        _this.goHome(dataJson);
                       }
                     });
 
@@ -465,8 +472,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "goHome",
-        value: function goHome() {
+        value: function goHome(data) {
+          var _this2 = this;
+
           this.nav.navigateRoot(['/home']);
+          setTimeout(function () {
+            _this2.presentToast(data.name);
+          }, 300);
         }
       }]);
 
@@ -490,6 +502,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]
       }, {
         type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]
+      }, {
+        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]
       }];
     };
 
@@ -501,7 +515,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./login.page.scss */
       "./src/app/auth.pages/login.page/login.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])], LoginPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]])], LoginPage);
     /***/
   }
 }]);

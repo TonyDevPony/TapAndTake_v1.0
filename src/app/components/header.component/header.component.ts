@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
     'admin-coffee-houses',
     'admin-settings',
   ];
+
   private buttonIsActive: boolean;
 
   constructor(

@@ -344,23 +344,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
-  "./src/app/services/auth.service/auth.service.ts":
-  /*!*******************************************************!*\
-    !*** ./src/app/services/auth.service/auth.service.ts ***!
-    \*******************************************************/
+  "./src/app/services/network.connection.service/network-connection.service.ts":
+  /*!***********************************************************************************!*\
+    !*** ./src/app/services/network.connection.service/network-connection.service.ts ***!
+    \***********************************************************************************/
 
-  /*! exports provided: AuthService */
+  /*! exports provided: NetworkConnectionService */
 
   /***/
-  function srcAppServicesAuthServiceAuthServiceTs(module, __webpack_exports__, __webpack_require__) {
+  function srcAppServicesNetworkConnectionServiceNetworkConnectionServiceTs(module, __webpack_exports__, __webpack_require__) {
     "use strict";
 
     __webpack_require__.r(__webpack_exports__);
     /* harmony export (binding) */
 
 
-    __webpack_require__.d(__webpack_exports__, "AuthService", function () {
-      return AuthService;
+    __webpack_require__.d(__webpack_exports__, "NetworkConnectionService", function () {
+      return NetworkConnectionService;
     });
     /* harmony import */
 
@@ -377,48 +377,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _ionic_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @ionic/storage */
-    "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/ngx/index.js");
 
-    var AuthService = /*#__PURE__*/function () {
-      // Записать юзера в сторейдж при входе 
-      function AuthService(storage) {
-        _classCallCheck(this, AuthService);
+    var NetworkConnectionService = /*#__PURE__*/function () {
+      function NetworkConnectionService(network) {
+        _classCallCheck(this, NetworkConnectionService);
 
-        this.storage = storage;
-        this.user = null;
+        this.network = network;
       }
 
-      _createClass(AuthService, [{
-        key: "setUser",
-        value: function setUser(user) {
-          this.user = user;
-        }
-      }, {
-        key: "getUser",
-        value: function getUser() {
-          return this.user;
-        }
-      }, {
-        key: "logOut",
-        value: function logOut() {
-          this.user = null;
+      _createClass(NetworkConnectionService, [{
+        key: "initializeConnection",
+        value: function initializeConnection() {
+          if (this.network.type == 'none') {
+            console.log('network is disconnected');
+            return false;
+          }
+
+          return true;
         }
       }]);
 
-      return AuthService;
+      return NetworkConnectionService;
     }();
 
-    AuthService.ctorParameters = function () {
+    NetworkConnectionService.ctorParameters = function () {
       return [{
-        type: _ionic_storage__WEBPACK_IMPORTED_MODULE_2__["Storage"]
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"]
       }];
     };
 
-    AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+    NetworkConnectionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_storage__WEBPACK_IMPORTED_MODULE_2__["Storage"]])], AuthService);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"]])], NetworkConnectionService);
     /***/
   }
 }]);

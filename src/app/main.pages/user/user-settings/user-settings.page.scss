@@ -117,13 +117,34 @@ ion-datetime::placeholder{
     display: flex;
     justify-content: flex-end;
 }
-.rowButton>ion-button{
+.rowButton>.saveButton{
     --background: linear-gradient(to right, #FBDC95, #FBA232);
     width: 160px;
     height: 45px;
     --border-radius: 20px;
     font-weight: bold;
 }
+
+.logOutButton {
+    height: 45px;
+    width: 120px;
+    --border-radius: 20px;
+    font-weight: bold;
+    --background: linear-gradient(to right, #FBDC95, #FBA232);
+    position: absolute;
+    left: 30px;
+}
+.logOutIcon {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    background-image: url('../../../../assets/img/user_settings/logout.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
 .arrow{
     margin-left: 10px;
     width: 20px;

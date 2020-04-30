@@ -4,6 +4,11 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { AlertController, NavController, LoadingController, ToastController, Platform } from '@ionic/angular';
 import { HTTP } from '@ionic-native/http/ngx';
 import { AuthService } from 'src/app/services/auth.service/auth.service';
+import { FileStorageForUserService } from 'src/app/services/fileStorageForUser.service/file-storage-for-user.service';
+import { NetworkConnectionService } from 'src/app/services/network.connection.service/network-connection.service';
+import { Network } from '@ionic-native/network/ngx';
+
+const STORAGE_KEY = 'user_info';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +23,8 @@ export class LoginPage implements OnInit {
   private data: any;
   private headers: any;
   private err_message = [];
+  private conection;
+  private user = `{"name":"Maksym Black","email":"dieslog@gmail.com","phone":"+380971679796","password":"b59c67bf196a4758191e42f76670ceba"}`;
 
   constructor(
     private keyboard: Keyboard, 
@@ -27,25 +34,48 @@ export class LoginPage implements OnInit {
     private loadingController: LoadingController,
     public toastController: ToastController,
     private plt: Platform,
-    private authService: AuthService,
+    private networkService: NetworkConnectionService,
+    private network: Network,
     ) {
 
     }
 
   ngOnInit() {
     this.plt.ready().then(() => {
-      // this.loadStoredUser();
+      if(!this.networkService.initializeConnection()) {
+        let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+        this.openAlert(massage);
+        this.conection = false;
+      } else {
+        this.conection = true;
+      }
+      this.network.onConnect().subscribe(() => {
+        this.conection = true;
+      });
+      this.network.onDisconnect().subscribe(() => {
+        this.conection = false;
+      });
+
     });
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
 
+
   forgotPass() {
     this.nav.navigateRoot(['/forgot-password']);
-
   }
   Register() {
     this.nav.navigateRoot(['/register']);
+  }
+
+  checkConection() {
+    let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Проверте подключение к интернету';
+    if(this.conection) {
+      return true;
+    }
+    this.openAlert(massage);
+    return false;
   }
 
   validate():boolean {
@@ -113,8 +143,8 @@ export class LoginPage implements OnInit {
   async Login() {
     const { email, password } = this;
     this.data = {email, password};
-    if(this.validate()) {
-      console.log(this.data);
+
+    if(this.checkConection() && this.validate()) {
       const loading = await this.loadingController.create({
         cssClass: 'spinerColor',
         message: "Вход...",
@@ -132,17 +162,19 @@ export class LoginPage implements OnInit {
           return;
         }
         if(this.err_message.length == 0) {
-          this.authService.setUser(dataJson);
-          this.nav.navigateRoot(['/home']);
-          setTimeout(() => {
-            this.presentToast(dataJson.name);
-          }, 300);
+          // this.authService.setUser(dataJson);
+          // this.authService.getUser();
+           
+          this.goHome(dataJson);
         }  
       });
     }
   }
 
-  goHome(){
+  goHome(data){
     this.nav.navigateRoot(['/home']);
+    setTimeout(() => {
+      this.presentToast(data.name);
+    }, 300);
   }
 }

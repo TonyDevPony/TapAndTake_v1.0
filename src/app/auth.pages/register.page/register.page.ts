@@ -1,9 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavController, AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController, ToastController, Platform } from '@ionic/angular';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { error } from 'protractor';
+import { AuthService } from 'src/app/services/auth.service/auth.service';
+import { NetworkConnectionService } from 'src/app/services/network.connection.service/network-connection.service';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-register',
@@ -22,6 +25,7 @@ export class RegisterPage implements OnInit {
   private confirmpass: string;
   private data: any;
   private err_message = [];
+  private conection;
 
   
   constructor(
@@ -32,9 +36,30 @@ export class RegisterPage implements OnInit {
      public alertController: AlertController,
      private loadingController: LoadingController,
      public toastController: ToastController,
+     private authService: AuthService,
+     private plt: Platform,
+     private networkService: NetworkConnectionService,
+     private network: Network,
      ) { }
 
   ngOnInit() {
+    this.plt.ready().then(() => {
+      if(!this.networkService.initializeConnection()) {
+        let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+        this.openAlert(massage);
+        this.conection = false;
+      } else {
+        this.conection = true;
+      }
+      this.network.onConnect().subscribe(() => {
+        this.conection = true;
+      });
+      this.network.onDisconnect().subscribe(() => {
+        this.conection = false;
+      });
+
+    });
+
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
@@ -51,6 +76,15 @@ export class RegisterPage implements OnInit {
     });
     await alert.present();
     this.err_message = [];
+  }
+
+  checkConection() {
+    let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Проверте подключение к интернету';
+    if(this.conection) {
+      return true;
+    }
+    this.openAlert(massage);
+    return false;
   }
 
   validate(data: any): boolean {
@@ -110,7 +144,7 @@ export class RegisterPage implements OnInit {
     const {name, email, phone, password, confirmpass} = this;
     this.data = {name, email, phone, password, confirmpass};
 
-    if(this.validate(this.data)) {
+    if(this.checkConection() && this.validate(this.data)) {
       console.log(this.data);
       const loading = await this.loadingController.create({
         cssClass: 'spinerColor',

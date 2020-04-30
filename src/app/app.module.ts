@@ -21,6 +21,7 @@ import { File } from '@ionic-native/file/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import { Network } from '@ionic-native/network/ngx';
  
 
 @NgModule({
@@ -44,7 +45,8 @@ import { HTTP } from '@ionic-native/http/ngx';
     File,
     WebView,
     FilePath,
-    HTTP
+    HTTP,
+    Network
   ],
   bootstrap: [AppComponent]
 })
