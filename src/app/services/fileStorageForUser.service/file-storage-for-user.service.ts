@@ -4,53 +4,68 @@ import { File } from '@ionic-native/file/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileStorageForUserService {
-  private promise: Promise<string>;
-  data: any;// = '{"name":"Maksym Black","email":"dieslog@gmail.com","phone":"+380971679796","password":"b59c67bf196a4758191e42f76670ceba"}';
+ 
+  private user;
+
 
   constructor(
     private file: File,
     private filePath: FilePath,
     private http: HttpClient,
+    private storage: Storage,
   ) { 
   }
-  createFile() {
-    this.file.checkFile(this.file.dataDirectory, 'user_info').then(massage => {
-      if(massage) {
-        console.log('file exists already exists\n' + massage);
-        return;
-      } 
-    }, (error) => {
-      this.file.createFile(this.file.dataDirectory, 'user_info', true)
-        .then(massage => {
-          console.log("Create file\n" + massage);
-        });
+  private async storageIsReady() {
+    return this.storage.ready().then(res => {return res});
+  }
+
+  setUserToStorage(store_key: string, data: any) {
+    this.storageIsReady()
+      .then(() => {
+        this.storage.set(store_key, data)
+          .then(answer => 
+            console.log("User is set to storage \n" + answer))
+        .catch(err => console.log("Error after set user to storage \n" + err));
+    })
+    .catch(err => {
+      console.log("Error after check is storage ready \n" + err);
+    }); 
+  }
+
+  async getUserFromStorage(store_key: string) {
+    return this.storageIsReady().then(async () => {
+        try {
+        const answer = await this.storage.get(store_key);
+        return answer;
+      }
+      catch (err) {
+        return console.log("Error after get user from storage\n" + err);
+      }
+    }).catch(err => {
+      console.log("Error after check is storage ready \n" + err);
     });
   }
 
-  writeToFile(user) {
-    this.data = new Blob([user], {type: 'text/plain'});
-    this.file.writeFile(this.file.dataDirectory, 'user_info', this.data, { replace:true, append: false })
-      .then(massage => {
-      console.log("Write to file\n" + massage);
-    });
+
+
+  async removeUserFromStorage(storage_key) {
+    return this.storageIsReady().then(async () => {
+      try {
+        const answer = await this.storage.remove(storage_key);
+        return answer;
+      }
+      catch (err) {
+        console.log('Error after remove user from storrage \n' + err);
+      }
+    }).catch(err => {console.log("Error after check is storage ready \n" + err);})
   }
 
-  readFile() {
-    this.file.readAsText(this.file.dataDirectory, 'user_info').then(data => {
-      console.log(data);
-       
-    });   
-  }
-
-  removeFile(fileName) {
-    this.file.removeFile(this.file.dataDirectory, fileName).then(() => {
-      console.log("File " + fileName + "is removed");
-    });
-  }
 }

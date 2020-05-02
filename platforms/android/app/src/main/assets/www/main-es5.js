@@ -800,6 +800,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
     "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _services_guard_service_guard_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ./services/guard.service/guard.service */
+    "./src/app/services/guard.service/guard.service.ts");
 
     var routes = [{
       path: '',
@@ -826,7 +832,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         "./src/app/auth.pages/login.page/login.module.ts")).then(function (m) {
           return m.LoginPageModule;
         });
-      }
+      },
+      canActivate: [_services_guard_service_guard_service__WEBPACK_IMPORTED_MODULE_3__["GuardService"]]
     }, {
       path: 'register',
       loadChildren: function loadChildren() {
@@ -1272,21 +1279,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ../fileStorageForUser.service/file-storage-for-user.service */
     "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+    /* harmony import */
 
-    ;
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var AuthService = /*#__PURE__*/function () {
-      function AuthService(FileStorForuser) {
+      function AuthService(FileStorForuser, http) {
         _classCallCheck(this, AuthService);
 
         this.FileStorForuser = FileStorForuser;
+        this.http = http;
       }
 
       _createClass(AuthService, [{
         key: "setUser",
         value: function setUser(user) {
-          // this.FileStorForuser.writeToFile(user);
-          this.FileStorForuser.readFile();
+          this.user = user;
         }
       }, {
         key: "getUser",
@@ -1301,12 +1312,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AuthService.ctorParameters = function () {
       return [{
         type: _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]
       }];
     };
 
     AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"]])], AuthService);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]])], AuthService);
     /***/
   },
 
@@ -1359,58 +1372,157 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic/storage */
+    "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+
+    var STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
     var FileStorageForUserService = /*#__PURE__*/function () {
-      function FileStorageForUserService(file, filePath, http) {
+      function FileStorageForUserService(file, filePath, http, storage) {
         _classCallCheck(this, FileStorageForUserService);
 
         this.file = file;
         this.filePath = filePath;
         this.http = http;
+        this.storage = storage;
       }
 
       _createClass(FileStorageForUserService, [{
-        key: "createFile",
-        value: function createFile() {
+        key: "storageIsReady",
+        value: function storageIsReady() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    return _context.abrupt("return", this.storage.ready().then(function (res) {
+                      return res;
+                    }));
+
+                  case 1:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
+      }, {
+        key: "setUserToStorage",
+        value: function setUserToStorage(store_key, data) {
           var _this2 = this;
 
-          this.file.checkFile(this.file.dataDirectory, 'user_info').then(function (massage) {
-            if (massage) {
-              console.log('file exists already exists\n' + massage);
-              return;
-            }
-          }, function (error) {
-            _this2.file.createFile(_this2.file.dataDirectory, 'user_info', true).then(function (massage) {
-              console.log("Create file\n" + massage);
+          this.storageIsReady().then(function () {
+            _this2.storage.set(store_key, data).then(function (answer) {
+              return console.log("User is set to storage \n" + answer);
+            }).catch(function (err) {
+              return console.log("Error after set user to storage \n" + err);
             });
+          }).catch(function (err) {
+            console.log("Error after check is storage ready \n" + err);
           });
         }
       }, {
-        key: "writeToFile",
-        value: function writeToFile(user) {
-          this.data = new Blob([user], {
-            type: 'text/plain'
-          });
-          this.file.writeFile(this.file.dataDirectory, 'user_info', this.data, {
-            replace: true,
-            append: false
-          }).then(function (massage) {
-            console.log("Write to file\n" + massage);
-          });
+        key: "getUserFromStorage",
+        value: function getUserFromStorage(store_key) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var _this3 = this;
+
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    return _context3.abrupt("return", this.storageIsReady().then(function () {
+                      return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this3, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+                        var answer;
+                        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                          while (1) {
+                            switch (_context2.prev = _context2.next) {
+                              case 0:
+                                _context2.prev = 0;
+                                _context2.next = 3;
+                                return this.storage.get(store_key);
+
+                              case 3:
+                                answer = _context2.sent;
+                                return _context2.abrupt("return", answer);
+
+                              case 7:
+                                _context2.prev = 7;
+                                _context2.t0 = _context2["catch"](0);
+                                return _context2.abrupt("return", console.log("Error after get user from storage\n" + _context2.t0));
+
+                              case 10:
+                              case "end":
+                                return _context2.stop();
+                            }
+                          }
+                        }, _callee2, this, [[0, 7]]);
+                      }));
+                    }).catch(function (err) {
+                      console.log("Error after check is storage ready \n" + err);
+                    }));
+
+                  case 1:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
         }
       }, {
-        key: "readFile",
-        value: function readFile() {
-          this.file.readAsText(this.file.dataDirectory, 'user_info').then(function (data) {
-            console.log(data);
-          });
-        }
-      }, {
-        key: "removeFile",
-        value: function removeFile(fileName) {
-          this.file.removeFile(this.file.dataDirectory, fileName).then(function () {
-            console.log("File " + fileName + "is removed");
-          });
+        key: "removeUserFromStorage",
+        value: function removeUserFromStorage(storage_key) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            var _this4 = this;
+
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    return _context5.abrupt("return", this.storageIsReady().then(function () {
+                      return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this4, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+                        var answer;
+                        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                          while (1) {
+                            switch (_context4.prev = _context4.next) {
+                              case 0:
+                                _context4.prev = 0;
+                                _context4.next = 3;
+                                return this.storage.remove(storage_key);
+
+                              case 3:
+                                answer = _context4.sent;
+                                return _context4.abrupt("return", answer);
+
+                              case 7:
+                                _context4.prev = 7;
+                                _context4.t0 = _context4["catch"](0);
+                                console.log('Error after remove user from storrage \n' + _context4.t0);
+
+                              case 10:
+                              case "end":
+                                return _context4.stop();
+                            }
+                          }
+                        }, _callee4, this, [[0, 7]]);
+                      }));
+                    }).catch(function (err) {
+                      console.log("Error after check is storage ready \n" + err);
+                    }));
+
+                  case 1:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
+          }));
         }
       }]);
 
@@ -1424,12 +1536,259 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"]
       }, {
         type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]
+      }, {
+        type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]
       }];
     };
 
     FileStorageForUserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__["File"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])], FileStorageForUserService);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__["File"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])], FileStorageForUserService);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/guard.service/guard.service.ts":
+  /*!*********************************************************!*\
+    !*** ./src/app/services/guard.service/guard.service.ts ***!
+    \*********************************************************/
+
+  /*! exports provided: GuardService */
+
+  /***/
+  function srcAppServicesGuardServiceGuardServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "GuardService", function () {
+      return GuardService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _auth_service_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! ../auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ../fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+    /*
+      Ключ по которому лежит информация
+      в сторейдже о юзере
+    */
+
+
+    var STORAGE_KEY_FOR_USER_INFO = 'user_info';
+    ;
+    ;
+
+    var GuardService = /*#__PURE__*/function () {
+      function GuardService(authService, router, nav, FileStorForUser, http, toastController, loadingController) {
+        _classCallCheck(this, GuardService);
+
+        this.authService = authService;
+        this.router = router;
+        this.nav = nav;
+        this.FileStorForUser = FileStorForUser;
+        this.http = http;
+        this.toastController = toastController;
+        this.loadingController = loadingController;
+      }
+      /* Метод для получения данных о юзере со сторейджа */
+
+
+      _createClass(GuardService, [{
+        key: "getUserFromStore",
+        value: function getUserFromStore() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                    return _context6.abrupt("return", this.FileStorForUser.getUserFromStorage(STORAGE_KEY_FOR_USER_INFO).then(function (res) {
+                      return res;
+                    }).catch(function (err) {
+                      console.log(err);
+                    }));
+
+                  case 1:
+                  case "end":
+                    return _context6.stop();
+                }
+              }
+            }, _callee6, this);
+          }));
+        }
+      }, {
+        key: "presentToast",
+        value: function presentToast(name) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+            var toast;
+            return regeneratorRuntime.wrap(function _callee7$(_context7) {
+              while (1) {
+                switch (_context7.prev = _context7.next) {
+                  case 0:
+                    _context7.next = 2;
+                    return this.toastController.create({
+                      message: "\u041F\u0440\u0438\u0432\u0435\u0442\u0441\u0432\u0443\u044E, ".concat(name),
+                      duration: 1000,
+                      cssClass: 'toast'
+                    });
+
+                  case 2:
+                    toast = _context7.sent;
+                    toast.present();
+
+                  case 4:
+                  case "end":
+                    return _context7.stop();
+                }
+              }
+            }, _callee7, this);
+          }));
+        }
+      }, {
+        key: "canActivate",
+        value: function canActivate(route) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            var _this5 = this;
+
+            var load, storeRes, parseData, dataForServer;
+            return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                    _context8.next = 2;
+                    return this.loadingController.create({
+                      cssClass: 'spinerColor',
+                      message: "Вход...",
+                      spinner: "lines"
+                    });
+
+                  case 2:
+                    load = _context8.sent;
+                    _context8.next = 5;
+                    return this.getUserFromStore().then(function (res) {
+                      if (res) {
+                        storeRes = res;
+                      }
+                    }).catch(function (err) {
+                      console.log(err);
+                    });
+
+                  case 5:
+                    if (!storeRes) {
+                      _context8.next = 11;
+                      break;
+                    }
+
+                    /* Создаем обьект и парсим в него результат предидущего метода */
+                    parseData = JSON.parse(storeRes);
+                    dataForServer = {
+                      id_user: parseData.id_user,
+                      sid: parseData.user_sid
+                    };
+                    _context8.next = 10;
+                    return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
+                      console.log("Answer is ");
+                      console.log(answer.data);
+                      var answerParse;
+                      answerParse = JSON.parse(answer.data);
+
+                      if (answerParse.success) {
+                        var user = Object.assign(dataForServer, answerParse.data);
+
+                        _this5.authService.setUser(user);
+                      }
+
+                      load.dismiss();
+
+                      _this5.nav.navigateRoot('home');
+
+                      setTimeout(function () {
+                        _this5.presentToast(_this5.authService.getUser().name);
+                      }, 300);
+                    }).catch(function (err) {
+                      console.log('Error: ' + err);
+                    });
+
+                  case 10:
+                    return _context8.abrupt("return", false);
+
+                  case 11:
+                    load.dismiss();
+                    return _context8.abrupt("return", true);
+
+                  case 13:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee8, this);
+          }));
+        }
+      }]);
+
+      return GuardService;
+    }();
+
+    GuardService.ctorParameters = function () {
+      return [{
+        type: _auth_service_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"]
+      }, {
+        type: _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"]
+      }];
+    };
+
+    GuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"], _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"]])], GuardService);
     /***/
   },
 

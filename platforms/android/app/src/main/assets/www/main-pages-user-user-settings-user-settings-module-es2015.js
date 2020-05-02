@@ -126,14 +126,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+/* harmony import */ var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 
 
 
 
+
+
+/*
+  Ключ по которому лежит информация
+  в сторейдже о юзере
+*/
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 let UserSettingsPage = class UserSettingsPage {
-    constructor(keyboard, authService) {
+    constructor(keyboard, authService, storageService, nav) {
         this.keyboard = keyboard;
         this.authService = authService;
+        this.storageService = storageService;
+        this.nav = nav;
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
     }
     ngOnInit() {
@@ -153,10 +164,21 @@ let UserSettingsPage = class UserSettingsPage {
             }, 200);
         });
     }
+    Logout() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.storageService.removeUserFromStorage(STORAGE_KEY_FOR_USER_INFO).then(res => {
+                console.log('User is logout');
+                console.log(res);
+                this.nav.navigateRoot('login');
+            });
+        });
+    }
 };
 UserSettingsPage.ctorParameters = () => [
     { type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"] },
-    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
+    { type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"] }
 ];
 UserSettingsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -165,7 +187,9 @@ UserSettingsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./user-settings.page.scss */ "./src/app/main.pages/user/user-settings/user-settings.page.scss")).default]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"],
-        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
+        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+        src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"]])
 ], UserSettingsPage);
 
 

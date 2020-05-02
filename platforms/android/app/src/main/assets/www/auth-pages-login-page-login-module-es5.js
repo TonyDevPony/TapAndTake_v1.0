@@ -255,20 +255,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! src/app/services/network.connection.service/network-connection.service */
     "./src/app/services/network.connection.service/network-connection.service.ts");
     /* harmony import */
 
 
-    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @ionic-native/network/ngx */
     "./node_modules/@ionic-native/network/ngx/index.js");
 
-    var STORAGE_KEY = 'user_info';
+    var STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
     var LoginPage = /*#__PURE__*/function () {
-      function LoginPage(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network) {
+      function LoginPage(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network, storageService) {
         _classCallCheck(this, LoginPage);
 
         this.keyboard = keyboard;
@@ -280,10 +286,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.plt = plt;
         this.networkService = networkService;
         this.network = network;
+        this.storageService = storageService;
         this.email = '';
         this.password = '';
         this.err_message = [];
-        this.user = "{\"name\":\"Maksym Black\",\"email\":\"dieslog@gmail.com\",\"phone\":\"+380971679796\",\"password\":\"b59c67bf196a4758191e42f76670ceba\"}";
       }
 
       _createClass(LoginPage, [{
@@ -292,6 +298,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this = this;
 
           this.plt.ready().then(function () {
+            // Выполняется проверка на покдключение к интернету 
             if (!_this.networkService.initializeConnection()) {
               var massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
 
@@ -474,7 +481,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     this.http.post('https://sc.grekagreka25.had.su/auth/in', this.data, {}).then(function (data) {
                       loading.dismiss();
                       var dataJson = JSON.parse(data.data);
-                      console.log(dataJson);
 
                       if (dataJson.hasOwnProperty('error')) {
                         _this2.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такого пользователя не существует!!!');
@@ -485,8 +491,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       }
 
                       if (_this2.err_message.length == 0) {
-                        // this.authService.setUser(dataJson);
-                        // this.authService.getUser();
+                        var toStorageData = {
+                          id_user: dataJson.id_user,
+                          user_sid: dataJson.sid
+                        };
+
+                        _this2.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
+
                         _this2.goHome(dataJson);
                       }
                     });
@@ -530,9 +541,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]
       }, {
-        type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__["NetworkConnectionService"]
+        type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"]
       }, {
-        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"]
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"]
+      }, {
+        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"]
       }];
     };
 
@@ -544,7 +557,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./login.page.scss */
       "./src/app/auth.pages/login.page/login.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__["NetworkConnectionService"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"]])], LoginPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"]])], LoginPage);
     /***/
   }
 }]);

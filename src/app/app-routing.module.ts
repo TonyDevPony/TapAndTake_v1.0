@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./auth.pages/login.page/login.module').then( m => m.LoginPageModule),
-   // canActivate: [GuardService],
+    canActivate: [GuardService],
   },
   {
     path: 'register',

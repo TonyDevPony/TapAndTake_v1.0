@@ -237,13 +237,34 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! src/app/services/auth.service/auth.service */
     "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /*
+      Ключ по которому лежит информация
+      в сторейдже о юзере
+    */
+
+
+    var STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
     var UserSettingsPage = /*#__PURE__*/function () {
-      function UserSettingsPage(keyboard, authService) {
+      function UserSettingsPage(keyboard, authService, storageService, nav) {
         _classCallCheck(this, UserSettingsPage);
 
         this.keyboard = keyboard;
         this.authService = authService;
+        this.storageService = storageService;
+        this.nav = nav;
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
       }
 
@@ -269,6 +290,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }, 200);
           });
         }
+      }, {
+        key: "Logout",
+        value: function Logout() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _this = this;
+
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return this.storageService.removeUserFromStorage(STORAGE_KEY_FOR_USER_INFO).then(function (res) {
+                      console.log('User is logout');
+                      console.log(res);
+
+                      _this.nav.navigateRoot('login');
+                    });
+
+                  case 2:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
       }]);
 
       return UserSettingsPage;
@@ -279,6 +326,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"]
       }, {
         type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+      }, {
+        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"]
       }];
     };
 
@@ -290,7 +341,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./user-settings.page.scss */
       "./src/app/main.pages/user/user-settings/user-settings.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])], UserSettingsPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"]])], UserSettingsPage);
     /***/
   }
 }]);

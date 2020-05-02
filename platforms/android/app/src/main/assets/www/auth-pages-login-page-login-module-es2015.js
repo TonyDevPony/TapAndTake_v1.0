@@ -134,8 +134,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
-/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
-/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+/* harmony import */ var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 
 
 
@@ -143,9 +144,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const STORAGE_KEY = 'user_info';
+
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 let LoginPage = class LoginPage {
-    constructor(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network) {
+    constructor(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network, storageService) {
         this.keyboard = keyboard;
         this.alertController = alertController;
         this.nav = nav;
@@ -155,13 +157,14 @@ let LoginPage = class LoginPage {
         this.plt = plt;
         this.networkService = networkService;
         this.network = network;
+        this.storageService = storageService;
         this.email = '';
         this.password = '';
         this.err_message = [];
-        this.user = `{"name":"Maksym Black","email":"dieslog@gmail.com","phone":"+380971679796","password":"b59c67bf196a4758191e42f76670ceba"}`;
     }
     ngOnInit() {
         this.plt.ready().then(() => {
+            // Выполняется проверка на покдключение к интернету 
             if (!this.networkService.initializeConnection()) {
                 let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
                 this.openAlert(massage);
@@ -268,15 +271,17 @@ let LoginPage = class LoginPage {
                 this.http.post('https://sc.grekagreka25.had.su/auth/in', this.data, {}).then(data => {
                     loading.dismiss();
                     let dataJson = JSON.parse(data.data);
-                    console.log(dataJson);
                     if (dataJson.hasOwnProperty('error')) {
                         this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такого пользователя не существует!!!');
                         this.openAlert(this.err_message);
                         return;
                     }
                     if (this.err_message.length == 0) {
-                        // this.authService.setUser(dataJson);
-                        // this.authService.getUser();
+                        let toStorageData = {
+                            id_user: dataJson.id_user,
+                            user_sid: dataJson.sid,
+                        };
+                        this.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
                         this.goHome(dataJson);
                     }
                 });
@@ -298,8 +303,9 @@ LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__["NetworkConnectionService"] },
-    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"] }
+    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"] },
+    { type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"] }
 ];
 LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -314,8 +320,9 @@ LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
-        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_5__["NetworkConnectionService"],
-        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"]])
+        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"],
+        src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"]])
 ], LoginPage);
 
 

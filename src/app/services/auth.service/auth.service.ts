@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FileStorageForUserService } from '../fileStorageForUser.service/file-storage-for-user.service';
-
-export interface User {
-  id: number,
-  name: string,
-  seed: string,
-};
+import { HTTP } from '@ionic-native/http/ngx';
 
 
 @Injectable({
@@ -19,13 +14,13 @@ export class AuthService {
 
   constructor(
     private FileStorForuser: FileStorageForUserService,
+    private http: HTTP,
     ) { 
   }
 
-  setUser(user) {
-    // this.FileStorForuser.writeToFile(user);
-    this.FileStorForuser.readFile();
-     
+
+  setUser(user: object) {
+     this.user = user;
   }
 
   getUser() {

@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { AuthService } from 'src/app/services/auth.service/auth.service';
+import { FileStorageForUserService } from 'src/app/services/fileStorageForUser.service/file-storage-for-user.service';
+import { NavController } from '@ionic/angular';
 
+/* 
+  Ключ по которому лежит информация
+  в сторейдже о юзере
+*/
+
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
 @Component({
   selector: 'app-user-settings',
@@ -16,6 +24,8 @@ export class UserSettingsPage implements OnInit {
   constructor(
     private keyboard: Keyboard,
     private authService: AuthService,
+    private storageService: FileStorageForUserService,
+    private nav: NavController,
   ) { }
 
   ngOnInit() {
@@ -37,6 +47,12 @@ export class UserSettingsPage implements OnInit {
       }, 200);
     });
   }
-
+  async Logout() {
+    await this.storageService.removeUserFromStorage(STORAGE_KEY_FOR_USER_INFO).then(res => {
+      console.log('User is logout');
+      console.log(res);
+      this.nav.navigateRoot('login');
+    });
+  }
 
 }

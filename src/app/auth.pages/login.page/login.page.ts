@@ -8,7 +8,7 @@ import { FileStorageForUserService } from 'src/app/services/fileStorageForUser.s
 import { NetworkConnectionService } from 'src/app/services/network.connection.service/network-connection.service';
 import { Network } from '@ionic-native/network/ngx';
 
-const STORAGE_KEY = 'user_info';
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,6 @@ export class LoginPage implements OnInit {
   private headers: any;
   private err_message = [];
   private conection;
-  private user = `{"name":"Maksym Black","email":"dieslog@gmail.com","phone":"+380971679796","password":"b59c67bf196a4758191e42f76670ceba"}`;
 
   constructor(
     private keyboard: Keyboard, 
@@ -36,12 +35,15 @@ export class LoginPage implements OnInit {
     private plt: Platform,
     private networkService: NetworkConnectionService,
     private network: Network,
+    private storageService: FileStorageForUserService,
     ) {
 
     }
 
   ngOnInit() {
     this.plt.ready().then(() => {
+
+      // Выполняется проверка на покдключение к интернету 
       if(!this.networkService.initializeConnection()) {
         let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
         this.openAlert(massage);
@@ -55,7 +57,6 @@ export class LoginPage implements OnInit {
       this.network.onDisconnect().subscribe(() => {
         this.conection = false;
       });
-
     });
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
@@ -155,15 +156,22 @@ export class LoginPage implements OnInit {
       this.http.post('https://sc.grekagreka25.had.su/auth/in', this.data, {}).then(data => {
         loading.dismiss();
         let dataJson = JSON.parse(data.data);
-        console.log(dataJson);
         if(dataJson.hasOwnProperty('error')) {
           this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такого пользователя не существует!!!');
           this.openAlert(this.err_message);
           return;
         }
         if(this.err_message.length == 0) {
-          // this.authService.setUser(dataJson);
-          // this.authService.getUser();
+
+          let toStorageData = {
+            id_user: dataJson.id_user,
+            user_sid: dataJson.sid,
+          };
+          
+          this.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
+
+        
+          
            
           this.goHome(dataJson);
         }  
@@ -171,10 +179,12 @@ export class LoginPage implements OnInit {
     }
   }
 
-  goHome(data){
+  
+  goHome(data: any){
     this.nav.navigateRoot(['/home']);
     setTimeout(() => {
       this.presentToast(data.name);
     }, 300);
   }
+
 }

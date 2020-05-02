@@ -703,6 +703,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _services_guard_service_guard_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/guard.service/guard.service */ "./src/app/services/guard.service/guard.service.ts");
+
 
 
 
@@ -712,6 +714,7 @@ const routes = [
     {
         path: 'login',
         loadChildren: () => Promise.all(/*! import() | auth-pages-login-page-login-module */[__webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module~main-pages-user-~e0eb3dc2"), __webpack_require__.e("default~auth-pages-login-page-login-module~auth-pages-register-page-register-module"), __webpack_require__.e("auth-pages-login-page-login-module")]).then(__webpack_require__.bind(null, /*! ./auth.pages/login.page/login.module */ "./src/app/auth.pages/login.page/login.module.ts")).then(m => m.LoginPageModule),
+        canActivate: [_services_guard_service_guard_service__WEBPACK_IMPORTED_MODULE_3__["GuardService"]],
     },
     {
         path: 'register',
@@ -944,30 +947,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
 
 
 
-;
+
 let AuthService = class AuthService {
-    constructor(FileStorForuser) {
+    constructor(FileStorForuser, http) {
         this.FileStorForuser = FileStorForuser;
+        this.http = http;
     }
     setUser(user) {
-        // this.FileStorForuser.writeToFile(user);
-        this.FileStorForuser.readFile();
+        this.user = user;
     }
     getUser() {
         return this.user;
     }
 };
 AuthService.ctorParameters = () => [
-    { type: _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"] }
+    { type: _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"] }
 ];
 AuthService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_2__["FileStorageForUserService"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]])
 ], AuthService);
 
 
@@ -989,52 +995,71 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/file-path/ngx */ "./node_modules/@ionic-native/file-path/ngx/index.js");
 /* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
 
 
 
 
 
+
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 let FileStorageForUserService = class FileStorageForUserService {
-    constructor(file, filePath, http) {
+    constructor(file, filePath, http, storage) {
         this.file = file;
         this.filePath = filePath;
         this.http = http;
+        this.storage = storage;
     }
-    createFile() {
-        this.file.checkFile(this.file.dataDirectory, 'user_info').then(massage => {
-            if (massage) {
-                console.log('file exists already exists\n' + massage);
-                return;
-            }
-        }, (error) => {
-            this.file.createFile(this.file.dataDirectory, 'user_info', true)
-                .then(massage => {
-                console.log("Create file\n" + massage);
+    storageIsReady() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.storage.ready().then(res => { return res; });
+        });
+    }
+    setUserToStorage(store_key, data) {
+        this.storageIsReady()
+            .then(() => {
+            this.storage.set(store_key, data)
+                .then(answer => console.log("User is set to storage \n" + answer))
+                .catch(err => console.log("Error after set user to storage \n" + err));
+        })
+            .catch(err => {
+            console.log("Error after check is storage ready \n" + err);
+        });
+    }
+    getUserFromStorage(store_key) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.storageIsReady().then(() => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                try {
+                    const answer = yield this.storage.get(store_key);
+                    return answer;
+                }
+                catch (err) {
+                    return console.log("Error after get user from storage\n" + err);
+                }
+            })).catch(err => {
+                console.log("Error after check is storage ready \n" + err);
             });
         });
     }
-    writeToFile(user) {
-        this.data = new Blob([user], { type: 'text/plain' });
-        this.file.writeFile(this.file.dataDirectory, 'user_info', this.data, { replace: true, append: false })
-            .then(massage => {
-            console.log("Write to file\n" + massage);
-        });
-    }
-    readFile() {
-        this.file.readAsText(this.file.dataDirectory, 'user_info').then(data => {
-            console.log(data);
-        });
-    }
-    removeFile(fileName) {
-        this.file.removeFile(this.file.dataDirectory, fileName).then(() => {
-            console.log("File " + fileName + "is removed");
+    removeUserFromStorage(storage_key) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.storageIsReady().then(() => tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+                try {
+                    const answer = yield this.storage.remove(storage_key);
+                    return answer;
+                }
+                catch (err) {
+                    console.log('Error after remove user from storrage \n' + err);
+                }
+            })).catch(err => { console.log("Error after check is storage ready \n" + err); });
         });
     }
 };
 FileStorageForUserService.ctorParameters = () => [
     { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__["File"] },
     { type: _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] }
 ];
 FileStorageForUserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1042,8 +1067,145 @@ FileStorageForUserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_3__["File"],
         _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_2__["FilePath"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
+        _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
 ], FileStorageForUserService);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/guard.service/guard.service.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/services/guard.service/guard.service.ts ***!
+  \*********************************************************/
+/*! exports provided: GuardService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GuardService", function() { return GuardService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _auth_service_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+
+
+
+
+
+
+
+/*
+  Ключ по которому лежит информация
+  в сторейдже о юзере
+*/
+const STORAGE_KEY_FOR_USER_INFO = 'user_info';
+;
+;
+let GuardService = class GuardService {
+    constructor(authService, router, nav, FileStorForUser, http, toastController, loadingController) {
+        this.authService = authService;
+        this.router = router;
+        this.nav = nav;
+        this.FileStorForUser = FileStorForUser;
+        this.http = http;
+        this.toastController = toastController;
+        this.loadingController = loadingController;
+    }
+    /* Метод для получения данных о юзере со сторейджа */
+    getUserFromStore() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            return this.FileStorForUser.getUserFromStorage(STORAGE_KEY_FOR_USER_INFO)
+                .then(res => { return res; }).catch(err => {
+                console.log(err);
+            });
+        });
+    }
+    presentToast(name) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastController.create({
+                message: `Приветсвую, ${name}`,
+                duration: 1000,
+                cssClass: 'toast',
+            });
+            toast.present();
+        });
+    }
+    canActivate(route) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const load = yield this.loadingController.create({
+                cssClass: 'spinerColor',
+                message: "Вход...",
+                spinner: "lines",
+            });
+            /* Получаем id и sid */
+            let storeRes;
+            yield this.getUserFromStore().then(res => {
+                if (res) {
+                    storeRes = res;
+                }
+            }).catch(err => { console.log(err); });
+            /*
+               Если в сторейдже был юзер,
+               отправляем запрос на сервер и
+               иницилизируем юзера
+            */
+            if (storeRes) {
+                /* Создаем обьект и парсим в него результат предидущего метода */
+                let parseData;
+                parseData = JSON.parse(storeRes);
+                let dataForServer = {
+                    id_user: parseData.id_user,
+                    sid: parseData.user_sid,
+                };
+                yield this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
+                    console.log("Answer is ");
+                    console.log(answer.data);
+                    let answerParse;
+                    answerParse = JSON.parse(answer.data);
+                    if (answerParse.success) {
+                        var user = Object.assign(dataForServer, answerParse.data);
+                        this.authService.setUser(user);
+                    }
+                    load.dismiss();
+                    this.nav.navigateRoot('home');
+                    setTimeout(() => {
+                        this.presentToast(this.authService.getUser().name);
+                    }, 300);
+                }).catch(err => { console.log('Error: ' + err); });
+                // console.log(this.authService.getUser());
+                return false;
+            }
+            load.dismiss();
+            return true;
+        });
+    }
+};
+GuardService.ctorParameters = () => [
+    { type: _auth_service_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] },
+    { type: _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"] }
+];
+GuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"],
+        _fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"]])
+], GuardService);
 
 
 
