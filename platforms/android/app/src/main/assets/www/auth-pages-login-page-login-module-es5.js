@@ -255,26 +255,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */
     "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
     /* harmony import */
 
 
-    var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! src/app/services/network.connection.service/network-connection.service */
     "./src/app/services/network.connection.service/network-connection.service.ts");
     /* harmony import */
 
 
-    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @ionic-native/network/ngx */
     "./node_modules/@ionic-native/network/ngx/index.js");
 
     var STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
     var LoginPage = /*#__PURE__*/function () {
-      function LoginPage(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network, storageService) {
+      function LoginPage(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network, storageService, authService) {
         _classCallCheck(this, LoginPage);
 
         this.keyboard = keyboard;
@@ -287,6 +293,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.networkService = networkService;
         this.network = network;
         this.storageService = storageService;
+        this.authService = authService;
         this.email = '';
         this.password = '';
         this.err_message = [];
@@ -498,6 +505,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                         _this2.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
 
+                        if (_this2.authService.getUser() == null) {
+                          _this2.authService.setUser(dataJson);
+                        }
+
                         _this2.goHome(dataJson);
                       }
                     });
@@ -541,11 +552,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"]
       }, {
-        type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"]
+        type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"]
       }, {
-        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"]
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"]
       }, {
-        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"]
+        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]
       }];
     };
 
@@ -557,7 +570,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./login.page.scss */
       "./src/app/auth.pages/login.page/login.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"]])], LoginPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])], LoginPage);
     /***/
   }
 }]);

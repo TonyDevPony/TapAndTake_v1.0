@@ -1292,6 +1292,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.FileStorForuser = FileStorForuser;
         this.http = http;
+        this.user = null;
+        this.user_id = -1;
+        this.user_sid = "";
       }
 
       _createClass(AuthService, [{
@@ -1303,6 +1306,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getUser",
         value: function getUser() {
           return this.user;
+        }
+      }, {
+        key: "setAuthConf",
+        value: function setAuthConf(user_id, user_sid) {
+          this.user_id = user_id;
+          this.user_sid = user_sid;
+        }
+      }, {
+        key: "getAthConf",
+        value: function getAthConf() {
+          return {
+            user_id: this.user_id,
+            user_sid: this.user_sid
+          };
         }
       }]);
 
@@ -1616,7 +1633,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var STORAGE_KEY_FOR_USER_INFO = 'user_info';
     ;
-    ;
 
     var GuardService = /*#__PURE__*/function () {
       function GuardService(authService, router, nav, FileStorForUser, http, toastController, loadingController) {
@@ -1656,54 +1672,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "presentToast",
-        value: function presentToast(name) {
+        key: "canActivate",
+        value: function canActivate(route) {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-            var toast;
+            var storeRes, parseData;
             return regeneratorRuntime.wrap(function _callee7$(_context7) {
               while (1) {
                 switch (_context7.prev = _context7.next) {
                   case 0:
                     _context7.next = 2;
-                    return this.toastController.create({
-                      message: "\u041F\u0440\u0438\u0432\u0435\u0442\u0441\u0432\u0443\u044E, ".concat(name),
-                      duration: 1000,
-                      cssClass: 'toast'
-                    });
-
-                  case 2:
-                    toast = _context7.sent;
-                    toast.present();
-
-                  case 4:
-                  case "end":
-                    return _context7.stop();
-                }
-              }
-            }, _callee7, this);
-          }));
-        }
-      }, {
-        key: "canActivate",
-        value: function canActivate(route) {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-            var _this5 = this;
-
-            var load, storeRes, parseData, dataForServer;
-            return regeneratorRuntime.wrap(function _callee8$(_context8) {
-              while (1) {
-                switch (_context8.prev = _context8.next) {
-                  case 0:
-                    _context8.next = 2;
-                    return this.loadingController.create({
-                      cssClass: 'spinerColor',
-                      message: "Вход...",
-                      spinner: "lines"
-                    });
-
-                  case 2:
-                    load = _context8.sent;
-                    _context8.next = 5;
                     return this.getUserFromStore().then(function (res) {
                       if (res) {
                         storeRes = res;
@@ -1712,55 +1689,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       console.log(err);
                     });
 
-                  case 5:
+                  case 2:
                     if (!storeRes) {
-                      _context8.next = 11;
+                      _context7.next = 9;
                       break;
                     }
 
                     /* Создаем обьект и парсим в него результат предидущего метода */
                     parseData = JSON.parse(storeRes);
-                    dataForServer = {
-                      id_user: parseData.id_user,
-                      sid: parseData.user_sid
-                    };
-                    _context8.next = 10;
-                    return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
-                      console.log("Answer is ");
-                      console.log(answer.data);
-                      var answerParse;
-                      answerParse = JSON.parse(answer.data);
+                    console.log('Store res is ↓');
+                    console.log(storeRes);
+                    this.authService.setAuthConf(parseData.id_user, parseData.user_sid);
+                    this.nav.navigateRoot('home');
+                    return _context7.abrupt("return", false);
 
-                      if (answerParse.success) {
-                        var user = Object.assign(dataForServer, answerParse.data);
-
-                        _this5.authService.setUser(user);
-                      }
-
-                      load.dismiss();
-
-                      _this5.nav.navigateRoot('home');
-
-                      setTimeout(function () {
-                        _this5.presentToast(_this5.authService.getUser().name);
-                      }, 300);
-                    }).catch(function (err) {
-                      console.log('Error: ' + err);
-                    });
+                  case 9:
+                    return _context7.abrupt("return", true);
 
                   case 10:
-                    return _context8.abrupt("return", false);
-
-                  case 11:
-                    load.dismiss();
-                    return _context8.abrupt("return", true);
-
-                  case 13:
                   case "end":
-                    return _context8.stop();
+                    return _context7.stop();
                 }
               }
-            }, _callee8, this);
+            }, _callee7, this);
           }));
         }
       }]);

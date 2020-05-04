@@ -3901,7 +3901,8 @@ let QRPage = class QRPage {
         this.base64ToGallary = base64ToGallary;
         this.toastCtrl = toastCtrl;
         this.nav = nav;
-        this.qrData = 'https://forum.ionicframework.com/t/how-to-generate-a-qr-code-in-ionic/108736';
+        //qrData = 'https://forum.ionicframework.com/t/how-to-generate-a-qr-code-in-ionic/108736';
+        this.qrData = '{id_user: 1, sid: c623dfa81a6e702578582af3dacbcabf}';
         this.scannedCode = null;
     }
     ngOnInit() {

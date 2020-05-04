@@ -504,9 +504,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
 
 
 
+
+
+
+;
 const coffehouse_list = [
     { id_coffehouse: '1', logo: '', name_coffehouse: 'Sharikava', is_favorite: '1', count_cups_purchased: '2', count_of_cups: '10' },
     { id_coffehouse: '2', logo: '', name_coffehouse: 'Sho', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '10' },
@@ -516,9 +523,39 @@ const coffehouse_list = [
     { id_coffehouse: '6', logo: '', name_coffehouse: 'Coffee & Sandwich', is_favorite: '1', count_cups_purchased: '5', count_of_cups: '10' },
 ];
 let HomePage = class HomePage {
-    constructor(nav) {
+    constructor(nav, route, authService, http, loadCTRL) {
         this.nav = nav;
+        this.route = route;
+        this.authService = authService;
+        this.http = http;
+        this.loadCTRL = loadCTRL;
         this.slideOpts = {};
+    }
+    ionViewWillEnter() {
+        this.userConf = this.authService.getAthConf();
+        this.user = this.authService.getUser();
+        console.log('home page this.user ↓');
+        console.log(this.user);
+        if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
+            this.getUserFromServer({ id_user: this.userConf.user_id, sid: this.userConf.user_sid });
+            console.log("If worked!!!");
+        }
+    }
+    getUserFromServer(dataForServer) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('method getUserFromServe dataForServer param ↓');
+            console.log(dataForServer);
+            yield this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
+                console.log("Answer is ↓");
+                console.log(answer.data);
+                let answerParse;
+                answerParse = JSON.parse(answer.data);
+                if (answerParse.success) {
+                    var user = Object.assign(dataForServer, answerParse.data);
+                    this.authService.setUser(user);
+                }
+            }).catch(err => { console.log('Error: ' + err); });
+        });
     }
     setButton() {
         new Promise((resolve, reject) => {
@@ -557,7 +594,11 @@ let HomePage = class HomePage {
     }
 };
 HomePage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mySlider', { static: false }),
@@ -569,7 +610,11 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./home.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/main.pages/home.page/home.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./home.page.scss */ "./src/app/main.pages/home.page/home.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
 ], HomePage);
 
 

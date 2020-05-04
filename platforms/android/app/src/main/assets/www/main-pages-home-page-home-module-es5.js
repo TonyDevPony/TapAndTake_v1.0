@@ -777,7 +777,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
     "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
 
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
+
+    ;
     var coffehouse_list = [{
       id_coffehouse: '1',
       logo: '',
@@ -823,22 +842,78 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }];
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(nav) {
+      function HomePage(nav, route, authService, http, loadCTRL) {
         _classCallCheck(this, HomePage);
 
         this.nav = nav;
+        this.route = route;
+        this.authService = authService;
+        this.http = http;
+        this.loadCTRL = loadCTRL;
         this.slideOpts = {};
       }
 
       _createClass(HomePage, [{
+        key: "ionViewWillEnter",
+        value: function ionViewWillEnter() {
+          this.userConf = this.authService.getAthConf();
+          this.user = this.authService.getUser();
+          console.log('home page this.user ↓');
+          console.log(this.user);
+
+          if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
+            this.getUserFromServer({
+              id_user: this.userConf.user_id,
+              sid: this.userConf.user_sid
+            });
+            console.log("If worked!!!");
+          }
+        }
+      }, {
+        key: "getUserFromServer",
+        value: function getUserFromServer(dataForServer) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _this = this;
+
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    console.log('method getUserFromServe dataForServer param ↓');
+                    console.log(dataForServer);
+                    _context.next = 4;
+                    return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
+                      console.log("Answer is ↓");
+                      console.log(answer.data);
+                      var answerParse;
+                      answerParse = JSON.parse(answer.data);
+
+                      if (answerParse.success) {
+                        var user = Object.assign(dataForServer, answerParse.data);
+
+                        _this.authService.setUser(user);
+                      }
+                    }).catch(function (err) {
+                      console.log('Error: ' + err);
+                    });
+
+                  case 4:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
+      }, {
         key: "setButton",
         value: function setButton() {
-          var _this = this;
+          var _this2 = this;
 
           new Promise(function (resolve, reject) {
-            resolve(_this.slides.getActiveIndex());
+            resolve(_this2.slides.getActiveIndex());
           }).then(function (result) {
-            return _this.changeButtonColor(result);
+            return _this2.changeButtonColor(result);
           });
           return true;
         }
@@ -892,6 +967,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     HomePage.ctorParameters = function () {
       return [{
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
       }];
     };
 
@@ -906,7 +989,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./home.page.scss */
       "./src/app/main.pages/home.page/home.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])], HomePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])], HomePage);
     /***/
   }
 }]);

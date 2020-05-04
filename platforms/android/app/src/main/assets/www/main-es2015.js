@@ -956,12 +956,25 @@ let AuthService = class AuthService {
     constructor(FileStorForuser, http) {
         this.FileStorForuser = FileStorForuser;
         this.http = http;
+        this.user = null;
+        this.user_id = -1;
+        this.user_sid = "";
     }
     setUser(user) {
         this.user = user;
     }
     getUser() {
         return this.user;
+    }
+    setAuthConf(user_id, user_sid) {
+        this.user_id = user_id;
+        this.user_sid = user_sid;
+    }
+    getAthConf() {
+        return {
+            user_id: this.user_id,
+            user_sid: this.user_sid,
+        };
     }
 };
 AuthService.ctorParameters = () => [
@@ -1105,7 +1118,6 @@ __webpack_require__.r(__webpack_exports__);
 */
 const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 ;
-;
 let GuardService = class GuardService {
     constructor(authService, router, nav, FileStorForUser, http, toastController, loadingController) {
         this.authService = authService;
@@ -1125,23 +1137,8 @@ let GuardService = class GuardService {
             });
         });
     }
-    presentToast(name) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message: `Приветсвую, ${name}`,
-                duration: 1000,
-                cssClass: 'toast',
-            });
-            toast.present();
-        });
-    }
     canActivate(route) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const load = yield this.loadingController.create({
-                cssClass: 'spinerColor',
-                message: "Вход...",
-                spinner: "lines",
-            });
             /* Получаем id и sid */
             let storeRes;
             yield this.getUserFromStore().then(res => {
@@ -1158,29 +1155,12 @@ let GuardService = class GuardService {
                 /* Создаем обьект и парсим в него результат предидущего метода */
                 let parseData;
                 parseData = JSON.parse(storeRes);
-                let dataForServer = {
-                    id_user: parseData.id_user,
-                    sid: parseData.user_sid,
-                };
-                yield this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
-                    console.log("Answer is ");
-                    console.log(answer.data);
-                    let answerParse;
-                    answerParse = JSON.parse(answer.data);
-                    if (answerParse.success) {
-                        var user = Object.assign(dataForServer, answerParse.data);
-                        this.authService.setUser(user);
-                    }
-                    load.dismiss();
-                    this.nav.navigateRoot('home');
-                    setTimeout(() => {
-                        this.presentToast(this.authService.getUser().name);
-                    }, 300);
-                }).catch(err => { console.log('Error: ' + err); });
-                // console.log(this.authService.getUser());
+                console.log('Store res is ↓');
+                console.log(storeRes);
+                this.authService.setAuthConf(parseData.id_user, parseData.user_sid);
+                this.nav.navigateRoot('home');
                 return false;
             }
-            load.dismiss();
             return true;
         });
     }

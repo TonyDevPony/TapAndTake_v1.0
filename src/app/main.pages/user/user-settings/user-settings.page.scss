@@ -128,11 +128,15 @@ ion-datetime::placeholder{
 .logOutButton {
     height: 45px;
     width: 120px;
-    --border-radius: 20px;
     font-weight: bold;
-    --background: linear-gradient(to right, #FBDC95, #FBA232);
     position: absolute;
+    color: #484848;
     left: 30px;
+    --background: none;
+    --background-activated: none;
+    --background-focused: none;
+    --box-shadow: none;
+    --border-radius: 20px;
 }
 .logOutIcon {
     width: 15px;
@@ -142,7 +146,6 @@ ion-datetime::placeholder{
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    
 }
 
 .arrow{

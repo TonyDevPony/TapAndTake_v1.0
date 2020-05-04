@@ -1,5 +1,17 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonSlides, NavController } from '@ionic/angular';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { IonSlides, NavController, LoadingController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service/auth.service';
+import { HTTP } from '@ionic-native/http/ngx';
+
+
+/* Интерфейс который содержит поля которые прийдут с сервера, нужно для типизации обьекта */
+
+export interface DataFromServer {
+  success: boolean,
+  error: boolean,
+  data: string,
+};
 
 const coffehouse_list = [
   { id_coffehouse: '1', logo: '', name_coffehouse: 'Sharikava', is_favorite: '1', count_cups_purchased: '2', count_of_cups: '10'},
@@ -18,12 +30,56 @@ const coffehouse_list = [
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  
   slideOpts = {
 
   };
 
+  userConf: any;
+  user: any;
+
   @ViewChild('mySlider', {static: false}) slides: IonSlides;
-  constructor(private nav: NavController) {}
+  constructor(
+    private nav: NavController,
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private http: HTTP,
+    private loadCTRL: LoadingController,
+    ) 
+    {
+    
+  }
+  ionViewWillEnter() {
+    this.userConf = this.authService.getAthConf();
+    this.user = this.authService.getUser();
+    console.log('home page this.user ↓');
+    
+    console.log(this.user);
+    
+    if(this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
+      this.getUserFromServer({id_user: this.userConf.user_id, sid: this.userConf.user_sid});
+      console.log("If worked!!!");
+      
+    }
+  }
+
+  async getUserFromServer (dataForServer: object) {
+     console.log('method getUserFromServe dataForServer param ↓');
+    
+     console.log(dataForServer);
+    
+     await this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
+        console.log("Answer is ↓");
+        console.log(answer.data);
+
+        let answerParse: DataFromServer;
+        answerParse = JSON.parse(answer.data);
+        if(answerParse.success) {
+          var user = Object.assign(dataForServer, answerParse.data);
+          this.authService.setUser(user);
+        }
+      }).catch(err => {console.log('Error: ' + err);})
+  }
 
   setButton(){
     new Promise((resolve, reject) => {

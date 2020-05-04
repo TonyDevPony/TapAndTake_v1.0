@@ -8,8 +8,9 @@ import { HTTP } from '@ionic-native/http/ngx';
 })
 export class AuthService {
 
-  private user;
-  private user_id: number;
+  private user = null;
+  private user_id =  -1;
+  private user_sid = "";
 
 
   constructor(
@@ -26,4 +27,17 @@ export class AuthService {
   getUser() {
     return this.user;
   }
+
+  setAuthConf(user_id: number, user_sid: string) {
+    this.user_id = user_id;
+    this.user_sid = user_sid;
+  }
+
+  getAthConf() {
+    return {
+      user_id: this.user_id,
+      user_sid: this.user_sid,
+    }
+  }
+
 }

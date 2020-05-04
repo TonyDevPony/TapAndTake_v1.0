@@ -10,7 +10,8 @@ import { ToastController, NavController } from '@ionic/angular';
 })
 export class QRPage implements OnInit {
 
-  qrData = 'https://forum.ionicframework.com/t/how-to-generate-a-qr-code-in-ionic/108736';
+  //qrData = 'https://forum.ionicframework.com/t/how-to-generate-a-qr-code-in-ionic/108736';
+  qrData = '{id_user: 1, sid: c623dfa81a6e702578582af3dacbcabf}'
   scannedCode = null;
 
   constructor(
@@ -21,7 +22,6 @@ export class QRPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
 
   }
   

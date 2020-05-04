@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
     private networkService: NetworkConnectionService,
     private network: Network,
     private storageService: FileStorageForUserService,
+    private authService: AuthService,
     ) {
 
     }
@@ -169,10 +170,10 @@ export class LoginPage implements OnInit {
           };
           
           this.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
-
-        
+          if(this.authService.getUser() == null) {
+            this.authService.setUser(dataJson);
+          }
           
-           
           this.goHome(dataJson);
         }  
       });

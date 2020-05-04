@@ -134,9 +134,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
-/* harmony import */ var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
-/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
-/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+/* harmony import */ var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+
 
 
 
@@ -147,7 +149,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 let LoginPage = class LoginPage {
-    constructor(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network, storageService) {
+    constructor(keyboard, alertController, nav, http, loadingController, toastController, plt, networkService, network, storageService, authService) {
         this.keyboard = keyboard;
         this.alertController = alertController;
         this.nav = nav;
@@ -158,6 +160,7 @@ let LoginPage = class LoginPage {
         this.networkService = networkService;
         this.network = network;
         this.storageService = storageService;
+        this.authService = authService;
         this.email = '';
         this.password = '';
         this.err_message = [];
@@ -282,6 +285,9 @@ let LoginPage = class LoginPage {
                             user_sid: dataJson.sid,
                         };
                         this.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
+                        if (this.authService.getUser() == null) {
+                            this.authService.setUser(dataJson);
+                        }
                         this.goHome(dataJson);
                     }
                 });
@@ -303,9 +309,10 @@ LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"] },
-    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"] },
-    { type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"] }
+    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"] },
+    { type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] }
 ];
 LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -320,9 +327,10 @@ LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
-        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_6__["NetworkConnectionService"],
-        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"],
-        src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_5__["FileStorageForUserService"]])
+        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_7__["NetworkConnectionService"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_8__["Network"],
+        src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"],
+        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])
 ], LoginPage);
 
 

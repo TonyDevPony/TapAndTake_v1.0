@@ -29,7 +29,7 @@ export class UserSettingsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.userSettingsInfo = JSON.parse(this.authService.getUser());
+    this.userSettingsInfo = this.authService.getUser();
     // Set hidden to bottom text when keyboard is show
     this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
@@ -51,6 +51,7 @@ export class UserSettingsPage implements OnInit {
     await this.storageService.removeUserFromStorage(STORAGE_KEY_FOR_USER_INFO).then(res => {
       console.log('User is logout');
       console.log(res);
+      this.authService.setUser(null);
       this.nav.navigateRoot('login');
     });
   }
