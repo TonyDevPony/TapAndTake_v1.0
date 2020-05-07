@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"alert animated fadeIn faster\">\n  <ion-row class=\"alert_header\">\n    <h4>Введите код</h4>\n  </ion-row>\n  <ion-row class=\"alert_body\">\n    <input type=\"text\" class=\"input_form\" placeholder=\"Код подтверждения\"  [(ngModel)]=\"code\" name=\"code\" id='code' maxlength=\"12\">\n  </ion-row>\n  <ion-row class=\"description\">\n    <p><i class=\"fas fa-exclamation-circle\"></i>&#32;Вам на почту был отпрален код, пожалуйста введите его, в течении 10 минут.</p>\n  </ion-row>\n  <ion-row class=\"alert_footer\">\n    <ion-button class=\"submit_button\" (click)=\"sendCode()\">Подтвердить</ion-button>\n  </ion-row>\n</div>\n\n<div class=\"background_opacity\" (click)=\"closeModal()\">\n\n</div>";
+    __webpack_exports__["default"] = "<div class=\"alert animated fadeIn faster\">\n  <ion-row class=\"alert_header\">\n    <h4>Введите код</h4>\n  </ion-row>\n  <ion-row class=\"alert_body\">\n    <input type=\"number\" class=\"input_form\" placeholder=\"Код подтверждения\"  [(ngModel)]=\"code\" name=\"code\" id='code' maxlength=\"12\">\n  </ion-row>\n  <ion-row class=\"description\">\n    <p><i class=\"fas fa-exclamation-circle\"></i>&#32;Вам на почту был отпрален код, пожалуйста введите его, в течении 10 минут.</p>\n  </ion-row>\n  <ion-row class=\"alert_footer\">\n    <ion-button class=\"submit_button\" (click)=\"sendCode()\">Подтвердить</ion-button>\n  </ion-row>\n</div>\n\n<div class=\"background_opacity\" (click)=\"closeModal()\">\n\n</div>";
     /***/
   },
 
@@ -178,9 +178,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! src/app/services/auth.service/auth.service */
     "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+
+    var STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
     var AlertComponent = /*#__PURE__*/function () {
-      function AlertComponent(router, nav, http, alertController, authService, toastController) {
+      function AlertComponent(router, nav, http, alertController, authService, toastController, storageService) {
         _classCallCheck(this, AlertComponent);
 
         this.router = router;
@@ -189,6 +197,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.alertController = alertController;
         this.authService = authService;
         this.toastController = toastController;
+        this.storageService = storageService;
         this.err_message = [];
       }
 
@@ -269,19 +278,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             code: code
           };
           this.http.post('https://sc.grekagreka25.had.su/reg/confirm/', this.data, {}).then(function (data) {
+            console.log("data from serve after request reg/confirm");
+            console.log(data.data);
             var parseData = JSON.parse(data.data);
 
             if (parseData.error == 907) {
               _this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Не верно введен код подтвержения или код просрочен');
 
               _this.openAlert(_this.err_message);
-            } else {
-              _this.authService.setUser(parseData);
+            } else if (parseData.success) {
+              console.log("parse data  is");
+              console.log(parseData);
+              var userInfo = parseData.success;
+              console.log("userInfo  is");
+              console.log(userInfo);
+              var toStorageData = {
+                id_user: userInfo.id_user,
+                user_sid: userInfo.sid
+              };
+              console.log("toStorageData  is");
+              console.log(toStorageData); // this.authService.setUser(parseData);
+
+              _this.storageService.setUserToStorage(STORAGE_KEY_FOR_USER_INFO, JSON.stringify(toStorageData));
+
+              if (_this.authService.getUser() == null) {
+                _this.authService.setUser(userInfo);
+              }
 
               _this.nav.navigateRoot(['/home']);
 
               setTimeout(function () {
-                _this.presentToast(parseData.name);
+                _this.presentToast(userInfo.name);
               }, 300);
             }
           });
@@ -328,6 +355,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]
+      }, {
+        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]
       }];
     };
 
@@ -339,7 +368,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./alert.component.scss */
       "./src/app/components/alert.component/alert.component.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])], AlertComponent);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_4__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]])], AlertComponent);
     /***/
   },
 

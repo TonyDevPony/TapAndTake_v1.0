@@ -64,6 +64,14 @@ export class RegisterPage implements OnInit {
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
 
+  submit(e) {
+    console.log('submit');
+    console.log(e);
+    if(e.key == "Enter") {
+      this.keyboard.hide();
+    }
+  }
+
   async openAlert(message) {
     const alert = await this.alertController.create({
       header: 'Упс...',
@@ -155,6 +163,7 @@ export class RegisterPage implements OnInit {
 
       this.http.post('https://sc.grekagreka25.had.su/reg/in', this.data, {}).then(data => {
         loading.dismiss();
+        console.log("data afte request reg/in");
         console.log(data.data);
         let dataJson = JSON.parse(data.data);
 

@@ -534,20 +534,15 @@ let HomePage = class HomePage {
     ionViewWillEnter() {
         this.userConf = this.authService.getAthConf();
         this.user = this.authService.getUser();
-        console.log('home page this.user ↓');
-        console.log(this.user);
         if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
             this.getUserFromServer({ id_user: this.userConf.user_id, sid: this.userConf.user_sid });
-            console.log("If worked!!!");
         }
     }
     getUserFromServer(dataForServer) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            console.log('method getUserFromServe dataForServer param ↓');
-            console.log(dataForServer);
+            //  console.log('method getUserFromServe dataForServer param ↓');
+            //  console.log(dataForServer);
             yield this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
-                console.log("Answer is ↓");
-                console.log(answer.data);
                 let answerParse;
                 answerParse = JSON.parse(answer.data);
                 if (answerParse.success) {

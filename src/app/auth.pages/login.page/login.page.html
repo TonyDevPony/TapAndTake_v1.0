@@ -1,47 +1,47 @@
 <app-header></app-header>
 <ion-content class="animated fadeInLeft fast">
-  <ion-row class="Login" id="login">
-    <ion-col size="1">
-    </ion-col>
-    <ion-col>
-      <span>Вход</span>
-    </ion-col>
-  </ion-row>
-  <ion-row class="Description">
-    <ion-col size="1">
-    </ion-col>
-    <ion-col>
-      <span>Заполните поля</span>
-    </ion-col>
-  </ion-row>
-  <ion-row class="Email" id="email">
-    <ion-col size="1" class="icons">
-      <i class="far fa-envelope"></i>
-    </ion-col>
-    <ion-col>
-      <input type="email" class="form__field" placeholder="Email" [(ngModel)]="email" name="emailInp" id='emailInp' pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"/>
-      <label for="emailInp" class="form__label">Email</label>
-    </ion-col>
-  </ion-row>
-  <ion-row class="Password">
-    <ion-col size="1" class="icons">
-      <i class="fas fa-unlock-alt"></i>
-    </ion-col>
-    <ion-col>
-      <input type="password" class="form__field" placeholder="Пароль" minlength="6" [(ngModel)]="password" name="pass" id='pass' />
-      <label for="pass" class="form__label">Пароль</label>
-      <div class="forgot" (click)="forgotPass()">
-        <span>ЗАБЫЛИ?</span>
-      </div>
-    </ion-col>
-  </ion-row>
-  <ion-row class="rowButton">
-    <ion-button (click)="Login()">Войти
-      <div class="arrow">
-      </div>
-    </ion-button>
-  </ion-row>
-  <ion-row class="text animated fadeInDown fast" id="text">
-    <span>Не зарегистрированы?&nbsp;</span><span (click)="Register()">Регистрация</span>
-  </ion-row>
+    <ion-row class="Login" id="login">
+      <ion-col size="1">
+      </ion-col>
+      <ion-col>
+        <span>Вход</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="Description">
+      <ion-col size="1">
+      </ion-col>
+      <ion-col>
+        <span>Заполните поля</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="Email" id="email">
+      <ion-col size="1" class="icons">
+        <i class="far fa-envelope"></i>
+      </ion-col>
+      <ion-col>
+        <input type="email" class="form__field" placeholder="Email" [(ngModel)]="email" name="emailInp" id='emailInp' pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$"/>
+        <label for="emailInp" class="form__label">Email</label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="Password">
+      <ion-col size="1" class="icons">
+        <i class="fas fa-unlock-alt"></i>
+      </ion-col>
+      <ion-col>
+        <input type="password" class="form__field" placeholder="Пароль" minlength="6" [(ngModel)]="password" name="pass" id='pass' />
+        <label for="pass" class="form__label">Пароль</label>
+        <div class="forgot" (click)="forgotPass()">
+          <span>ЗАБЫЛИ?</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowButton">
+      <ion-button (click)="Login()">Войти
+        <div class="arrow">
+        </div>
+      </ion-button>
+    </ion-row>
+    <ion-row class="text animated fadeInDown fast" id="text">
+      <span>Не зарегистрированы?&nbsp;</span><span (click)="Register()">Регистрация</span>
+    </ion-row>
 </ion-content>

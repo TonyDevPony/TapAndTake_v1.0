@@ -61,7 +61,7 @@
           <i class="fas fa-unlock-alt"></i>
         </ion-col>
         <ion-col>
-          <input type="password" class="form__field" placeholder="Подтверждения пароля" minlength="6" [(ngModel)]="confirmpass" name="confirm_pass" id='confirm_pass' />
+          <input type="password" class="form__field" (keyup)="submit($event)" placeholder="Подтверждения пароля" minlength="6" [(ngModel)]="confirmpass" name="confirm_pass" id='confirm_pass' />
           <label for="confirm_pass" class="form__label">Подтверждения пароля</label>
         </ion-col>
       </ion-row>

@@ -858,15 +858,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function ionViewWillEnter() {
           this.userConf = this.authService.getAthConf();
           this.user = this.authService.getUser();
-          console.log('home page this.user ↓');
-          console.log(this.user);
 
           if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
             this.getUserFromServer({
               id_user: this.userConf.user_id,
               sid: this.userConf.user_sid
             });
-            console.log("If worked!!!");
           }
         }
       }, {
@@ -879,12 +876,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    console.log('method getUserFromServe dataForServer param ↓');
-                    console.log(dataForServer);
-                    _context.next = 4;
+                    _context.next = 2;
                     return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
-                      console.log("Answer is ↓");
-                      console.log(answer.data);
                       var answerParse;
                       answerParse = JSON.parse(answer.data);
 
@@ -897,7 +890,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       console.log('Error: ' + err);
                     });
 
-                  case 4:
+                  case 2:
                   case "end":
                     return _context.stop();
                 }

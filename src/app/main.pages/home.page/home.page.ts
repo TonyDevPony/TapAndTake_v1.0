@@ -52,25 +52,20 @@ export class HomePage {
   ionViewWillEnter() {
     this.userConf = this.authService.getAthConf();
     this.user = this.authService.getUser();
-    console.log('home page this.user ↓');
     
-    console.log(this.user);
     
     if(this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
       this.getUserFromServer({id_user: this.userConf.user_id, sid: this.userConf.user_sid});
-      console.log("If worked!!!");
       
     }
   }
 
   async getUserFromServer (dataForServer: object) {
-     console.log('method getUserFromServe dataForServer param ↓');
+    //  console.log('method getUserFromServe dataForServer param ↓');
     
-     console.log(dataForServer);
+    //  console.log(dataForServer);
     
      await this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
-        console.log("Answer is ↓");
-        console.log(answer.data);
 
         let answerParse: DataFromServer;
         answerParse = JSON.parse(answer.data);

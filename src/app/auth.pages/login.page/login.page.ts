@@ -63,7 +63,6 @@ export class LoginPage implements OnInit {
     this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
   }
 
-
   forgotPass() {
     this.nav.navigateRoot(['/forgot-password']);
   }
