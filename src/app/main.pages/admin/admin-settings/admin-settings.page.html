@@ -1,28 +1,73 @@
 <app-header></app-header>
 
 <ion-content>
-  <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
-
-  <ion-item *ngFor="let img of images; index as pos" text-wrap>
-    <ion-thumbnail slot="start">
-      <ion-img [src]="img.path"></ion-img>
-    </ion-thumbnail>
-    <ion-label>
-      {{ img.name }}
-    </ion-label>
-    <ion-button slot="end" fill="clear" (click)="startUpload(img)">
-      <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
-    </ion-button>
-    <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
-      <ion-icon slot="icon-only" name="trash"></ion-icon>
-    </ion-button>
-  </ion-item>
+  <section>
+    <ion-row>
+      <h4 class="title">Создание бизнеса</h4>
+    </ion-row>
+    <ion-row class="section_row_item animated fadeInLeft fast" id="bussines_name">
+      <ion-col size="1" class="icons">
+        <i class="fas fa-signature"></i>
+      </ion-col>
+      <ion-col>
+        <input type="text" class="form__field" (keyup)="submit($event)" [(ngModel)]="bussinesName" placeholder="BussinesName" name="BussinesName" id='bussinesName'/> <!--[value]="this.userSettingsInfo.name"-->
+        <label for="bussinesName" class="form__label">Название заведения <span class="necessarily">*</span></label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="section_row_item animated fadeInRight fast" id="description_row">
+      <ion-col size="1" class="icons">
+        <i class="far fa-comment"></i>
+      </ion-col>
+      <ion-col>
+        <textarea name="description" id="description" (keyup)="submit($event)" [(ngModel)]="description" cols="30" rows="2" ></textarea>
+        <label for="description" class="label_description">Описание</label>
+      </ion-col>
+    </ion-row>
+    <ion-row class="section_row_item animated fadeInLeft fast" id="numb_row">
+      <ion-col size="1" class="icons">
+        <i class="fas fa-mug-hot"></i>
+      </ion-col>
+      <ion-col>
+        <input type="number" class="form__field" (keyup)="submit($event)" [(ngModel)]="numb_purchases" placeholder="numb_purchases" name="numb_purchases" id='numb_purchases'/> <!--[value]="this.userSettingsInfo.name"-->
+        <label for="numb_purchases" class="form__label">Количество покупок <span class="necessarily">*</span></label>
+        <div class="info_button" (click)="callNumberPurchHelper()" id="info_button_umber"><i class="fas fa-info-circle"></i></div>
+        <!-- <div class="info" id="info_numb"><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel enim ipsa, omnis dolorum eos aspernatur, at deserunt magnam commodi incidunt distinctio error repellat eaque nisi molestias possimus in animi ullam.</span></div> -->
+      </ion-col>
+    </ion-row>
+    <ion-row class="logo_row">
+      <ion-col class="logo_col animated fadeInLeft fast"   (click)="selectImage()" size="3">
+        <ng-container *ngIf="image">
+          <ion-avatar>
+            <img class="logo_img" [src]="image.path">
+          </ion-avatar>
+        </ng-container>
+        <ng-container *ngIf="!image">
+          <ion-avatar>
+            <img src="../../../../assets/img/stub/stub_logo.png">
+          </ion-avatar>
+        </ng-container>
+      </ion-col>
+      <ion-col class="select_button_col animated fadeInRight fast">
+        <button class="select_button" (click)="selectImage()">Выбрать файл <span class="necessarily">*</span></button>
+        <div class="info_button" (click)="callLogoHelper()" id="info_button_logo"><i class="fas fa-info-circle"></i></div>
+      </ion-col>
+    </ion-row>
+    <article class="social_network_block" id="social_network_block">
+    </article>
+    <ion-row class="add_network_button animated fadeInLeft fast" (click)="selectSocialNetwork()">
+      <ion-col size="1" class="icons">
+        <i class="fas fa-plus"></i>
+      </ion-col>
+      <ion-col>
+        <span>Добавить соц. сеть</span>
+      </ion-col>
+    </ion-row>
+    <ion-row class="rowButton">
+      <ion-button class="saveButton animated fadeInRight fast" >Создать
+        <div class="arrow">
+        </div>
+      </ion-button>
+    </ion-row>
+  </section>
 
 </ion-content>
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-button fill="clear" expand="full" color="light" (click)="selectImage()">
-      <ion-icon slot="start" name="camera"></ion-icon>
-      Select Image</ion-button>
-  </ion-toolbar>
-</ion-footer>

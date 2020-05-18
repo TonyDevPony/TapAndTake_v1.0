@@ -65,8 +65,6 @@ export class RegisterPage implements OnInit {
   }
 
   submit(e) {
-    console.log('submit');
-    console.log(e);
     if(e.key == "Enter") {
       this.keyboard.hide();
     }

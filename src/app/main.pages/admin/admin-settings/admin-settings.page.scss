@@ -1,0 +1,217 @@
+h4{
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 20px 0 5px 10px;
+    color: #484848;
+}
+.section_row_item{
+    height: 50px;
+    margin-top: 10px;
+}
+.icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+i{
+    color: #A4B0BE;
+    margin-top: 5px;
+    display: block;
+}
+.form__label{
+    position: absolute;
+    top: 17px;
+    display: block;
+    transition: 0.2s;
+    // font-size: 5pt;
+    font-size: 10pt;
+    color: #A4B0BE;
+}
+.form__field{
+    width: 95%;
+    border: none;
+    border-bottom: 1px solid #A4B0BE;
+    height: 100%;
+    color: #484848;
+    &::placeholder {
+        color: transparent;
+    }
+    &:placeholder-shown ~ .form__label {
+        font-size: 14pt;
+        cursor: text;
+    }
+}
+.form__field:focus {
+    ~ .form__label {
+      position: absolute;
+      top: -5px;
+      display: block;
+      transition: 0.2s;
+      font-size: 10pt;
+    //   font-size: 5pt;
+      color: #FBA232;
+      font-weight: 700;
+    } 
+    // font-weight: 700;
+    border-bottom: 1px solid #FBA232;
+    outline: none;
+}
+.form__field:not(:placeholder-shown){
+    ~ .form__label {
+        position: absolute;
+        top: -5px;
+        display: block;
+        transition: 0.2s;
+        font-size: 10pt;
+      //   font-size: 5pt;
+        color: #FBA232;
+        font-weight: 700;
+    }
+    border-bottom: 1px solid #FBA232;
+}
+.form__field{
+    &:required,&:invalid { border-bottom: 1px solid red; }
+}
+textarea{
+    resize: none;
+    width: 95%;
+    transition: .3s ease;
+    margin-top: 10px;
+    border: none;
+    border-bottom: 1px solid #A4B0BE;
+}
+.label_description {
+    position: absolute;
+    transition: .2s ease;
+    top: 25px;
+    display: block;
+    font-size: 14pt;
+    color: #A4B0BE;
+}
+
+textarea:focus{
+    outline: none;
+    border-bottom: 1px solid #FBA232;
+    &::placeholder {
+        color: transparent;
+    }
+    ~.label_description {
+        top: -5px;
+        color: #FBA232;
+        font-size: 10pt;
+    }
+}
+section{ 
+    position: relative;
+}
+#numb_row{
+    margin-top: 20px;
+    z-index: 1000;
+
+}
+.info_button{
+    position: absolute;
+}
+.info_button{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 20px;
+    right: 25px;
+}
+.info_button > i {
+    margin: 0;
+    font-size: 14pt;
+}
+
+.logo_col {
+    // border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_row{
+    height: 70px;
+    margin-top: 15px;
+
+}
+img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.select_button_col {
+    display: flex;
+    align-items: flex-end;
+}
+.select_button_col::after {
+    content: "";
+    display: block;
+    width: 90%;
+    position: absolute;
+    top: 70px;
+    border-bottom: 1.2px solid #A4B0BE;
+}
+.select_button{
+    background: none;
+    outline: none;
+    padding: 5px;
+    font-size: 14pt;
+    color: #A4B0BE;
+
+}
+#info_button_logo {
+    top: 45px;
+}
+.title:after {
+    content: "* Обязательно";
+    position: absolute;
+    display: block;
+    font-size: 9pt;
+    top: 75px;
+    color: #FBA232;
+}
+.necessarily {
+    color: #FBA232;
+}
+.social_network_block{
+    width: 100%;
+    margin-top: 25px;
+    position: relative;
+}
+.add_network_button {
+    display: flex;
+    justify-content: center;
+    color: #A4B0BE;
+    font-size: 14pt;
+}
+.add_network_button span {
+    display: block;
+    width: 94%;
+    border-bottom: 1px solid #A4B0BE;
+    padding: 5px;
+    margin-top: 15px;
+}
+.rowButton{
+    margin-top: 35px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+.rowButton>.saveButton{
+    --background: linear-gradient(to right, #FBDC95, #FBA232);
+    width: 160px;
+    height: 45px;
+    --border-radius: 20px;
+    font-weight: bold;
+}
+.arrow{
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    background-image: url('../../../../assets/img/arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}

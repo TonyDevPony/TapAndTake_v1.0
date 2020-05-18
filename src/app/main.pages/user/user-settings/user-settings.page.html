@@ -10,7 +10,7 @@
         <i class="far fa-user"></i>
       </ion-col>
       <ion-col>
-        <input type="text" class="form__field" placeholder="FullName" name="fullname" id='fullname' [value]="this.userSettingsInfo.name"/> <!--[value]="this.userSettingsInfo.name"-->
+        <input type="text" class="form__field" (keyup)="submit($event)" placeholder="FullName" name="fullname" id='fullname' [value]="this.userSettingsInfo.name"/> <!--[value]="this.userSettingsInfo.name"-->
         <label for="fullname" class="form__label">Имя/Фамилия</label>
       </ion-col>
     </ion-row>
@@ -19,7 +19,7 @@
         <i class="far fa-envelope"></i>
       </ion-col>
       <ion-col>
-        <input type="text" class="form__field" placeholder="Email" name="emailInp" id='emailInp'  pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$" [value]="this.userSettingsInfo.email"/> <!--[value]="this.userSettingsInfo.email"-->
+        <input type="text" class="form__field" (keyup)="submit($event)" placeholder="Email" name="emailInp" id='emailInp'  pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$" [value]="this.userSettingsInfo.email"/> <!--[value]="this.userSettingsInfo.email"-->
         <label for="emailInp" class="form__label">Email</label>
       </ion-col>
     </ion-row>
@@ -28,7 +28,7 @@
         <i class="fas fa-mobile-alt"></i>
       </ion-col>
       <ion-col>
-        <input [textMask]="{mask: mask}" type="tel" class="form__field" placeholder="(___)___-___" name="Tellephone" id='tellephone'  pattern="^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" [value]="this.userSettingsInfo.phone"/><!--[value]="this.userSettingsInfo.phone"-->
+        <input [textMask]="{mask: mask}" type="tel" (keyup)="submit($event)" class="form__field" placeholder="(___)___-___" name="Tellephone" id='tellephone'  pattern="^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" [value]="this.userSettingsInfo.phone"/><!--[value]="this.userSettingsInfo.phone"-->
         <label for="tellephone" class="form__label">Телефон</label>
       </ion-col>
     </ion-row>
@@ -53,12 +53,12 @@
         </ion-select>
       </ion-col>
     </ion-row>
-    <ion-row class="rowButton animated fadeInRight fast">
-      <ion-button class="logOutButton" (click)="Logout()">Выйти
+    <ion-row class="rowButton">
+      <ion-button class="logOutButton animated fadeInLeft fast" (click)="Logout()">Выйти
         <div class="logOutIcon">
         </div>
       </ion-button>
-      <ion-button class="saveButton" (click)="saveSettings()">Сохранить
+      <ion-button class="saveButton animated fadeInRight fast" (click)="saveSettings()">Сохранить
         <div class="arrow">
         </div>
       </ion-button>

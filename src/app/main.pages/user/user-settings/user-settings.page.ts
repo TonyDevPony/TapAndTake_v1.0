@@ -55,5 +55,9 @@ export class UserSettingsPage implements OnInit {
       this.nav.navigateRoot('login');
     });
   }
-
+  submit(e) {
+    if(e.key == "Enter") {
+      this.keyboard.hide();
+    }
+  }
 }
