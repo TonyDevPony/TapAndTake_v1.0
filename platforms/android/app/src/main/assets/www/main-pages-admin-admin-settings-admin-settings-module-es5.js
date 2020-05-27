@@ -762,6 +762,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           social_network_input.id = name;
           social_network_input.addEventListener('keyup', function (e) {
             _this5.submit(e);
+
+            social_network_input.onblur = function () {};
           });
           social_network_input.style.cssText = "\n                                          width: 94%;\n                                          border: none;\n                                          border-bottom: 1px solid #A4B0BE;\n                                          height: 100%;\n                                          color: #484848\n                                         ";
           social_network_input.style.outline = 'none';
@@ -866,8 +868,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "submit",
         value: function submit(e) {
-          console.log(e.key);
-
           if (e.key == "Enter") {
             this.keyboard.hide();
           }

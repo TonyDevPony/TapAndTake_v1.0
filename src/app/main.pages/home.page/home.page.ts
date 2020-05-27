@@ -1,8 +1,11 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonSlides, NavController, LoadingController } from '@ionic/angular';
+import { IonSlides, NavController, LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service/auth.service';
 import { HTTP } from '@ionic-native/http/ngx';
+import { FileStorageForUserService } from 'src/app/services/fileStorageForUser.service/file-storage-for-user.service';
+import { Network } from '@ionic-native/network/ngx';
+import { NetworkConnectionService } from 'src/app/services/network.connection.service/network-connection.service';
 
 
 /* Интерфейс который содержит поля которые прийдут с сервера, нужно для типизации обьекта */
@@ -13,15 +16,6 @@ export interface DataFromServer {
   data: string,
 };
 
-const coffehouse_list = [
-  { id_coffehouse: '1', logo: '', name_coffehouse: 'Sharikava', is_favorite: '1', count_cups_purchased: '2', count_of_cups: '10'},
-  { id_coffehouse: '2', logo: '', name_coffehouse: 'Sho', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '10'},
-  { id_coffehouse: '3', logo: '', name_coffehouse: 'Kaviati', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '8'},
-  { id_coffehouse: '4', logo: '', name_coffehouse: 'Caffeggio', is_favorite: '1', count_cups_purchased: '10', count_of_cups: '10'},
-  { id_coffehouse: '5', logo: '', name_coffehouse: 'Marmelad', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '8'},
-  { id_coffehouse: '6', logo: '', name_coffehouse: 'Coffee & Sandwich', is_favorite: '1', count_cups_purchased: '5', count_of_cups: '10'},
-];
-  
 
 
 @Component({
@@ -29,14 +23,11 @@ const coffehouse_list = [
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   
-  slideOpts = {
-
-  };
-
   userConf: any;
   user: any;
+  connecticon: boolean;
 
   @ViewChild('mySlider', {static: false}) slides: IonSlides;
   constructor(
@@ -44,37 +35,86 @@ export class HomePage {
     private route: ActivatedRoute,
     private authService: AuthService,
     private http: HTTP,
-    private loadCTRL: LoadingController,
+    private loadingController: LoadingController,
+    private storageService: FileStorageForUserService,
+    public toastController: ToastController,
+    private network: Network,
+    private networkService: NetworkConnectionService,
+    public alertController: AlertController, 
     ) 
     {
     
   }
-  ionViewWillEnter() {
+
+  async ngOnInit() {
     this.userConf = this.authService.getAthConf();
     this.user = this.authService.getUser();
-    
-    
+    if(this.networkService.initializeConnection()) {
+      this.connecticon = true;
+      this.checkUserAndGoRequest();
+    } else {
+      this.connecticon = false;
+      let message = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+      this.openAlert(message);
+    }
+    document.addEventListener('offline', () => {
+      this.connecticon = false;
+      this.presentToast('Вы отключились от интернета');
+      console.log('offline');
+      
+    });
+
+    document.addEventListener('online', () => {
+      this.connecticon = true;
+      this.presentToast('Подключение востановлено');
+      if(!this.authService.getUser()) {
+        this.checkUserAndGoRequest();
+      }
+    });
+  }
+
+  checkUserAndGoRequest() {
     if(this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
       this.getUserFromServer({id_user: this.userConf.user_id, sid: this.userConf.user_sid});
       
     }
   }
+  async openAlert(message) {
+    const alert = await this.alertController.create({
+      header: 'Упс...',
+      message,
+      cssClass: 'alert',
+      buttons: [{
+        text: 'OK',
+        cssClass: 'alertButton'
+      }]
+    });
+    await alert.present();
+  }
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 1200,
+      cssClass: 'toast',
+    });
+    toast.present();
+  }
 
   async getUserFromServer (dataForServer: object) {
-    //  console.log('method getUserFromServe dataForServer param ↓');
-    
-    //  console.log(dataForServer);
-    
-     await this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
 
+     await this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
+        console.log('Answer from server...');
+        console.log("Answer params: ");
+        console.log(answer);
         let answerParse: DataFromServer;
         answerParse = JSON.parse(answer.data);
         if(answerParse.success) {
           var user = Object.assign(dataForServer, answerParse.data);
           this.authService.setUser(user);
         }
-      }).catch(err => {console.log('Error: ' + err);})
+      }).catch(err => {console.log('Error: ' + err);}) 
   }
+
 
   setButton(){
     new Promise((resolve, reject) => {
@@ -108,10 +148,33 @@ export class HomePage {
   goQrPage(){
     this.nav.navigateRoot(['/qr']);
   }
-  goUserSettings() {
-    this.nav.navigateRoot(['/user-settings']);
+  async goUserSettings() {
+    if(!this.connecticon) {
+      let message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
+      this.openAlert(message);
+      return false;
+    }
+    if(this.authService.getUser()) {
+      this.nav.navigateRoot(['/user-settings']);
+    } else {
+      const load = await this.loadingController.create({
+        cssClass: 'spinerColor',
+        message: "Секунду...",
+        spinner: "lines",
+      });
+      setTimeout(() => {
+        load.dismiss();
+        this.nav.navigateRoot(['/user-settings']);
+      },250);
+    }
+    
   }
   goToAdminCoffeeHouses() {
+    if(!this.connecticon) {
+      let message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
+      this.openAlert(message);
+      return false;
+    }
     this.nav.navigateRoot(['/admin-coffee-houses']);
   }
 

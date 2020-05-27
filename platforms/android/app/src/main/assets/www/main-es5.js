@@ -911,6 +911,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return m.AdminSettingsPageModule;
         });
       }
+    }, {
+      path: 'user-coffe-house-info',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | main-pages-user-user-coffe-house-info-user-coffe-house-info-module */
+        "main-pages-user-user-coffe-house-info-user-coffe-house-info-module").then(__webpack_require__.bind(null,
+        /*! ./main.pages/user/user-coffe-house-info/user-coffe-house-info.module */
+        "./src/app/main.pages/user/user-coffe-house-info/user-coffe-house-info.module.ts")).then(function (m) {
+          return m.UserCoffeHouseInfoPageModule;
+        });
+      }
+    }, {
+      path: 'bussiness-info',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | main-pages-admin-bussiness-info-bussiness-info-module */
+        "main-pages-admin-bussiness-info-bussiness-info-module").then(__webpack_require__.bind(null,
+        /*! ./main.pages/admin/bussiness-info/bussiness-info.module */
+        "./src/app/main.pages/admin/bussiness-info/bussiness-info.module.ts")).then(function (m) {
+          return m.BussinessInfoPageModule;
+        });
+      }
     }];
 
     var AppRoutingModule = function AppRoutingModule() {

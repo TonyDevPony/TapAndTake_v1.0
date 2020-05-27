@@ -744,6 +744,14 @@ const routes = [
         path: 'admin-settings',
         loadChildren: () => __webpack_require__.e(/*! import() | main-pages-admin-admin-settings-admin-settings-module */ "main-pages-admin-admin-settings-admin-settings-module").then(__webpack_require__.bind(null, /*! ./main.pages/admin/admin-settings/admin-settings.module */ "./src/app/main.pages/admin/admin-settings/admin-settings.module.ts")).then(m => m.AdminSettingsPageModule)
     },
+    {
+        path: 'user-coffe-house-info',
+        loadChildren: () => __webpack_require__.e(/*! import() | main-pages-user-user-coffe-house-info-user-coffe-house-info-module */ "main-pages-user-user-coffe-house-info-user-coffe-house-info-module").then(__webpack_require__.bind(null, /*! ./main.pages/user/user-coffe-house-info/user-coffe-house-info.module */ "./src/app/main.pages/user/user-coffe-house-info/user-coffe-house-info.module.ts")).then(m => m.UserCoffeHouseInfoPageModule)
+    },
+    {
+        path: 'bussiness-info',
+        loadChildren: () => __webpack_require__.e(/*! import() | main-pages-admin-bussiness-info-bussiness-info-module */ "main-pages-admin-bussiness-info-bussiness-info-module").then(__webpack_require__.bind(null, /*! ./main.pages/admin/bussiness-info/bussiness-info.module */ "./src/app/main.pages/admin/bussiness-info/bussiness-info.module.ts")).then(m => m.BussinessInfoPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };

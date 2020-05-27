@@ -466,6 +466,8 @@ let AdminSettingsPage = class AdminSettingsPage {
         social_network_input.id = name;
         social_network_input.addEventListener('keyup', (e) => {
             this.submit(e);
+            social_network_input.onblur = () => {
+            };
         });
         social_network_input.style.cssText = `
                                           width: 94%;
@@ -549,7 +551,6 @@ let AdminSettingsPage = class AdminSettingsPage {
         });
     }
     submit(e) {
-        console.log(e.key);
         if (e.key == "Enter") {
             this.keyboard.hide();
         }

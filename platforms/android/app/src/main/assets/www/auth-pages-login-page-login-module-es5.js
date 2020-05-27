@@ -307,9 +307,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.plt.ready().then(function () {
             // Выполняется проверка на покдключение к интернету 
             if (!_this.networkService.initializeConnection()) {
-              var massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+              var message = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
 
-              _this.openAlert(massage);
+              _this.openAlert(message);
 
               _this.conection = false;
             } else {

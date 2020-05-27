@@ -46,8 +46,8 @@ export class LoginPage implements OnInit {
 
       // Выполняется проверка на покдключение к интернету 
       if(!this.networkService.initializeConnection()) {
-        let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
-        this.openAlert(massage);
+        let message = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+        this.openAlert(message);
         this.conection = false;
       } else {
         this.conection = true;
@@ -156,6 +156,8 @@ export class LoginPage implements OnInit {
       this.http.post('https://sc.grekagreka25.had.su/auth/in', this.data, {}).then(data => {
         loading.dismiss();
         let dataJson = JSON.parse(data.data);
+        
+        
         if(dataJson.hasOwnProperty('error')) {
           this.err_message.push('<i class="fas fa-exclamation-circle"></i>&#32;Такого пользователя не существует!!!');
           this.openAlert(this.err_message);

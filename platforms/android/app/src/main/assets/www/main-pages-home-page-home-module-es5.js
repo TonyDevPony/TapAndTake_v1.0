@@ -795,102 +795,84 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */
+    "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+    /* harmony import */
+
+
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    /*! src/app/services/network.connection.service/network-connection.service */
+    "./src/app/services/network.connection.service/network-connection.service.ts");
 
     ;
-    var coffehouse_list = [{
-      id_coffehouse: '1',
-      logo: '',
-      name_coffehouse: 'Sharikava',
-      is_favorite: '1',
-      count_cups_purchased: '2',
-      count_of_cups: '10'
-    }, {
-      id_coffehouse: '2',
-      logo: '',
-      name_coffehouse: 'Sho',
-      is_favorite: '0',
-      count_cups_purchased: '0',
-      count_of_cups: '10'
-    }, {
-      id_coffehouse: '3',
-      logo: '',
-      name_coffehouse: 'Kaviati',
-      is_favorite: '0',
-      count_cups_purchased: '0',
-      count_of_cups: '8'
-    }, {
-      id_coffehouse: '4',
-      logo: '',
-      name_coffehouse: 'Caffeggio',
-      is_favorite: '1',
-      count_cups_purchased: '10',
-      count_of_cups: '10'
-    }, {
-      id_coffehouse: '5',
-      logo: '',
-      name_coffehouse: 'Marmelad',
-      is_favorite: '0',
-      count_cups_purchased: '0',
-      count_of_cups: '8'
-    }, {
-      id_coffehouse: '6',
-      logo: '',
-      name_coffehouse: 'Coffee & Sandwich',
-      is_favorite: '1',
-      count_cups_purchased: '5',
-      count_of_cups: '10'
-    }];
 
     var HomePage = /*#__PURE__*/function () {
-      function HomePage(nav, route, authService, http, loadCTRL) {
+      function HomePage(nav, route, authService, http, loadingController, storageService, toastController, network, networkService, alertController) {
         _classCallCheck(this, HomePage);
 
         this.nav = nav;
         this.route = route;
         this.authService = authService;
         this.http = http;
-        this.loadCTRL = loadCTRL;
-        this.slideOpts = {};
+        this.loadingController = loadingController;
+        this.storageService = storageService;
+        this.toastController = toastController;
+        this.network = network;
+        this.networkService = networkService;
+        this.alertController = alertController;
       }
 
       _createClass(HomePage, [{
-        key: "ionViewWillEnter",
-        value: function ionViewWillEnter() {
-          this.userConf = this.authService.getAthConf();
-          this.user = this.authService.getUser();
-
-          if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
-            this.getUserFromServer({
-              id_user: this.userConf.user_id,
-              sid: this.userConf.user_sid
-            });
-          }
-        }
-      }, {
-        key: "getUserFromServer",
-        value: function getUserFromServer(dataForServer) {
+        key: "ngOnInit",
+        value: function ngOnInit() {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
             var _this = this;
 
+            var message;
             return regeneratorRuntime.wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    _context.next = 2;
-                    return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
-                      var answerParse;
-                      answerParse = JSON.parse(answer.data);
+                    this.userConf = this.authService.getAthConf();
+                    this.user = this.authService.getUser();
 
-                      if (answerParse.success) {
-                        var user = Object.assign(dataForServer, answerParse.data);
+                    if (this.networkService.initializeConnection()) {
+                      this.connecticon = true;
+                      this.checkUserAndGoRequest();
+                    } else {
+                      this.connecticon = false;
+                      message = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+                      this.openAlert(message);
+                    }
 
-                        _this.authService.setUser(user);
+                    document.addEventListener('offline', function () {
+                      _this.connecticon = false;
+
+                      _this.presentToast('Вы отключились от интернета');
+
+                      console.log('offline');
+                    });
+                    document.addEventListener('online', function () {
+                      _this.connecticon = true;
+
+                      _this.presentToast('Подключение востановлено');
+
+                      if (!_this.authService.getUser()) {
+                        _this.checkUserAndGoRequest();
                       }
-                    }).catch(function (err) {
-                      console.log('Error: ' + err);
                     });
 
-                  case 2:
+                  case 5:
                   case "end":
                     return _context.stop();
                 }
@@ -899,14 +881,120 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
+        key: "checkUserAndGoRequest",
+        value: function checkUserAndGoRequest() {
+          if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
+            this.getUserFromServer({
+              id_user: this.userConf.user_id,
+              sid: this.userConf.user_sid
+            });
+          }
+        }
+      }, {
+        key: "openAlert",
+        value: function openAlert(message) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var alert;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return this.alertController.create({
+                      header: 'Упс...',
+                      message: message,
+                      cssClass: 'alert',
+                      buttons: [{
+                        text: 'OK',
+                        cssClass: 'alertButton'
+                      }]
+                    });
+
+                  case 2:
+                    alert = _context2.sent;
+                    _context2.next = 5;
+                    return alert.present();
+
+                  case 5:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+        }
+      }, {
+        key: "presentToast",
+        value: function presentToast(message) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var toast;
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.next = 2;
+                    return this.toastController.create({
+                      message: message,
+                      duration: 1200,
+                      cssClass: 'toast'
+                    });
+
+                  case 2:
+                    toast = _context3.sent;
+                    toast.present();
+
+                  case 4:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
+        }
+      }, {
+        key: "getUserFromServer",
+        value: function getUserFromServer(dataForServer) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+            var _this2 = this;
+
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+              while (1) {
+                switch (_context4.prev = _context4.next) {
+                  case 0:
+                    _context4.next = 2;
+                    return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
+                      console.log('Answer from server...');
+                      console.log("Answer params: ");
+                      console.log(answer);
+                      var answerParse;
+                      answerParse = JSON.parse(answer.data);
+
+                      if (answerParse.success) {
+                        var user = Object.assign(dataForServer, answerParse.data);
+
+                        _this2.authService.setUser(user);
+                      }
+                    }).catch(function (err) {
+                      console.log('Error: ' + err);
+                    });
+
+                  case 2:
+                  case "end":
+                    return _context4.stop();
+                }
+              }
+            }, _callee4, this);
+          }));
+        }
+      }, {
         key: "setButton",
         value: function setButton() {
-          var _this2 = this;
+          var _this3 = this;
 
           new Promise(function (resolve, reject) {
-            resolve(_this2.slides.getActiveIndex());
+            resolve(_this3.slides.getActiveIndex());
           }).then(function (result) {
-            return _this2.changeButtonColor(result);
+            return _this3.changeButtonColor(result);
           });
           return true;
         }
@@ -945,11 +1033,66 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goUserSettings",
         value: function goUserSettings() {
-          this.nav.navigateRoot(['/user-settings']);
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            var _this4 = this;
+
+            var message, load;
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    if (this.connecticon) {
+                      _context5.next = 4;
+                      break;
+                    }
+
+                    message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
+                    this.openAlert(message);
+                    return _context5.abrupt("return", false);
+
+                  case 4:
+                    if (!this.authService.getUser()) {
+                      _context5.next = 8;
+                      break;
+                    }
+
+                    this.nav.navigateRoot(['/user-settings']);
+                    _context5.next = 12;
+                    break;
+
+                  case 8:
+                    _context5.next = 10;
+                    return this.loadingController.create({
+                      cssClass: 'spinerColor',
+                      message: "Секунду...",
+                      spinner: "lines"
+                    });
+
+                  case 10:
+                    load = _context5.sent;
+                    setTimeout(function () {
+                      load.dismiss();
+
+                      _this4.nav.navigateRoot(['/user-settings']);
+                    }, 250);
+
+                  case 12:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
+          }));
         }
       }, {
         key: "goToAdminCoffeeHouses",
         value: function goToAdminCoffeeHouses() {
+          if (!this.connecticon) {
+            var message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
+            this.openAlert(message);
+            return false;
+          }
+
           this.nav.navigateRoot(['/admin-coffee-houses']);
         }
       }]);
@@ -968,6 +1111,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
+      }, {
+        type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]
+      }, {
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"]
+      }, {
+        type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_8__["NetworkConnectionService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
       }];
     };
 
@@ -982,7 +1135,79 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./home.page.scss */
       "./src/app/main.pages/home.page/home.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])], HomePage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"], _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"], src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_8__["NetworkConnectionService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])], HomePage);
+    /***/
+  },
+
+  /***/
+  "./src/app/services/network.connection.service/network-connection.service.ts":
+  /*!***********************************************************************************!*\
+    !*** ./src/app/services/network.connection.service/network-connection.service.ts ***!
+    \***********************************************************************************/
+
+  /*! exports provided: NetworkConnectionService */
+
+  /***/
+  function srcAppServicesNetworkConnectionServiceNetworkConnectionServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "NetworkConnectionService", function () {
+      return NetworkConnectionService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/network/ngx */
+    "./node_modules/@ionic-native/network/ngx/index.js");
+
+    var NetworkConnectionService = /*#__PURE__*/function () {
+      function NetworkConnectionService(network) {
+        _classCallCheck(this, NetworkConnectionService);
+
+        this.network = network;
+      }
+
+      _createClass(NetworkConnectionService, [{
+        key: "initializeConnection",
+        value: function initializeConnection() {
+          if (this.network.type == 'none') {
+            console.log('network is disconnected');
+            return false;
+          }
+
+          return true;
+        }
+      }]);
+
+      return NetworkConnectionService;
+    }();
+
+    NetworkConnectionService.ctorParameters = function () {
+      return [{
+        type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"]
+      }];
+    };
+
+    NetworkConnectionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"]])], NetworkConnectionService);
     /***/
   }
 }]);

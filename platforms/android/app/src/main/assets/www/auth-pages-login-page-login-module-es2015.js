@@ -169,8 +169,8 @@ let LoginPage = class LoginPage {
         this.plt.ready().then(() => {
             // Выполняется проверка на покдключение к интернету 
             if (!this.networkService.initializeConnection()) {
-                let massage = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
-                this.openAlert(massage);
+                let message = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+                this.openAlert(message);
                 this.conection = false;
             }
             else {

@@ -507,6 +507,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+/* harmony import */ var src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/network.connection.service/network-connection.service */ "./src/app/services/network.connection.service/network-connection.service.ts");
+
+
+
 
 
 
@@ -514,35 +520,81 @@ __webpack_require__.r(__webpack_exports__);
 
 
 ;
-const coffehouse_list = [
-    { id_coffehouse: '1', logo: '', name_coffehouse: 'Sharikava', is_favorite: '1', count_cups_purchased: '2', count_of_cups: '10' },
-    { id_coffehouse: '2', logo: '', name_coffehouse: 'Sho', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '10' },
-    { id_coffehouse: '3', logo: '', name_coffehouse: 'Kaviati', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '8' },
-    { id_coffehouse: '4', logo: '', name_coffehouse: 'Caffeggio', is_favorite: '1', count_cups_purchased: '10', count_of_cups: '10' },
-    { id_coffehouse: '5', logo: '', name_coffehouse: 'Marmelad', is_favorite: '0', count_cups_purchased: '0', count_of_cups: '8' },
-    { id_coffehouse: '6', logo: '', name_coffehouse: 'Coffee & Sandwich', is_favorite: '1', count_cups_purchased: '5', count_of_cups: '10' },
-];
 let HomePage = class HomePage {
-    constructor(nav, route, authService, http, loadCTRL) {
+    constructor(nav, route, authService, http, loadingController, storageService, toastController, network, networkService, alertController) {
         this.nav = nav;
         this.route = route;
         this.authService = authService;
         this.http = http;
-        this.loadCTRL = loadCTRL;
-        this.slideOpts = {};
+        this.loadingController = loadingController;
+        this.storageService = storageService;
+        this.toastController = toastController;
+        this.network = network;
+        this.networkService = networkService;
+        this.alertController = alertController;
     }
-    ionViewWillEnter() {
-        this.userConf = this.authService.getAthConf();
-        this.user = this.authService.getUser();
+    ngOnInit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.userConf = this.authService.getAthConf();
+            this.user = this.authService.getUser();
+            if (this.networkService.initializeConnection()) {
+                this.connecticon = true;
+                this.checkUserAndGoRequest();
+            }
+            else {
+                this.connecticon = false;
+                let message = '<i class="fas fa-exclamation-circle"></i>&#32;Подключение к интернету отсутсвует';
+                this.openAlert(message);
+            }
+            document.addEventListener('offline', () => {
+                this.connecticon = false;
+                this.presentToast('Вы отключились от интернета');
+                console.log('offline');
+            });
+            document.addEventListener('online', () => {
+                this.connecticon = true;
+                this.presentToast('Подключение востановлено');
+                if (!this.authService.getUser()) {
+                    this.checkUserAndGoRequest();
+                }
+            });
+        });
+    }
+    checkUserAndGoRequest() {
         if (this.user == null && this.userConf.user_id != -1 && this.userConf.user_sid != '') {
             this.getUserFromServer({ id_user: this.userConf.user_id, sid: this.userConf.user_sid });
         }
     }
+    openAlert(message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Упс...',
+                message,
+                cssClass: 'alert',
+                buttons: [{
+                        text: 'OK',
+                        cssClass: 'alertButton'
+                    }]
+            });
+            yield alert.present();
+        });
+    }
+    presentToast(message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastController.create({
+                message,
+                duration: 1200,
+                cssClass: 'toast',
+            });
+            toast.present();
+        });
+    }
     getUserFromServer(dataForServer) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            //  console.log('method getUserFromServe dataForServer param ↓');
-            //  console.log(dataForServer);
             yield this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(answer => {
+                console.log('Answer from server...');
+                console.log("Answer params: ");
+                console.log(answer);
                 let answerParse;
                 answerParse = JSON.parse(answer.data);
                 if (answerParse.success) {
@@ -582,9 +634,34 @@ let HomePage = class HomePage {
         this.nav.navigateRoot(['/qr']);
     }
     goUserSettings() {
-        this.nav.navigateRoot(['/user-settings']);
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (!this.connecticon) {
+                let message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
+                this.openAlert(message);
+                return false;
+            }
+            if (this.authService.getUser()) {
+                this.nav.navigateRoot(['/user-settings']);
+            }
+            else {
+                const load = yield this.loadingController.create({
+                    cssClass: 'spinerColor',
+                    message: "Секунду...",
+                    spinner: "lines",
+                });
+                setTimeout(() => {
+                    load.dismiss();
+                    this.nav.navigateRoot(['/user-settings']);
+                }, 250);
+            }
+        });
     }
     goToAdminCoffeeHouses() {
+        if (!this.connecticon) {
+            let message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
+            this.openAlert(message);
+            return false;
+        }
         this.nav.navigateRoot(['/admin-coffee-houses']);
     }
 };
@@ -593,7 +670,12 @@ HomePage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"] },
     { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"] },
+    { type: src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_8__["NetworkConnectionService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mySlider', { static: false }),
@@ -609,8 +691,55 @@ HomePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
         src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
         _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
+        src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_6__["FileStorageForUserService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_7__["Network"],
+        src_app_services_network_connection_service_network_connection_service__WEBPACK_IMPORTED_MODULE_8__["NetworkConnectionService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
 ], HomePage);
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/network.connection.service/network-connection.service.ts":
+/*!***********************************************************************************!*\
+  !*** ./src/app/services/network.connection.service/network-connection.service.ts ***!
+  \***********************************************************************************/
+/*! exports provided: NetworkConnectionService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NetworkConnectionService", function() { return NetworkConnectionService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+
+
+
+let NetworkConnectionService = class NetworkConnectionService {
+    constructor(network) {
+        this.network = network;
+    }
+    initializeConnection() {
+        if (this.network.type == 'none') {
+            console.log('network is disconnected');
+            return false;
+        }
+        return true;
+    }
+};
+NetworkConnectionService.ctorParameters = () => [
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"] }
+];
+NetworkConnectionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_2__["Network"]])
+], NetworkConnectionService);
 
 
 

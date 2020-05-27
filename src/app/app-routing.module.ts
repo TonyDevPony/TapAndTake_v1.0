@@ -38,6 +38,14 @@ const routes: Routes = [
     path: 'admin-settings',
     loadChildren: () => import('./main.pages/admin/admin-settings/admin-settings.module').then( m => m.AdminSettingsPageModule)
   },
+  {
+    path: 'user-coffe-house-info',
+    loadChildren: () => import('./main.pages/user/user-coffe-house-info/user-coffe-house-info.module').then( m => m.UserCoffeHouseInfoPageModule)
+  },
+  {
+    path: 'bussiness-info',
+    loadChildren: () => import('./main.pages/admin/bussiness-info/bussiness-info.module').then( m => m.BussinessInfoPageModule)
+  },
 ];
 
 @NgModule({
