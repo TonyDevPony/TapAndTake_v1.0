@@ -1,9 +1,42 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>bussinessInfo</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header></app-header>
 
 <ion-content>
-
+  <section class="coffeeHouseLogo animated fadeInDown fast">
+    <ion-row class="logoRow animated fadeIn fast">
+      <!--Вставить src динамичное взятое из сервера-->
+      <img src="../../../../assets/img/test_logo/logo_sharikava.png" alt="" class="logo">
+    </ion-row>
+    <ion-row class="titleRow">
+       <!--Вставить название из сервера-->
+      <h3 class="title">ShariKava</h3>
+    </ion-row>
+  </section>
+  <section class="coffeeHouseInfo">
+    <ion-row>
+      <h2 class="titleInfo animated fadeIn fast">Информация</h2>
+    </ion-row>
+    <ion-row class="descriptionRow animated fadeInLeft fast">
+      <ion-col class="description" size="8">К-ство клиентов</ion-col>
+      <ion-col size="3" class="count">134</ion-col>
+    </ion-row>
+    <ion-row class="descriptionRow animated fadeInRight fast">
+      <ion-col class="description" size="8">Совершено покупок</ion-col>
+      <ion-col size="3" class="count">211</ion-col>
+    </ion-row>
+    <ion-row class="descriptionRow animated fadeInLeft fast">
+      <ion-col class="description" size="8">Бесплатных напитков выдано</ion-col>
+      <ion-col size="3" class="count">55</ion-col>
+    </ion-row>
+  </section>
 </ion-content>
+<div class="toolbar animated fadeInUp fast" id="toolbar">
+  <div class="settings" id="settings" (click)="goAdminSettings()">
+      <img src="../../assets/img/home/settings.svg" alt="" class="toolbar_img">
+  </div>
+  <div class="qr_code" id="qr_code" (click)="goScanQrPage()">
+      <img src="../../../../assets/img/admin_coffeeHouses/scan-qr-code.svg" alt="" class="toolbar_img">
+  </div>
+  <div class="home" id="home">
+      <img src="../../../../assets/img/admin_coffeeHouses/login.svg" alt="" (click)="goToHomePage()" class="toolbar_img">
+  </div>
+</div>

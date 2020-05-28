@@ -3987,7 +3987,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.navCtrl = navCtrl;
         this.router = router;
-        this.noBackButtonRoute = ['forgot-password', 'qr', 'password-reset', 'user-settings', 'admin-coffee-houses', 'admin-settings'];
+        this.noBackButtonRoute = ['forgot-password', 'qr', 'password-reset', 'user-settings', 'admin-coffee-houses', 'admin-settings', 'bussiness-info'];
         this.buttonIsActive = false;
       }
 

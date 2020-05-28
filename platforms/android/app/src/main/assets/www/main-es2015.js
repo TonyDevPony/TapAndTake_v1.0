@@ -1136,6 +1136,10 @@ let GuardService = class GuardService {
         this.toastController = toastController;
         this.loadingController = loadingController;
     }
+    // forTest() {
+    //   this.nav.navigateRoot('home');
+    //   return true;
+    // }
     /* Метод для получения данных о юзере со сторейджа */
     getUserFromStore() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {

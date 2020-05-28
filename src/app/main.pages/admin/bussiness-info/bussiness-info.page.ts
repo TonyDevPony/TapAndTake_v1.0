@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-bussiness-info',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BussinessInfoPage implements OnInit {
 
-  constructor() { }
+  constructor(private nav: NavController,) { }
 
   ngOnInit() {
   }
-
+  goAdminSettings() {
+    alert("__method: goAdminSettings()");
+  }
+  goScanQrPage() {
+    alert("__method: goScanQrPage()");
+  }
+  goToHomePage() {
+    this.nav.navigateRoot('/home');
+  }
 }

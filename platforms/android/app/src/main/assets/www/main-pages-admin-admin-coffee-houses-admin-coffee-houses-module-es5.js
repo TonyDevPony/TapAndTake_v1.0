@@ -41,7 +41,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <ion-row class=\"title animated fadeIn fast\">\n    <h4>Ваши бизнесы</h4>\n  </ion-row>\n  <section class=\"main_section\">\n    <!--\n        Это шаблон ->\n        Сделать перечень кофеен(бизнесов)\n        доступных даному пользователю.\n        Получить все бизнесы с сервера и вывести их\n        в порядке добавления на странциу,\n        то есть отсортировать по дате добавления.\n        При нажатии перенаправит на страницу кофейни\n        -->\n    <ion-row class=\"card_business_main animated fadeInLeft fast\">\n      <ion-col class=\"card_business_main_logo_wraper\" size=\"4\">\n        <div class=\"card_business_main_logo\"></div>\n      </ion-col>\n      <ion-col class=\"card_business_main_titles\" size=\"8\">\n        <h5 class=\"name_coffehouse\">ShariKava</h5>\n        <p class=\"name_of_counts\">К-ство клиентов <span class=\"count first\">134</span></p>\n        <p class=\"name_of_counts\">Выдано карточек <span class=\"count\">134</span></p>\n      </ion-col>\n    </ion-row>\n\n    <!--\n      Кнопка в вдие карточки.\n      Добавление нового бизнеса.\n      Перенаправляет на стриницу создания бизнеса\n    -->\n    <ion-row class=\"card_add_button animated fadeInRight fast\" (click)=\"goCreateCoffehouse()\">\n      <div class=\"pluss\"></div>\n      <div class=\"description\">Доверьте Ваш бизнес нам!</div>\n    </ion-row>\n  </section>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <ion-row class=\"title animated fadeIn fast\">\n    <h4>Ваши бизнесы</h4>\n  </ion-row>\n  <section class=\"main_section\">\n    <!--\n        Это шаблон ->\n        Сделать перечень кофеен(бизнесов)\n        доступных даному пользователю.\n        Получить все бизнесы с сервера и вывести их\n        в порядке добавления на странциу,\n        то есть отсортировать по дате добавления.\n        При нажатии перенаправит на страницу кофейни\n        -->\n    <ion-row class=\"card_business_main animated fadeInLeft fast\" (click)=\"goCoffehouse()\">\n      <ion-col class=\"card_business_main_logo_wraper\" size=\"4\">\n        <div class=\"card_business_main_logo\"></div>\n      </ion-col>\n      <ion-col class=\"card_business_main_titles\" size=\"8\">\n        <h5 class=\"name_coffehouse\">ShariKava</h5>\n        <p class=\"name_of_counts\">К-ство клиентов <span class=\"count first\">134</span></p>\n        <p class=\"name_of_counts\">Выдано карточек <span class=\"count\">134</span></p>\n      </ion-col>\n    </ion-row>\n\n    <!--\n      Кнопка в вдие карточки.\n      Добавление нового бизнеса.\n      Перенаправляет на стриницу создания бизнеса\n    -->\n    <ion-row class=\"card_add_button animated fadeInRight fast\" (click)=\"goCreateCoffehouse()\">\n      <div class=\"pluss\"></div>\n      <div class=\"description\">Доверьте Ваш бизнес нам!</div>\n    </ion-row>\n  </section>\n</ion-content>\n";
     /***/
   },
 
@@ -177,7 +177,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.navCtrl = navCtrl;
         this.router = router;
-        this.noBackButtonRoute = ['forgot-password', 'qr', 'password-reset', 'user-settings', 'admin-coffee-houses', 'admin-settings'];
+        this.noBackButtonRoute = ['forgot-password', 'qr', 'password-reset', 'user-settings', 'admin-coffee-houses', 'admin-settings', 'bussiness-info'];
         this.buttonIsActive = false;
       }
 
@@ -429,6 +429,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "goCreateCoffehouse",
         value: function goCreateCoffehouse() {
           this.nav.navigateRoot(['/admin-settings']);
+        }
+      }, {
+        key: "goCoffehouse",
+        value: function goCoffehouse() {
+          this.nav.navigateRoot(['/bussiness-info']);
         }
       }]);
 

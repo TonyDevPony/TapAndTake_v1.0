@@ -15,4 +15,7 @@ export class AdminCoffeeHousesPage implements OnInit {
   goCreateCoffehouse() {
     this.nav.navigateRoot(['/admin-settings']);
   }
+  goCoffehouse(){
+    this.nav.navigateRoot(['/bussiness-info']);
+  }
 }

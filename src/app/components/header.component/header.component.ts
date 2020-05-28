@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
     'user-settings',
     'admin-coffee-houses',
     'admin-settings',
+    'bussiness-info',
   ];
 
   private buttonIsActive: boolean;

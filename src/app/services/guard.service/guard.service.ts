@@ -39,10 +39,14 @@ export class GuardService implements CanActivate {
     private loadingController: LoadingController,
     
     ) {
-
+      
+      
     }
 
-
+  // forTest() {
+  //   this.nav.navigateRoot('home');
+  //   return true;
+  // }
 
 /* Метод для получения данных о юзере со сторейджа */
   async getUserFromStore() {
@@ -57,6 +61,7 @@ export class GuardService implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot) : Promise<any> {
     /* Получаем id и sid */ 
 
+    
     let storeRes: any;
     await this.getUserFromStore().then(res => {
       if(res) {

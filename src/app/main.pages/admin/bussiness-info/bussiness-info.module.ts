@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { BussinessInfoPageRoutingModule } from './bussiness-info-routing.module';
 
 import { BussinessInfoPage } from './bussiness-info.page';
+import { HeaderComponentModule } from 'src/app/components/header.component/header.component.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    BussinessInfoPageRoutingModule
+    BussinessInfoPageRoutingModule,
+    HeaderComponentModule,
   ],
   declarations: [BussinessInfoPage]
 })

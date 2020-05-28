@@ -241,6 +241,7 @@ let HeaderComponent = class HeaderComponent {
             'user-settings',
             'admin-coffee-houses',
             'admin-settings',
+            'bussiness-info',
         ];
         this.buttonIsActive = false;
     }

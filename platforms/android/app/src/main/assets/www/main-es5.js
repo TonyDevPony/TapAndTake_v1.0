@@ -1667,7 +1667,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.http = http;
         this.toastController = toastController;
         this.loadingController = loadingController;
-      }
+      } // forTest() {
+      //   this.nav.navigateRoot('home');
+      //   return true;
+      // }
+
       /* Метод для получения данных о юзере со сторейджа */
 
 
