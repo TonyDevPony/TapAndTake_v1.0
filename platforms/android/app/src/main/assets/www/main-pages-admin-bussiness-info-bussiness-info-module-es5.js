@@ -414,17 +414,65 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
     "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/barcode-scanner/ngx */
+    "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var BussinessInfoPage = /*#__PURE__*/function () {
-      function BussinessInfoPage(nav) {
+      function BussinessInfoPage(nav, barcodeScaner, router, route, http, loading) {
         _classCallCheck(this, BussinessInfoPage);
 
         this.nav = nav;
+        this.barcodeScaner = barcodeScaner;
+        this.router = router;
+        this.route = route;
+        this.http = http;
+        this.loading = loading;
       }
 
       _createClass(BussinessInfoPage, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _this = this;
+
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return this.route.queryParamMap.subscribe(function (params) {
+                      if (_this.router.getCurrentNavigation().extras.state) {
+                        _this.coffehouseId = _this.router.getCurrentNavigation().extras.state.coffehouseId;
+                      }
+                    });
+
+                  case 2:
+                    console.log(this.coffehouseId);
+
+                  case 3:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
       }, {
         key: "goAdminSettings",
         value: function goAdminSettings() {
@@ -433,7 +481,85 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goScanQrPage",
         value: function goScanQrPage() {
-          alert("__method: goScanQrPage()");
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var _this2 = this;
+
+            var loading;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return this.barcodeScaner.scan().then(function (barcodeData) {
+                      _this2.scannedCode = barcodeData;
+                    });
+
+                  case 2:
+                    this.id_user = this.getIdUserFromCode();
+                    console.log(this.id_user);
+                    _context2.next = 6;
+                    return this.loading.create({
+                      cssClass: 'spinerColor',
+                      message: "Вход...",
+                      spinner: "lines"
+                    });
+
+                  case 6:
+                    loading = _context2.sent;
+                    loading.present();
+                    this.requestToSetClients();
+                    setTimeout(function () {
+                      loading.dismiss();
+                    }, 600);
+
+                  case 10:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+        } // setClients
+        // https://sc.grekagreka25.had.su/coffeehouse/setClients/
+        // int $userId, int $coffeehouseId
+
+      }, {
+        key: "requestToSetClients",
+        value: function requestToSetClients() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.next = 2;
+                    return this.http.get('https://sc.grekagreka25.had.su/coffeehouse/qrCode/', {
+                      userId: this.id_user,
+                      coffeehouseId: this.coffehouseId
+                    }, {}).then(function (answer) {
+                      console.log("Request to accepted....");
+                      console.log("Data return....");
+                      var parsedData = JSON.parse(answer.data);
+
+                      if (parsedData.status == 'error') {
+                        console.log('error');
+                        return false;
+                      }
+
+                      console.log('success');
+                    });
+
+                  case 2:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
+        }
+      }, {
+        key: "getIdUserFromCode",
+        value: function getIdUserFromCode() {
+          return this.scannedCode.text;
         }
       }, {
         key: "goToHomePage",
@@ -448,6 +574,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     BussinessInfoPage.ctorParameters = function () {
       return [{
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]
+      }, {
+        type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_3__["BarcodeScanner"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]
       }];
     };
 
@@ -459,7 +595,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./bussiness-info.page.scss */
       "./src/app/main.pages/admin/bussiness-info/bussiness-info.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])], BussinessInfoPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_3__["BarcodeScanner"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])], BussinessInfoPage);
     /***/
   }
 }]);

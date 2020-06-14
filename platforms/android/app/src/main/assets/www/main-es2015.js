@@ -974,6 +974,9 @@ let AuthService = class AuthService {
     getUser() {
         return this.user;
     }
+    getUserId() {
+        this.user_id;
+    }
     setAuthConf(user_id, user_sid) {
         this.user_id = user_id;
         this.user_sid = user_sid;

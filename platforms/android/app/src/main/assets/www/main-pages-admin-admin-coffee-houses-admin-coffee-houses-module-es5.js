@@ -41,7 +41,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <ion-row class=\"title animated fadeIn fast\">\n    <h4>Ваши бизнесы</h4>\n  </ion-row>\n  <section class=\"main_section\">\n    <!--\n        Это шаблон ->\n        Сделать перечень кофеен(бизнесов)\n        доступных даному пользователю.\n        Получить все бизнесы с сервера и вывести их\n        в порядке добавления на странциу,\n        то есть отсортировать по дате добавления.\n        При нажатии перенаправит на страницу кофейни\n        -->\n    <ion-row class=\"card_business_main animated fadeInLeft fast\" (click)=\"goCoffehouse()\">\n      <ion-col class=\"card_business_main_logo_wraper\" size=\"4\">\n        <div class=\"card_business_main_logo\"></div>\n      </ion-col>\n      <ion-col class=\"card_business_main_titles\" size=\"8\">\n        <h5 class=\"name_coffehouse\">ShariKava</h5>\n        <p class=\"name_of_counts\">К-ство клиентов <span class=\"count first\">134</span></p>\n        <p class=\"name_of_counts\">Выдано карточек <span class=\"count\">134</span></p>\n      </ion-col>\n    </ion-row>\n\n    <!--\n      Кнопка в вдие карточки.\n      Добавление нового бизнеса.\n      Перенаправляет на стриницу создания бизнеса\n    -->\n    <ion-row class=\"card_add_button animated fadeInRight fast\" (click)=\"goCreateCoffehouse()\">\n      <div class=\"pluss\"></div>\n      <div class=\"description\">Доверьте Ваш бизнес нам!</div>\n    </ion-row>\n  </section>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <ion-row class=\"title animated fadeIn fast\">\n    <h4>Ваши бизнесы</h4>\n  </ion-row>\n  <section class=\"main_section\">\n    <ion-row class=\"card_add_button animated fadeInRight fast\" (click)=\"goCreateCoffehouse()\">\n      <div class=\"pluss\"></div>\n      <div class=\"description\">Доверьте Ваш бизнес нам!</div>\n    </ion-row>\n    <ng-container *ngFor=\"let house of coffeehouses\">\n      <ion-row class=\"card_business_main animated fadeInLeft fast\" (click)=\"goCoffehouse(house.coffehousesId)\">\n        <ion-col class=\"card_business_main_logo_wraper\" size=\"4\">\n          <div class=\"card_business_main_logo\"></div>\n        </ion-col>\n        <ion-col class=\"card_business_main_titles\" size=\"8\">\n          <h5 class=\"name_coffehouse\">{{ house.name }}</h5>\n          <p class=\"name_of_counts\">К-ство клиентов \n              <span class=\"count first\" #elseBlock>0</span>\n          </p>\n        </ion-col>\n      </ion-row>\n    </ng-container>\n  </section>\n</ion-content>";
     /***/
   },
 
@@ -373,7 +373,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".main_section {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n  -webkit-box-pack: center;\n          justify-content: center;\n  position: relative;\n}\n\n.title {\n  margin-top: 5vh;\n}\n\n.title > h4 {\n  font-size: 20pt;\n  font-weight: bold;\n  margin-left: 15px;\n  color: #484848;\n}\n\n.card_business_main, .card_add_button {\n  width: 90%;\n  height: 120px;\n  margin-top: 15px;\n  border-radius: 42px;\n  box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.16);\n}\n\n.card_business_main_logo_wraper {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.card_business_main_logo {\n  border-radius: 50%;\n  width: 85%;\n  height: 85%;\n  background-image: url('logo_sharikava.png');\n  background-repeat: no-repeat;\n  background-size: 100% 100%;\n}\n\n.name_coffehouse {\n  margin: 0 0 5px 5px;\n  font-size: 17pt;\n  font-weight: bold;\n}\n\n.card_business_main_titles {\n  position: relative;\n}\n\n.name_of_counts {\n  margin: 10px 0 0 5px;\n}\n\n.count.first {\n  padding-left: 32px;\n}\n\n.count {\n  padding-left: 25px;\n}\n\n.card_add_button {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n\n.pluss {\n  background-image: url('plus.svg');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: 15%;\n  opacity: 0.3;\n  width: 100%;\n  height: 70px;\n  margin-top: 10px;\n}\n\n.description {\n  color: #d5d5d5;\n  margin-top: -10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3RvbnkvVGFwQW5kVGFrZV92MS4wL3NyYy9hcHAvbWFpbi5wYWdlcy9hZG1pbi9hZG1pbi1jb2ZmZWUtaG91c2VzL2FkbWluLWNvZmZlZS1ob3VzZXMucGFnZS5zY3NzIiwic3JjL2FwcC9tYWluLnBhZ2VzL2FkbWluL2FkbWluLWNvZmZlZS1ob3VzZXMvYWRtaW4tY29mZmVlLWhvdXNlcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxlQUFBO0VBQ0Esd0JBQUE7VUFBQSx1QkFBQTtFQUNBLGtCQUFBO0FDQ0o7O0FEQ0E7RUFDSSxlQUFBO0FDRUo7O0FEQUE7RUFDSSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7QUNHSjs7QURBQTtFQUNJLFVBQUE7RUFDQSxhQUFBO0VBQ0EsZ0JBQUE7RUFDQSxtQkFBQTtFQUdBLGdEQUFBO0FDR0o7O0FEREE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtBQ0lKOztBREZBO0VBQ0ksa0JBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtFQUNBLDJDQUFBO0VBQ0EsNEJBQUE7RUFDQSwwQkFBQTtBQ0tKOztBREhBO0VBQ0ksbUJBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUNNSjs7QURKQTtFQUNJLGtCQUFBO0FDT0o7O0FETEE7RUFDSSxvQkFBQTtBQ1FKOztBRE5BO0VBQ0ksa0JBQUE7QUNTSjs7QURQQTtFQUNJLGtCQUFBO0FDVUo7O0FEUkE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0FDV0o7O0FEVEE7RUFDSSxpQ0FBQTtFQUNBLDJCQUFBO0VBQ0EsNEJBQUE7RUFDQSxvQkFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0FDWUo7O0FEVkE7RUFDSSxjQUFBO0VBQ0EsaUJBQUE7QUNhSiIsImZpbGUiOiJzcmMvYXBwL21haW4ucGFnZXMvYWRtaW4vYWRtaW4tY29mZmVlLWhvdXNlcy9hZG1pbi1jb2ZmZWUtaG91c2VzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYWluX3NlY3Rpb24ge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC13cmFwOiB3cmFwO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi50aXRsZSB7XG4gICAgbWFyZ2luLXRvcDogNXZoO1xufVxuLnRpdGxlID4gaDQge1xuICAgIGZvbnQtc2l6ZTogMjBwdDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcbiAgICBjb2xvcjogIzQ4NDg0ODtcbiAgICBcbn1cbi5jYXJkX2J1c2luZXNzX21haW4sIC5jYXJkX2FkZF9idXR0b24ge1xuICAgIHdpZHRoOiA5MCU7XG4gICAgaGVpZ2h0OiAxMjBweDtcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDQycHg7XG4gICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwcHggNHB4IDIwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG4gICAgLW1vei1ib3gtc2hhZG93OiAgICAwcHggNHB4IDIwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG4gICAgYm94LXNoYWRvdzogICAgICAgICAwcHggNnB4IDEycHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG59XG4uY2FyZF9idXNpbmVzc19tYWluX2xvZ29fd3JhcGVye1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cbi5jYXJkX2J1c2luZXNzX21haW5fbG9nbyB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIHdpZHRoOiA4NSU7XG4gICAgaGVpZ2h0OiA4NSU7XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKCcuLi8uLi8uLi8uLi9hc3NldHMvaW1nL3Rlc3RfbG9nby9sb2dvX3NoYXJpa2F2YS5wbmcnKTtcbiAgICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICAgIGJhY2tncm91bmQtc2l6ZTogMTAwJSAxMDAlO1xufVxuLm5hbWVfY29mZmVob3VzZSB7XG4gICAgbWFyZ2luOiAwIDAgNXB4IDVweDtcbiAgICBmb250LXNpemU6IDE3cHQ7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG4uY2FyZF9idXNpbmVzc19tYWluX3RpdGxlcyB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuLm5hbWVfb2ZfY291bnRzIHtcbiAgICBtYXJnaW46IDEwcHggMCAwIDVweDtcbn1cbi5jb3VudC5maXJzdCB7XG4gICAgcGFkZGluZy1sZWZ0OiAzMnB4O1xufVxuLmNvdW50IHtcbiAgICBwYWRkaW5nLWxlZnQ6IDI1cHg7XG59XG4uY2FyZF9hZGRfYnV0dG9uIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xufVxuLnBsdXNzIHtcbiAgICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoJy4uLy4uLy4uLy4uL2Fzc2V0cy9pbWcvY2FyZHMvYWRkL3BsdXMuc3ZnJyk7XG4gICAgYmFja2dyb3VuZC1wb3NpdGlvbjogY2VudGVyO1xuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gICAgYmFja2dyb3VuZC1zaXplOiAxNSU7XG4gICAgb3BhY2l0eTogLjM7IFxuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNzBweDtcbiAgICBtYXJnaW4tdG9wOiAxMHB4O1xufVxuLmRlc2NyaXB0aW9uIHtcbiAgICBjb2xvcjogcmdiYSgyMTMsIDIxMywgMjEzLCAxKTtcbiAgICBtYXJnaW4tdG9wOiAtMTBweDtcbn0iLCIubWFpbl9zZWN0aW9uIHtcbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC13cmFwOiB3cmFwO1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4udGl0bGUge1xuICBtYXJnaW4tdG9wOiA1dmg7XG59XG5cbi50aXRsZSA+IGg0IHtcbiAgZm9udC1zaXplOiAyMHB0O1xuICBmb250LXdlaWdodDogYm9sZDtcbiAgbWFyZ2luLWxlZnQ6IDE1cHg7XG4gIGNvbG9yOiAjNDg0ODQ4O1xufVxuXG4uY2FyZF9idXNpbmVzc19tYWluLCAuY2FyZF9hZGRfYnV0dG9uIHtcbiAgd2lkdGg6IDkwJTtcbiAgaGVpZ2h0OiAxMjBweDtcbiAgbWFyZ2luLXRvcDogMTVweDtcbiAgYm9yZGVyLXJhZGl1czogNDJweDtcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiAwcHggNHB4IDIwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG4gIC1tb3otYm94LXNoYWRvdzogMHB4IDRweCAyMHB4IDBweCByZ2JhKDAsIDAsIDAsIDAuMTYpO1xuICBib3gtc2hhZG93OiAwcHggNnB4IDEycHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG59XG5cbi5jYXJkX2J1c2luZXNzX21haW5fbG9nb193cmFwZXIge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cblxuLmNhcmRfYnVzaW5lc3NfbWFpbl9sb2dvIHtcbiAgYm9yZGVyLXJhZGl1czogNTAlO1xuICB3aWR0aDogODUlO1xuICBoZWlnaHQ6IDg1JTtcbiAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL2ltZy90ZXN0X2xvZ28vbG9nb19zaGFyaWthdmEucG5nXCIpO1xuICBiYWNrZ3JvdW5kLXJlcGVhdDogbm8tcmVwZWF0O1xuICBiYWNrZ3JvdW5kLXNpemU6IDEwMCUgMTAwJTtcbn1cblxuLm5hbWVfY29mZmVob3VzZSB7XG4gIG1hcmdpbjogMCAwIDVweCA1cHg7XG4gIGZvbnQtc2l6ZTogMTdwdDtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG5cbi5jYXJkX2J1c2luZXNzX21haW5fdGl0bGVzIHtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4ubmFtZV9vZl9jb3VudHMge1xuICBtYXJnaW46IDEwcHggMCAwIDVweDtcbn1cblxuLmNvdW50LmZpcnN0IHtcbiAgcGFkZGluZy1sZWZ0OiAzMnB4O1xufVxuXG4uY291bnQge1xuICBwYWRkaW5nLWxlZnQ6IDI1cHg7XG59XG5cbi5jYXJkX2FkZF9idXR0b24ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbn1cblxuLnBsdXNzIHtcbiAgYmFja2dyb3VuZC1pbWFnZTogdXJsKFwiLi4vLi4vLi4vLi4vYXNzZXRzL2ltZy9jYXJkcy9hZGQvcGx1cy5zdmdcIik7XG4gIGJhY2tncm91bmQtcG9zaXRpb246IGNlbnRlcjtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgYmFja2dyb3VuZC1zaXplOiAxNSU7XG4gIG9wYWNpdHk6IDAuMztcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogNzBweDtcbiAgbWFyZ2luLXRvcDogMTBweDtcbn1cblxuLmRlc2NyaXB0aW9uIHtcbiAgY29sb3I6ICNkNWQ1ZDU7XG4gIG1hcmdpbi10b3A6IC0xMHB4O1xufSJdfQ== */";
+    __webpack_exports__["default"] = ".main_section {\n  display: -webkit-box;\n  display: flex;\n  flex-wrap: wrap;\n  -webkit-box-pack: center;\n          justify-content: center;\n  position: relative;\n}\n\n.title {\n  margin-top: 5vh;\n}\n\n.title > h4 {\n  font-size: 20pt;\n  font-weight: bold;\n  margin-left: 15px;\n  color: #484848;\n}\n\n.card_business_main, .card_add_button {\n  width: 90%;\n  height: 120px;\n  margin-top: 15px;\n  border-radius: 42px;\n  box-shadow: 0px 6px 12px 0px rgba(0, 0, 0, 0.16);\n}\n\n.card_business_main_logo_wraper {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n          align-items: center;\n}\n\n.card_business_main_logo {\n  border-radius: 50%;\n  width: 85%;\n  height: 85%;\n  background-image: url('stub_logo.png');\n  background-repeat: no-repeat;\n  background-size: 100% 100%;\n}\n\n.name_coffehouse {\n  margin: 0 0 5px 5px;\n  font-size: 17pt;\n  font-weight: bold;\n}\n\n.card_business_main_titles {\n  position: relative;\n}\n\n.name_of_counts {\n  margin: 10px 0 0 5px;\n}\n\n.count.first {\n  padding-left: 32px;\n}\n\n.count {\n  padding-left: 25px;\n}\n\n.card_add_button {\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: center;\n          justify-content: center;\n}\n\n.pluss {\n  background-image: url('plus.svg');\n  background-position: center;\n  background-repeat: no-repeat;\n  background-size: 15%;\n  opacity: 0.3;\n  width: 100%;\n  height: 70px;\n  margin-top: 10px;\n}\n\n.description {\n  color: #d5d5d5;\n  margin-top: -10px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3RvbnkvVGFwQW5kVGFrZV92MS4wL3NyYy9hcHAvbWFpbi5wYWdlcy9hZG1pbi9hZG1pbi1jb2ZmZWUtaG91c2VzL2FkbWluLWNvZmZlZS1ob3VzZXMucGFnZS5zY3NzIiwic3JjL2FwcC9tYWluLnBhZ2VzL2FkbWluL2FkbWluLWNvZmZlZS1ob3VzZXMvYWRtaW4tY29mZmVlLWhvdXNlcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSxlQUFBO0VBQ0Esd0JBQUE7VUFBQSx1QkFBQTtFQUNBLGtCQUFBO0FDQ0o7O0FEQ0E7RUFDSSxlQUFBO0FDRUo7O0FEQUE7RUFDSSxlQUFBO0VBQ0EsaUJBQUE7RUFDQSxpQkFBQTtFQUNBLGNBQUE7QUNHSjs7QURBQTtFQUNJLFVBQUE7RUFDQSxhQUFBO0VBQ0EsZ0JBQUE7RUFDQSxtQkFBQTtFQUdBLGdEQUFBO0FDR0o7O0FEREE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0VBQ0EseUJBQUE7VUFBQSxtQkFBQTtBQ0lKOztBREZBO0VBQ0ksa0JBQUE7RUFDQSxVQUFBO0VBQ0EsV0FBQTtFQUNBLHNDQUFBO0VBQ0EsNEJBQUE7RUFDQSwwQkFBQTtBQ0tKOztBREhBO0VBQ0ksbUJBQUE7RUFDQSxlQUFBO0VBQ0EsaUJBQUE7QUNNSjs7QURKQTtFQUNJLGtCQUFBO0FDT0o7O0FETEE7RUFDSSxvQkFBQTtBQ1FKOztBRE5BO0VBQ0ksa0JBQUE7QUNTSjs7QURQQTtFQUNJLGtCQUFBO0FDVUo7O0FEUkE7RUFDSSxvQkFBQTtFQUFBLGFBQUE7RUFDQSx3QkFBQTtVQUFBLHVCQUFBO0FDV0o7O0FEVEE7RUFDSSxpQ0FBQTtFQUNBLDJCQUFBO0VBQ0EsNEJBQUE7RUFDQSxvQkFBQTtFQUNBLFlBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtFQUNBLGdCQUFBO0FDWUo7O0FEVkE7RUFDSSxjQUFBO0VBQ0EsaUJBQUE7QUNhSiIsImZpbGUiOiJzcmMvYXBwL21haW4ucGFnZXMvYWRtaW4vYWRtaW4tY29mZmVlLWhvdXNlcy9hZG1pbi1jb2ZmZWUtaG91c2VzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5tYWluX3NlY3Rpb24ge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC13cmFwOiB3cmFwO1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cbi50aXRsZSB7XG4gICAgbWFyZ2luLXRvcDogNXZoO1xufVxuLnRpdGxlID4gaDQge1xuICAgIGZvbnQtc2l6ZTogMjBwdDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcbiAgICBjb2xvcjogIzQ4NDg0ODtcbiAgICBcbn1cbi5jYXJkX2J1c2luZXNzX21haW4sIC5jYXJkX2FkZF9idXR0b24ge1xuICAgIHdpZHRoOiA5MCU7XG4gICAgaGVpZ2h0OiAxMjBweDtcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDQycHg7XG4gICAgLXdlYmtpdC1ib3gtc2hhZG93OiAwcHggNHB4IDIwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG4gICAgLW1vei1ib3gtc2hhZG93OiAgICAwcHggNHB4IDIwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG4gICAgYm94LXNoYWRvdzogICAgICAgICAwcHggNnB4IDEycHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG59XG4uY2FyZF9idXNpbmVzc19tYWluX2xvZ29fd3JhcGVye1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cbi5jYXJkX2J1c2luZXNzX21haW5fbG9nbyB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIHdpZHRoOiA4NSU7XG4gICAgaGVpZ2h0OiA4NSU7XG4gICAgYmFja2dyb3VuZC1pbWFnZTogdXJsKCcuLi8uLi8uLi8uLi9hc3NldHMvaW1nL3N0dWIvc3R1Yl9sb2dvLnBuZycpO1xuICAgIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gICAgYmFja2dyb3VuZC1zaXplOiAxMDAlIDEwMCU7XG59XG4ubmFtZV9jb2ZmZWhvdXNlIHtcbiAgICBtYXJnaW46IDAgMCA1cHggNXB4O1xuICAgIGZvbnQtc2l6ZTogMTdwdDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbn1cbi5jYXJkX2J1c2luZXNzX21haW5fdGl0bGVzIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG4ubmFtZV9vZl9jb3VudHMge1xuICAgIG1hcmdpbjogMTBweCAwIDAgNXB4O1xufVxuLmNvdW50LmZpcnN0IHtcbiAgICBwYWRkaW5nLWxlZnQ6IDMycHg7XG59XG4uY291bnQge1xuICAgIHBhZGRpbmctbGVmdDogMjVweDtcbn1cbi5jYXJkX2FkZF9idXR0b24ge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG4ucGx1c3Mge1xuICAgIGJhY2tncm91bmQtaW1hZ2U6IHVybCgnLi4vLi4vLi4vLi4vYXNzZXRzL2ltZy9jYXJkcy9hZGQvcGx1cy5zdmcnKTtcbiAgICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XG4gICAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgICBiYWNrZ3JvdW5kLXNpemU6IDE1JTtcbiAgICBvcGFjaXR5OiAuMzsgXG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiA3MHB4O1xuICAgIG1hcmdpbi10b3A6IDEwcHg7XG59XG4uZGVzY3JpcHRpb24ge1xuICAgIGNvbG9yOiByZ2JhKDIxMywgMjEzLCAyMTMsIDEpO1xuICAgIG1hcmdpbi10b3A6IC0xMHB4O1xufSIsIi5tYWluX3NlY3Rpb24ge1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbGV4LXdyYXA6IHdyYXA7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBwb3NpdGlvbjogcmVsYXRpdmU7XG59XG5cbi50aXRsZSB7XG4gIG1hcmdpbi10b3A6IDV2aDtcbn1cblxuLnRpdGxlID4gaDQge1xuICBmb250LXNpemU6IDIwcHQ7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xuICBtYXJnaW4tbGVmdDogMTVweDtcbiAgY29sb3I6ICM0ODQ4NDg7XG59XG5cbi5jYXJkX2J1c2luZXNzX21haW4sIC5jYXJkX2FkZF9idXR0b24ge1xuICB3aWR0aDogOTAlO1xuICBoZWlnaHQ6IDEyMHB4O1xuICBtYXJnaW4tdG9wOiAxNXB4O1xuICBib3JkZXItcmFkaXVzOiA0MnB4O1xuICAtd2Via2l0LWJveC1zaGFkb3c6IDBweCA0cHggMjBweCAwcHggcmdiYSgwLCAwLCAwLCAwLjE2KTtcbiAgLW1vei1ib3gtc2hhZG93OiAwcHggNHB4IDIwcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xNik7XG4gIGJveC1zaGFkb3c6IDBweCA2cHggMTJweCAwcHggcmdiYSgwLCAwLCAwLCAwLjE2KTtcbn1cblxuLmNhcmRfYnVzaW5lc3NfbWFpbl9sb2dvX3dyYXBlciB7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xufVxuXG4uY2FyZF9idXNpbmVzc19tYWluX2xvZ28ge1xuICBib3JkZXItcmFkaXVzOiA1MCU7XG4gIHdpZHRoOiA4NSU7XG4gIGhlaWdodDogODUlO1xuICBiYWNrZ3JvdW5kLWltYWdlOiB1cmwoXCIuLi8uLi8uLi8uLi9hc3NldHMvaW1nL3N0dWIvc3R1Yl9sb2dvLnBuZ1wiKTtcbiAgYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDtcbiAgYmFja2dyb3VuZC1zaXplOiAxMDAlIDEwMCU7XG59XG5cbi5uYW1lX2NvZmZlaG91c2Uge1xuICBtYXJnaW46IDAgMCA1cHggNXB4O1xuICBmb250LXNpemU6IDE3cHQ7XG4gIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuXG4uY2FyZF9idXNpbmVzc19tYWluX3RpdGxlcyB7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbn1cblxuLm5hbWVfb2ZfY291bnRzIHtcbiAgbWFyZ2luOiAxMHB4IDAgMCA1cHg7XG59XG5cbi5jb3VudC5maXJzdCB7XG4gIHBhZGRpbmctbGVmdDogMzJweDtcbn1cblxuLmNvdW50IHtcbiAgcGFkZGluZy1sZWZ0OiAyNXB4O1xufVxuXG4uY2FyZF9hZGRfYnV0dG9uIHtcbiAgZGlzcGxheTogZmxleDtcbiAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG59XG5cbi5wbHVzcyB7XG4gIGJhY2tncm91bmQtaW1hZ2U6IHVybChcIi4uLy4uLy4uLy4uL2Fzc2V0cy9pbWcvY2FyZHMvYWRkL3BsdXMuc3ZnXCIpO1xuICBiYWNrZ3JvdW5kLXBvc2l0aW9uOiBjZW50ZXI7XG4gIGJhY2tncm91bmQtcmVwZWF0OiBuby1yZXBlYXQ7XG4gIGJhY2tncm91bmQtc2l6ZTogMTUlO1xuICBvcGFjaXR5OiAwLjM7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDcwcHg7XG4gIG1hcmdpbi10b3A6IDEwcHg7XG59XG5cbi5kZXNjcmlwdGlvbiB7XG4gIGNvbG9yOiAjZDVkNWQ1O1xuICBtYXJnaW4tdG9wOiAtMTBweDtcbn0iXX0= */";
     /***/
   },
 
@@ -414,17 +414,78 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
     "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var AdminCoffeeHousesPage = /*#__PURE__*/function () {
-      function AdminCoffeeHousesPage(nav) {
+      function AdminCoffeeHousesPage(nav, http, Auth, router) {
         _classCallCheck(this, AdminCoffeeHousesPage);
 
         this.nav = nav;
+        this.http = http;
+        this.Auth = Auth;
+        this.router = router;
       }
 
       _createClass(AdminCoffeeHousesPage, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          this.user = this.Auth.getUser();
+          this.creatorId = this.user.id_user;
+          this.getUserCoffehouse();
+        }
+      }, {
+        key: "getUserCoffehouse",
+        value: function getUserCoffehouse() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _this = this;
+
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    console.log("Request to server....");
+                    _context.next = 3;
+                    return this.http.get('https://sc.grekagreka25.had.su/coffeehouse/userCoffeeHouses/', {
+                      creatorId: this.creatorId
+                    }, {}).then(function (answer) {
+                      console.log("Request to accepted....");
+                      console.log("Data return....");
+                      var parsedData = JSON.parse(answer.data);
+
+                      if (parsedData.status == 'error') {
+                        console.log("data for user ".concat(_this.creatorId, " not found!!!"));
+                        return false;
+                      }
+
+                      _this.coffeehouses = parsedData;
+                      console.log(_this.coffeehouses);
+                    });
+
+                  case 3:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
       }, {
         key: "goCreateCoffehouse",
         value: function goCreateCoffehouse() {
@@ -432,8 +493,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }, {
         key: "goCoffehouse",
-        value: function goCoffehouse() {
-          this.nav.navigateRoot(['/bussiness-info']);
+        value: function goCoffehouse(id) {
+          var navigationExtras = {
+            state: {
+              coffehouseId: id
+            }
+          };
+          this.router.navigate(['bussiness-info'], navigationExtras);
         }
       }]);
 
@@ -443,6 +509,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     AdminCoffeeHousesPage.ctorParameters = function () {
       return [{
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]
+      }, {
+        type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]
       }];
     };
 
@@ -454,7 +526,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./admin-coffee-houses.page.scss */
       "./src/app/main.pages/admin/admin-coffee-houses/admin-coffee-houses.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])], AdminCoffeeHousesPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_3__["HTTP"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])], AdminCoffeeHousesPage);
     /***/
   }
 }]);

@@ -252,6 +252,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/file-path/ngx */ "./node_modules/@ionic-native/file-path/ngx/index.js");
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+
 
 
 
@@ -265,7 +267,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const STORAGE_KEY = 'logo_image';
 let AdminSettingsPage = class AdminSettingsPage {
-    constructor(camera, file, httpClient, webview, actionSheetController, toastController, storage, plt, loadingController, ref, filePath, alertController, keyboard, http) {
+    constructor(camera, file, httpClient, webview, actionSheetController, toastController, storage, plt, loadingController, ref, filePath, alertController, keyboard, http, authServ, nav) {
         this.camera = camera;
         this.file = file;
         this.httpClient = httpClient;
@@ -280,17 +282,10 @@ let AdminSettingsPage = class AdminSettingsPage {
         this.alertController = alertController;
         this.keyboard = keyboard;
         this.http = http;
-        this.rquestData = {
-            data: {
-                name: 'shariKava2',
-                description: 'Coffeehouse shariKava2',
-                creatorId: 11,
-                pathLogo: '/logo/sharicava/11.png',
-                clients: '{"8":"4", "2":"7"}',
-                promoCups: 10,
-                socialNetwork: '@instagram @facebook',
-            }
-        };
+        this.authServ = authServ;
+        this.nav = nav;
+        this.bussinesName = '';
+        this.description = '';
         this.social_network_icons = {
             instagram: {
                 html: '<i class="fab fa-instagram"></i><style>i {color: #A4B0BE; margin-top: 5px;}</style>',
@@ -311,6 +306,7 @@ let AdminSettingsPage = class AdminSettingsPage {
         this.plt.ready().then(() => {
             this.loadStoredImages();
         });
+        this.user = this.authServ.getUser();
     }
     openAlert(message) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -572,20 +568,34 @@ let AdminSettingsPage = class AdminSettingsPage {
     }
     requestToCreate() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            var requestData = {
-                name: 'shariKava2',
-                description: 'Coffeehouse shariKava2',
-                creatorId: 11,
-                pathLogo: '/logo/sharicava/11.png',
-                clients: '{"8":"4", "2":"7"}',
+            const { bussinesName, description } = this;
+            const loading = yield this.loadingController.create({
+                cssClass: 'spinerColor',
+                message: "Создание...",
+                spinner: "lines",
+            });
+            loading.present();
+            let requestData = {
+                name: bussinesName,
+                description, creatorId: this.user.id_user,
+                pathLogo: `/logo/sharicava/${this.user.id_user}.png`,
+                clients: "{}",
                 promoCups: 10,
-                socialNetwork: '@instagram @facebook'
+                socialNetworks: '@instagram'
             };
-            yield this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', { data: { requestData } }, {}).then(answer => {
+            yield this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', requestData, {}).then(answer => {
+                setTimeout(() => {
+                    loading.dismiss();
+                }, 600);
                 console.log('Answer from server...');
                 console.log("Answer params: ");
-                let data = JSON.parse(answer.data);
-                console.log(JSON.parse(data));
+                console.log(answer);
+                if (JSON.parse(answer.data).status != 'error') {
+                    this.nav.navigateRoot('/admin-coffee-houses');
+                }
+                else {
+                    this.openAlert('<i class="fas fa-info-circle"></i>&#32;Проверте введеные данные....<br/>');
+                }
             }).catch(err => { console.log('Error: ' + err); });
         });
     }
@@ -604,7 +614,9 @@ AdminSettingsPage.ctorParameters = () => [
     { type: _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__["FilePath"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
     { type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"] },
-    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"] }
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] }
 ];
 AdminSettingsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -616,7 +628,7 @@ AdminSettingsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
         _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__["FilePath"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
-        _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"]])
+        _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])
 ], AdminSettingsPage);
 
 

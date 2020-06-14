@@ -5,34 +5,22 @@
     <h4>Ваши бизнесы</h4>
   </ion-row>
   <section class="main_section">
-    <!--
-        Это шаблон ->
-        Сделать перечень кофеен(бизнесов)
-        доступных даному пользователю.
-        Получить все бизнесы с сервера и вывести их
-        в порядке добавления на странциу,
-        то есть отсортировать по дате добавления.
-        При нажатии перенаправит на страницу кофейни
-        -->
-    <ion-row class="card_business_main animated fadeInLeft fast" (click)="goCoffehouse()">
-      <ion-col class="card_business_main_logo_wraper" size="4">
-        <div class="card_business_main_logo"></div>
-      </ion-col>
-      <ion-col class="card_business_main_titles" size="8">
-        <h5 class="name_coffehouse">ShariKava</h5>
-        <p class="name_of_counts">К-ство клиентов <span class="count first">134</span></p>
-        <p class="name_of_counts">Выдано карточек <span class="count">134</span></p>
-      </ion-col>
-    </ion-row>
-
-    <!--
-      Кнопка в вдие карточки.
-      Добавление нового бизнеса.
-      Перенаправляет на стриницу создания бизнеса
-    -->
     <ion-row class="card_add_button animated fadeInRight fast" (click)="goCreateCoffehouse()">
       <div class="pluss"></div>
       <div class="description">Доверьте Ваш бизнес нам!</div>
     </ion-row>
+    <ng-container *ngFor="let house of coffeehouses">
+      <ion-row class="card_business_main animated fadeInLeft fast" (click)="goCoffehouse(house.coffehousesId)">
+        <ion-col class="card_business_main_logo_wraper" size="4">
+          <div class="card_business_main_logo"></div>
+        </ion-col>
+        <ion-col class="card_business_main_titles" size="8">
+          <h5 class="name_coffehouse">{{ house.name }}</h5>
+          <p class="name_of_counts">К-ство клиентов 
+              <span class="count first" #elseBlock>0</span>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ng-container>
   </section>
 </ion-content>

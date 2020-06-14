@@ -3664,7 +3664,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n    <!--Add this button if role is Admin, and go to see scanCode method in qr.page.ts-->\n    <!-- <ion-button expand=\"full\" (click)=\"scanCode()\" color=\"secondary\">\n        Scan Code\n    </ion-button> -->\n\n    <section class=\"content\">\n        <div class=\"qr_code_div animated fadeInLeft fast\">\n            <ngx-qrcode\n            [qrc-element-type] = \"canvas\"\n            [qrc-value] = \"qrData\" \n            qrc-version=\"12\"\n            >\n        </ngx-qrcode>\n        <div class=\"description_div animated fadeInRight fast\">\n            <p class=\"description\">Действует во всех <br/>заведениях-партнерах <span class=\"TapWord\">Tap&nbsp;</span><span class=\"TakeWord\">& Take</span></p>\n        </div>\n        </div>\n        <div class=\"qr_code animated fadeInDown fast\" id=\"qr_code\" (click)=\"goHome()\">\n            <img src=\"../../assets/img/qr/close.svg\" alt=\"\" class=\"toolbar_img\">\n        </div>\n    </section>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n    <section class=\"content\">\n        <div class=\"qr_code_div animated fadeInLeft fast\">\n            <ngx-qrcode\n            [qrc-element-type] = \"canvas\"\n            [qrc-value] = \"qrData\" \n            qrc-version=\"12\"\n            >\n        </ngx-qrcode>\n        <div class=\"description_div animated fadeInRight fast\">\n            <p class=\"description\">Действует во всех <br/>заведениях-партнерах <span class=\"TapWord\">Tap&nbsp;</span><span class=\"TakeWord\">& Take</span></p>\n        </div>\n        </div>\n        <div class=\"qr_code animated fadeInDown fast\" id=\"qr_code\" (click)=\"goHome()\">\n            <img src=\"../../assets/img/qr/close.svg\" alt=\"\" class=\"toolbar_img\">\n        </div>\n    </section>\n</ion-content>\n");
 
 /***/ }),
 
@@ -3891,22 +3891,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
 /* harmony import */ var _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/base64-to-gallery/ngx */ "./node_modules/@ionic-native/base64-to-gallery/ngx/index.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+
 
 
 
 
 
 let QRPage = class QRPage {
-    constructor(barcodeScaner, base64ToGallary, toastCtrl, nav) {
+    constructor(barcodeScaner, base64ToGallary, toastCtrl, nav, auth) {
         this.barcodeScaner = barcodeScaner;
         this.base64ToGallary = base64ToGallary;
         this.toastCtrl = toastCtrl;
         this.nav = nav;
-        //qrData = 'https://forum.ionicframework.com/t/how-to-generate-a-qr-code-in-ionic/108736';
-        this.qrData = '{id_user: 1, sid: c623dfa81a6e702578582af3dacbcabf}';
+        this.auth = auth;
         this.scannedCode = null;
     }
     ngOnInit() {
+        this.user = this.auth.getUser();
+        this.userId = this.user.id_user;
+        this.qrData = this.userId.toString();
     }
     goHome() {
         this.nav.navigateRoot(['/home']);
@@ -3916,7 +3920,8 @@ QRPage.ctorParameters = () => [
     { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["BarcodeScanner"] },
     { type: _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_3__["Base64ToGallery"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"] }
 ];
 QRPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -3927,7 +3932,8 @@ QRPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_2__["BarcodeScanner"],
         _ionic_native_base64_to_gallery_ngx__WEBPACK_IMPORTED_MODULE_3__["Base64ToGallery"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"],
+        src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]])
 ], QRPage);
 
 

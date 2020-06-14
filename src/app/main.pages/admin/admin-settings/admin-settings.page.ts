@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/camera/ngx';
-import { ActionSheetController, ToastController, Platform, LoadingController, AlertController } from '@ionic/angular';
+import { ActionSheetController, ToastController, Platform, LoadingController, AlertController, NavController } from '@ionic/angular';
 import { File } from '@ionic-native/file/ngx';
 import { HttpClient } from '@angular/common/http';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { HTTP } from '@ionic-native/http/ngx';
+import { AuthService } from 'src/app/services/auth.service/auth.service';
 
 const STORAGE_KEY = 'logo_image';
 
@@ -19,17 +20,13 @@ const STORAGE_KEY = 'logo_image';
 })
 export class AdminSettingsPage implements OnInit {
 
-  rquestData = {
-    data: {
-      name: 'shariKava2',
-      description: 'Coffeehouse shariKava2',
-      creatorId: 11,
-      pathLogo: '/logo/sharicava/11.png',
-      clients: '{"8":"4", "2":"7"}',
-      promoCups: 10,
-      socialNetwork: '@instagram @facebook',
-    }
-  };
+  bussinesName = '';
+  description = '';
+  user: any;
+
+
+
+
 
   image: any;
   social_network_icons = {
@@ -52,13 +49,14 @@ export class AdminSettingsPage implements OnInit {
     private actionSheetController: ActionSheetController, private toastController: ToastController,
     private storage: Storage, private plt: Platform, private loadingController: LoadingController,
     private ref: ChangeDetectorRef, private filePath: FilePath, private alertController: AlertController,
-    private keyboard: Keyboard, private http: HTTP) { }
+    private keyboard: Keyboard, private http: HTTP, private authServ: AuthService, private nav: NavController) { }
 
   ngOnInit() {
     this.plt.ready().then(() => {
       this.loadStoredImages();
       
     });
+    this.user = this.authServ.getUser()
   }
 
   async openAlert(message) {
@@ -346,23 +344,39 @@ export class AdminSettingsPage implements OnInit {
   }
 
   async requestToCreate() {
-    var requestData = {
-      name: 'shariKava2',
-      description: 'Coffeehouse shariKava2',
-      creatorId: 11,
-      pathLogo: '/logo/sharicava/11.png',
-      clients: '{"8":"4", "2":"7"}',
-      promoCups: 10,
-      socialNetwork: '@instagram @facebook'
-    }
 
-    await this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', {data: {requestData}}, {}).then(answer => {
+    const { bussinesName, description } = this;
+    const loading = await this.loadingController.create({
+        cssClass: 'spinerColor',
+        message: "Создание...",
+        spinner: "lines",
+    });
+    loading.present();
+    let requestData = { 
+      name: bussinesName, 
+      description, creatorId: 
+      this.user.id_user,  
+      pathLogo: `/logo/sharicava/${this.user.id_user}.png`,
+      clients: "{}",
+      promoCups: 10,
+      socialNetworks: '@instagram'
+    }
+       
+    await this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', requestData, {}).then(answer => {
+        setTimeout(() => {
+          loading.dismiss();
+        }, 600);
         console.log('Answer from server...');
         console.log("Answer params: ");
-        let data = JSON.parse(answer.data);
-        console.log(JSON.parse(data));
-        
-      }).catch(err => {console.log('Error: ' + err);}) 
+        console.log(answer);
+        if(JSON.parse(answer.data).status != 'error')
+        {
+          this.nav.navigateRoot('/admin-coffee-houses');
+        } else {
+          this.openAlert('<i class="fas fa-info-circle"></i>&#32;Проверте введеные данные....<br/>')
+        }
+    }).catch(err => {console.log('Error: ' + err);}) 
+   
   }
 
 }

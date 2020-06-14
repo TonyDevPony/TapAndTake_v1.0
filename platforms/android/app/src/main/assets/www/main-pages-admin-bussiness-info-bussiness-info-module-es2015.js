@@ -244,27 +244,88 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
+
+
 
 
 
 let BussinessInfoPage = class BussinessInfoPage {
-    constructor(nav) {
+    constructor(nav, barcodeScaner, router, route, http, loading) {
         this.nav = nav;
+        this.barcodeScaner = barcodeScaner;
+        this.router = router;
+        this.route = route;
+        this.http = http;
+        this.loading = loading;
     }
     ngOnInit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.route.queryParamMap.subscribe(params => {
+                if (this.router.getCurrentNavigation().extras.state) {
+                    this.coffehouseId = this.router.getCurrentNavigation().extras.state.coffehouseId;
+                }
+            });
+            console.log(this.coffehouseId);
+        });
     }
     goAdminSettings() {
         alert("__method: goAdminSettings()");
     }
     goScanQrPage() {
-        alert("__method: goScanQrPage()");
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.barcodeScaner.scan().then(barcodeData => {
+                this.scannedCode = barcodeData;
+            });
+            this.id_user = this.getIdUserFromCode();
+            console.log(this.id_user);
+            const loading = yield this.loading.create({
+                cssClass: 'spinerColor',
+                message: "Вход...",
+                spinner: "lines",
+            });
+            loading.present();
+            this.requestToSetClients();
+            setTimeout(() => {
+                loading.dismiss();
+            }, 600);
+        });
+    }
+    // setClients
+    // https://sc.grekagreka25.had.su/coffeehouse/setClients/
+    // int $userId, int $coffeehouseId
+    requestToSetClients() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.http.get('https://sc.grekagreka25.had.su/coffeehouse/qrCode/', { userId: this.id_user, coffeehouseId: this.coffehouseId }, {})
+                .then(answer => {
+                console.log("Request to accepted....");
+                console.log("Data return....");
+                let parsedData = JSON.parse(answer.data);
+                if (parsedData.status == 'error') {
+                    console.log('error');
+                    return false;
+                }
+                console.log('success');
+            });
+        });
+    }
+    getIdUserFromCode() {
+        return this.scannedCode.text;
     }
     goToHomePage() {
         this.nav.navigateRoot('/home');
     }
 };
 BussinessInfoPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_3__["BarcodeScanner"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
 ];
 BussinessInfoPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -272,7 +333,8 @@ BussinessInfoPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./bussiness-info.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/main.pages/admin/bussiness-info/bussiness-info.page.html")).default,
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./bussiness-info.page.scss */ "./src/app/main.pages/admin/bussiness-info/bussiness-info.page.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"], _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_3__["BarcodeScanner"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_5__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
 ], BussinessInfoPage);
 
 

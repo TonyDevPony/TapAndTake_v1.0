@@ -462,11 +462,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @ionic-native/http/ngx */
     "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
 
     var STORAGE_KEY = 'logo_image';
 
     var AdminSettingsPage = /*#__PURE__*/function () {
-      function AdminSettingsPage(camera, file, httpClient, webview, actionSheetController, toastController, storage, plt, loadingController, ref, filePath, alertController, keyboard, http) {
+      function AdminSettingsPage(camera, file, httpClient, webview, actionSheetController, toastController, storage, plt, loadingController, ref, filePath, alertController, keyboard, http, authServ, nav) {
         _classCallCheck(this, AdminSettingsPage);
 
         this.camera = camera;
@@ -483,17 +489,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.alertController = alertController;
         this.keyboard = keyboard;
         this.http = http;
-        this.rquestData = {
-          data: {
-            name: 'shariKava2',
-            description: 'Coffeehouse shariKava2',
-            creatorId: 11,
-            pathLogo: '/logo/sharicava/11.png',
-            clients: '{"8":"4", "2":"7"}',
-            promoCups: 10,
-            socialNetwork: '@instagram @facebook'
-          }
-        };
+        this.authServ = authServ;
+        this.nav = nav;
+        this.bussinesName = '';
+        this.description = '';
         this.social_network_icons = {
           instagram: {
             html: '<i class="fab fa-instagram"></i><style>i {color: #A4B0BE; margin-top: 5px;}</style>',
@@ -519,6 +518,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.plt.ready().then(function () {
             _this.loadStoredImages();
           });
+          this.user = this.authServ.getUser();
         }
       }, {
         key: "openAlert",
@@ -894,35 +894,52 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "requestToCreate",
         value: function requestToCreate() {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-            var requestData;
+            var _this9 = this;
+
+            var bussinesName, description, loading, requestData;
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
                 switch (_context5.prev = _context5.next) {
                   case 0:
-                    requestData = {
-                      name: 'shariKava2',
-                      description: 'Coffeehouse shariKava2',
-                      creatorId: 11,
-                      pathLogo: '/logo/sharicava/11.png',
-                      clients: '{"8":"4", "2":"7"}',
-                      promoCups: 10,
-                      socialNetwork: '@instagram @facebook'
-                    };
+                    bussinesName = this.bussinesName, description = this.description;
                     _context5.next = 3;
-                    return this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', {
-                      data: {
-                        requestData: requestData
-                      }
-                    }, {}).then(function (answer) {
+                    return this.loadingController.create({
+                      cssClass: 'spinerColor',
+                      message: "Создание...",
+                      spinner: "lines"
+                    });
+
+                  case 3:
+                    loading = _context5.sent;
+                    loading.present();
+                    requestData = {
+                      name: bussinesName,
+                      description: description,
+                      creatorId: this.user.id_user,
+                      pathLogo: "/logo/sharicava/".concat(this.user.id_user, ".png"),
+                      clients: "{}",
+                      promoCups: 10,
+                      socialNetworks: '@instagram'
+                    };
+                    _context5.next = 8;
+                    return this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', requestData, {}).then(function (answer) {
+                      setTimeout(function () {
+                        loading.dismiss();
+                      }, 600);
                       console.log('Answer from server...');
                       console.log("Answer params: ");
-                      var data = JSON.parse(answer.data);
-                      console.log(JSON.parse(data));
+                      console.log(answer);
+
+                      if (JSON.parse(answer.data).status != 'error') {
+                        _this9.nav.navigateRoot('/admin-coffee-houses');
+                      } else {
+                        _this9.openAlert('<i class="fas fa-info-circle"></i>&#32;Проверте введеные данные....<br/>');
+                      }
                     }).catch(function (err) {
                       console.log('Error: ' + err);
                     });
 
-                  case 3:
+                  case 8:
                   case "end":
                     return _context5.stop();
                 }
@@ -964,6 +981,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"]
       }, {
         type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]
       }];
     };
 
@@ -975,7 +996,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./admin-settings.page.scss */
       "./src/app/main.pages/admin/admin-settings/admin-settings.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__["File"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_6__["WebView"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__["FilePath"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"]])], AdminSettingsPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__["File"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_6__["WebView"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__["FilePath"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_11__["AuthService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])], AdminSettingsPage);
     /***/
   }
 }]);

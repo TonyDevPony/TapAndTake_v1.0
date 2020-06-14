@@ -28,6 +28,11 @@ export class AuthService {
     return this.user;
   }
 
+  getUserId()
+  {
+    this.user_id;
+  }
+
   setAuthConf(user_id: number, user_sid: string) {
     this.user_id = user_id;
     this.user_sid = user_sid;

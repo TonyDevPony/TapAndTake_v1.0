@@ -1330,6 +1330,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return this.user;
         }
       }, {
+        key: "getUserId",
+        value: function getUserId() {
+          this.user_id;
+        }
+      }, {
         key: "setAuthConf",
         value: function setAuthConf(user_id, user_sid) {
           this.user_id = user_id;
