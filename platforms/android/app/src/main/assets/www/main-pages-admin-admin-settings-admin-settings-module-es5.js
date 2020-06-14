@@ -41,7 +41,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <section>\n    <ion-row>\n      <h4 class=\"title\">Создание бизнеса</h4>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"bussines_name\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-signature\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"bussinesName\" placeholder=\"BussinesName\" name=\"BussinesName\" id='bussinesName'/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"bussinesName\" class=\"form__label\">Название заведения <span class=\"necessarily\">*</span></label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"description_row\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-comment\"></i>\n      </ion-col>\n      <ion-col>\n        <textarea name=\"description\" id=\"description\" (keyup)=\"submit($event)\" [(ngModel)]=\"description\" cols=\"30\" rows=\"2\" ></textarea>\n        <label for=\"description\" class=\"label_description\">Описание</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"numb_row\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-mug-hot\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"number\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"numb_purchases\" placeholder=\"numb_purchases\" name=\"numb_purchases\" id='numb_purchases'/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"numb_purchases\" class=\"form__label\">Количество покупок <span class=\"necessarily\">*</span></label>\n        <div class=\"info_button\" (click)=\"callNumberPurchHelper()\" id=\"info_button_umber\"><i class=\"fas fa-info-circle\"></i></div>\n        <!-- <div class=\"info\" id=\"info_numb\"><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel enim ipsa, omnis dolorum eos aspernatur, at deserunt magnam commodi incidunt distinctio error repellat eaque nisi molestias possimus in animi ullam.</span></div> -->\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"logo_row\">\n      <ion-col class=\"logo_col animated fadeInLeft fast\"   (click)=\"selectImage()\" size=\"3\">\n        <ng-container *ngIf=\"image\">\n          <ion-avatar>\n            <img class=\"logo_img\" [src]=\"image.path\">\n          </ion-avatar>\n        </ng-container>\n        <ng-container *ngIf=\"!image\">\n          <ion-avatar>\n            <img src=\"../../../../assets/img/stub/stub_logo.png\">\n          </ion-avatar>\n        </ng-container>\n      </ion-col>\n      <ion-col class=\"select_button_col animated fadeInRight fast\">\n        <button class=\"select_button\" (click)=\"selectImage()\">Выбрать файл <span class=\"necessarily\">*</span></button>\n        <div class=\"info_button\" (click)=\"callLogoHelper()\" id=\"info_button_logo\"><i class=\"fas fa-info-circle\"></i></div>\n      </ion-col>\n    </ion-row>\n    <article class=\"social_network_block\" id=\"social_network_block\">\n    </article>\n    <ion-row class=\"add_network_button animated fadeInLeft fast\" (click)=\"selectSocialNetwork()\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-plus\"></i>\n      </ion-col>\n      <ion-col>\n        <span>Добавить соц. сеть</span>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton\">\n      <ion-button class=\"saveButton animated fadeInRight fast\" >Создать\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n  </section>\n\n</ion-content>\n";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <section>\n    <ion-row>\n      <h4 class=\"title\">Создание бизнеса</h4>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"bussines_name\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-signature\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"bussinesName\" placeholder=\"BussinesName\" name=\"BussinesName\" id='bussinesName'/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"bussinesName\" class=\"form__label\">Название заведения <span class=\"necessarily\">*</span></label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"description_row\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-comment\"></i>\n      </ion-col>\n      <ion-col>\n        <textarea name=\"description\" id=\"description\" (keyup)=\"submit($event)\" [(ngModel)]=\"description\" cols=\"30\" rows=\"2\" ></textarea>\n        <label for=\"description\" class=\"label_description\">Описание</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"numb_row\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-mug-hot\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"number\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"numb_purchases\" placeholder=\"numb_purchases\" name=\"numb_purchases\" id='numb_purchases'/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"numb_purchases\" class=\"form__label\">Количество покупок <span class=\"necessarily\">*</span></label>\n        <div class=\"info_button\" (click)=\"callNumberPurchHelper()\" id=\"info_button_umber\"><i class=\"fas fa-info-circle\"></i></div>\n        <!-- <div class=\"info\" id=\"info_numb\"><span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel enim ipsa, omnis dolorum eos aspernatur, at deserunt magnam commodi incidunt distinctio error repellat eaque nisi molestias possimus in animi ullam.</span></div> -->\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"logo_row\">\n      <ion-col class=\"logo_col animated fadeInLeft fast\"   (click)=\"selectImage()\" size=\"3\">\n        <ng-container *ngIf=\"image\">\n          <ion-avatar>\n            <img class=\"logo_img\" [src]=\"image.path\">\n          </ion-avatar>\n        </ng-container>\n        <ng-container *ngIf=\"!image\">\n          <ion-avatar>\n            <img src=\"../../../../assets/img/stub/stub_logo.png\">\n          </ion-avatar>\n        </ng-container>\n      </ion-col>\n      <ion-col class=\"select_button_col animated fadeInRight fast\">\n        <button class=\"select_button\" (click)=\"selectImage()\">Выбрать файл <span class=\"necessarily\">*</span></button>\n        <div class=\"info_button\" (click)=\"callLogoHelper()\" id=\"info_button_logo\"><i class=\"fas fa-info-circle\"></i></div>\n      </ion-col>\n    </ion-row>\n    <article class=\"social_network_block\" id=\"social_network_block\">\n    </article>\n    <ion-row class=\"add_network_button animated fadeInLeft fast\" (click)=\"selectSocialNetwork()\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-plus\"></i>\n      </ion-col>\n      <ion-col>\n        <span>Добавить соц. сеть</span>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton\">\n      <ion-button class=\"saveButton animated fadeInRight fast\" (click)=\"requestToCreate()\">Создать\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n  </section>\n\n</ion-content>\n";
     /***/
   },
 
@@ -456,16 +456,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @ionic-native/keyboard/ngx */
     "./node_modules/@ionic-native/keyboard/ngx/index.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
 
     var STORAGE_KEY = 'logo_image';
 
     var AdminSettingsPage = /*#__PURE__*/function () {
-      function AdminSettingsPage(camera, file, http, webview, actionSheetController, toastController, storage, plt, loadingController, ref, filePath, alertController, keyboard) {
+      function AdminSettingsPage(camera, file, httpClient, webview, actionSheetController, toastController, storage, plt, loadingController, ref, filePath, alertController, keyboard, http) {
         _classCallCheck(this, AdminSettingsPage);
 
         this.camera = camera;
         this.file = file;
-        this.http = http;
+        this.httpClient = httpClient;
         this.webview = webview;
         this.actionSheetController = actionSheetController;
         this.toastController = toastController;
@@ -476,6 +482,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.filePath = filePath;
         this.alertController = alertController;
         this.keyboard = keyboard;
+        this.http = http;
+        this.rquestData = {
+          data: {
+            name: 'shariKava2',
+            description: 'Coffeehouse shariKava2',
+            creatorId: 11,
+            pathLogo: '/logo/sharicava/11.png',
+            clients: '{"8":"4", "2":"7"}',
+            promoCups: 10,
+            socialNetwork: '@instagram @facebook'
+          }
+        };
         this.social_network_icons = {
           instagram: {
             html: '<i class="fab fa-instagram"></i><style>i {color: #A4B0BE; margin-top: 5px;}</style>',
@@ -872,6 +890,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             this.keyboard.hide();
           }
         }
+      }, {
+        key: "requestToCreate",
+        value: function requestToCreate() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            var requestData;
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    requestData = {
+                      name: 'shariKava2',
+                      description: 'Coffeehouse shariKava2',
+                      creatorId: 11,
+                      pathLogo: '/logo/sharicava/11.png',
+                      clients: '{"8":"4", "2":"7"}',
+                      promoCups: 10,
+                      socialNetwork: '@instagram @facebook'
+                    };
+                    _context5.next = 3;
+                    return this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', {
+                      data: {
+                        requestData: requestData
+                      }
+                    }, {}).then(function (answer) {
+                      console.log('Answer from server...');
+                      console.log("Answer params: ");
+                      var data = JSON.parse(answer.data);
+                      console.log(JSON.parse(data));
+                    }).catch(function (err) {
+                      console.log('Error: ' + err);
+                    });
+
+                  case 3:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
+          }));
+        }
       }]);
 
       return AdminSettingsPage;
@@ -904,6 +962,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"]
       }, {
         type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"]
       }];
     };
 
@@ -915,7 +975,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./admin-settings.page.scss */
       "./src/app/main.pages/admin/admin-settings/admin-settings.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__["File"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_6__["WebView"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__["FilePath"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"]])], AdminSettingsPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"], _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_4__["File"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"], _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_6__["WebView"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"], _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_8__["FilePath"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_9__["Keyboard"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_10__["HTTP"]])], AdminSettingsPage);
     /***/
   }
 }]);

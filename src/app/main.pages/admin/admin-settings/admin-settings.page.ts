@@ -7,6 +7,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Storage } from '@ionic/storage';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
 
 const STORAGE_KEY = 'logo_image';
 
@@ -17,6 +18,18 @@ const STORAGE_KEY = 'logo_image';
   styleUrls: ['./admin-settings.page.scss'],
 })
 export class AdminSettingsPage implements OnInit {
+
+  rquestData = {
+    data: {
+      name: 'shariKava2',
+      description: 'Coffeehouse shariKava2',
+      creatorId: 11,
+      pathLogo: '/logo/sharicava/11.png',
+      clients: '{"8":"4", "2":"7"}',
+      promoCups: 10,
+      socialNetwork: '@instagram @facebook',
+    }
+  };
 
   image: any;
   social_network_icons = {
@@ -35,11 +48,11 @@ export class AdminSettingsPage implements OnInit {
   };
   social_network_count = [];
 
-  constructor(private camera: Camera, private file: File, private http: HttpClient, private webview: WebView,
+  constructor(private camera: Camera, private file: File, private httpClient: HttpClient, private webview: WebView,
     private actionSheetController: ActionSheetController, private toastController: ToastController,
     private storage: Storage, private plt: Platform, private loadingController: LoadingController,
     private ref: ChangeDetectorRef, private filePath: FilePath, private alertController: AlertController,
-    private keyboard: Keyboard) { }
+    private keyboard: Keyboard, private http: HTTP) { }
 
   ngOnInit() {
     this.plt.ready().then(() => {
@@ -330,6 +343,26 @@ export class AdminSettingsPage implements OnInit {
     if(e.key == "Enter") {
       this.keyboard.hide();
     }
+  }
+
+  async requestToCreate() {
+    var requestData = {
+      name: 'shariKava2',
+      description: 'Coffeehouse shariKava2',
+      creatorId: 11,
+      pathLogo: '/logo/sharicava/11.png',
+      clients: '{"8":"4", "2":"7"}',
+      promoCups: 10,
+      socialNetwork: '@instagram @facebook'
+    }
+
+    await this.http.post('https://sc.grekagreka25.had.su/coffeehouse/AddHouse/', {data: {requestData}}, {}).then(answer => {
+        console.log('Answer from server...');
+        console.log("Answer params: ");
+        let data = JSON.parse(answer.data);
+        console.log(JSON.parse(data));
+        
+      }).catch(err => {console.log('Error: ' + err);}) 
   }
 
 }

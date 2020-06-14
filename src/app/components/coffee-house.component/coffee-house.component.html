@@ -1,20 +1,21 @@
 <section class="section_coffee_houses" (ionScroll)="scrol()">
     <ng-container *ngFor="let houses of coffeeHouses">
-
+      
       <ion-row class="card_coffeehouses_main animated fadeInLeft fast">
         <ion-col class="card_coffeehouses_main_logo_wraper" size="4">
           <div class="card_coffeehouses_main_logo"></div>
         </ion-col>
         <ion-col class="card_body">
-          <div class="name_coffehouse">Sharikava</div>
+          <div class="name_coffehouse">{{ houses.name }}</div>
           <div class="coffee_cups">
-            <ng-container *ngFor="let cup of coffeeCupsTest">
-              <ng-container *ngIf="cup.is_full">
+            <ng-container *ngFor="let cup of countCups">
+              <div class="cupps empty_cup"></div>
+              <!-- <ng-container *ngIf="cup.is_full">
                 <div class="cupps full_cup"></div>
               </ng-container>
               <ng-container *ngIf="!cup.is_full">
                 <div class="cupps empty_cup"></div>
-              </ng-container>
+              </ng-container> -->
             </ng-container>
           </div>
         </ion-col>
