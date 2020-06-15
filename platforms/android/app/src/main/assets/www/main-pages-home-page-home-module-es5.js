@@ -81,7 +81,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content scrollY=\"false\">\n    <ion-row class=\"row_buttons\">\n        <ion-col class=\"col_buttons animated fadeInLeft fast\">\n            <button (click)=\"viewFavorites()\" class=\"choise_button active\" id=\"favorites\">Избранные</button>\n        </ion-col>\n        <ion-col class=\"col_buttons animated fadeInRight fast\">\n            <button (click)=\"viewCoffeeHouses()\" class=\"choise_button\" id=\"coffee_house\">Кофейни</button>\n        </ion-col>\n    </ion-row>\n    <ion-row class=\"animated fadeIn fast\">\n        <ion-slides [options]=\"slideOpts\" #mySlider (ionSlideDidChange)=\"setButton()\">\n            <ion-slide>\n              <app-favorites></app-favorites>\n            </ion-slide>\n            <ion-slide>\n              <app-coffee-house></app-coffee-house>\n            </ion-slide>\n          </ion-slides>\n    </ion-row>\n</ion-content>\n<div class=\"toolbar animated fadeInUp fast\" id=\"toolbar\">\n    <div class=\"settings\" id=\"settings\" (click)=\"goUserSettings()\">\n        <img src=\"../../assets/img/home/settings.svg\" alt=\"\" class=\"toolbar_img\">\n    </div>\n    <div class=\"qr_code\" id=\"qr_code\" (click)=\"goQrPage()\">\n        <img src=\"../../assets/img/home/qr-code.svg\" alt=\"\" class=\"toolbar_img\">\n    </div>\n    <div class=\"business\" id=\"business\">\n        <img src=\"../../../assets/img/home/business-coffee.svg\" alt=\"\" (click)=\"goToAdminCoffeeHouses()\" class=\"toolbar_img\">\n    </div>\n</div>";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content scrollY=\"false\">\n    <ion-row class=\"row_buttons\">\n        <ion-col class=\"col_buttons animated fadeInLeft fast\">\n            <button (click)=\"viewCoffeeHouses()\" class=\"choise_button active\" id=\"favorites\">Кофейни</button>\n        </ion-col>\n        <ion-col class=\"col_buttons animated fadeInRight fast\">\n            <button (click)=\"viewFavorites()\" class=\"choise_button\" id=\"coffee_house\">Избранные</button>\n        </ion-col>\n    </ion-row>\n    <ion-row class=\"animated fadeIn fast\">\n        <ion-slides [options]=\"slideOpts\" #mySlider (ionSlideDidChange)=\"setButton()\">\n            <ion-slide>\n                <app-coffee-house></app-coffee-house>\n            </ion-slide>\n            <ion-slide>\n                <app-favorites></app-favorites>\n            </ion-slide>\n          </ion-slides>\n    </ion-row>\n</ion-content>\n<div class=\"toolbar animated fadeInUp fast\" id=\"toolbar\">\n    <div class=\"settings\" id=\"settings\" (click)=\"goUserSettings()\">\n        <img src=\"../../assets/img/home/settings.svg\" alt=\"\" class=\"toolbar_img\">\n    </div>\n    <div class=\"qr_code\" id=\"qr_code\" (click)=\"goQrPage()\">\n        <img src=\"../../assets/img/home/qr-code.svg\" alt=\"\" class=\"toolbar_img\">\n    </div>\n    <div class=\"business\" id=\"business\">\n        <img src=\"../../../assets/img/home/business-coffee.svg\" alt=\"\" (click)=\"goToAdminCoffeeHouses()\" class=\"toolbar_img\">\n    </div>\n</div>";
     /***/
   },
 
@@ -1114,15 +1114,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
         }
       }, {
-        key: "viewFavorites",
-        value: function viewFavorites() {
+        key: "viewCoffeeHouses",
+        value: function viewCoffeeHouses() {
           this.slides.slideTo(0, 600);
           this.changeButtonColor(0);
           return true;
         }
       }, {
-        key: "viewCoffeeHouses",
-        value: function viewCoffeeHouses() {
+        key: "viewFavorites",
+        value: function viewFavorites() {
           this.slides.slideTo(1, 600);
           this.changeButtonColor(1);
           return true;

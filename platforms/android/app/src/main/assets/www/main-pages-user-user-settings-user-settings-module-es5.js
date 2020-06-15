@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <section>\n    <ion-row>\n      <h4>Настройки</h4>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"user_name\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-user\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" placeholder=\"FullName\" name=\"fullname\" id='fullname' [value]=\"this.userSettingsInfo.name\"/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"fullname\" class=\"form__label\">Имя/Фамилия</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"email\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-envelope\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" placeholder=\"Email\" name=\"emailInp\" id='emailInp'  pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\" [value]=\"this.userSettingsInfo.email\"/> <!--[value]=\"this.userSettingsInfo.email\"-->\n        <label for=\"emailInp\" class=\"form__label\">Email</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"phone_number\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-mobile-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <input [textMask]=\"{mask: mask}\" type=\"tel\" (keyup)=\"submit($event)\" class=\"form__field\" placeholder=\"(___)___-___\" name=\"Tellephone\" id='tellephone'  pattern=\"^\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}$\" [value]=\"this.userSettingsInfo.phone\"/><!--[value]=\"this.userSettingsInfo.phone\"-->\n        <label for=\"tellephone\" class=\"form__label\">Телефон</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"birthday\">\n      <ion-col size=\"1\" class=\"icons date\">\n        <i class=\"far fa-calendar-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"date_label\">Дата рождения</ion-label>\n        <ion-datetime displayFormat=\"MM.DD.YYYY\" placeholder=\"Выберете Дату\" cancelText=\"Отменить\" doneText=\"Применить\"></ion-datetime>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"gender\">\n      <ion-col size=\"1\" class=\"icons gender\">\n        <i class=\"fas fa-venus-mars\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"gender_label\">Пол</ion-label>\n        <ion-select [interfaceOptions]=\"customActionSheetOptions\" interface=\"action-sheet\" placeholder=\"Не выбрано\" class=\"select_button\" cancelText=\"Отменить\">\n            <ion-select-option value=\"male\">Мужской</ion-select-option>\n            <ion-select-option value=\"female\">Женский</ion-select-option>\n        </ion-select>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton\">\n      <ion-button class=\"logOutButton animated fadeInLeft fast\" (click)=\"Logout()\">Выйти\n        <div class=\"logOutIcon\">\n        </div>\n      </ion-button>\n      <ion-button class=\"saveButton animated fadeInRight fast\" (click)=\"saveSettings()\">Сохранить\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n    <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>\n    </ion-row>\n  </section>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<app-header></app-header>\n\n<ion-content>\n  <section>\n    <ion-row>\n      <h4>Настройки</h4>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"user_name\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-user\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"name\" placeholder=\"FullName\" name=\"fullname\" id='fullname' [value]=\"this.userSettingsInfo.name\"/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"fullname\" class=\"form__label\">Имя/Фамилия</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"email\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-envelope\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"email\" placeholder=\"Email\" name=\"emailInp\" id='emailInp'  pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\" [value]=\"this.userSettingsInfo.email\"/> <!--[value]=\"this.userSettingsInfo.email\"-->\n        <label for=\"emailInp\" class=\"form__label\">Email</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"phone_number\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-mobile-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <input [textMask]=\"{mask: mask}\" type=\"tel\" (keyup)=\"submit($event)\" [(ngModel)]=\"phone\" class=\"form__field\" placeholder=\"(___)___-___\" name=\"Tellephone\" id='tellephone'  pattern=\"^\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}$\" [value]=\"this.userSettingsInfo.phone\"/><!--[value]=\"this.userSettingsInfo.phone\"-->\n        <label for=\"tellephone\" class=\"form__label\">Телефон</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"birthday\">\n      <ion-col size=\"1\" class=\"icons date\">\n        <i class=\"far fa-calendar-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"date_label\">Дата рождения</ion-label>\n        <ion-datetime displayFormat=\"MM.DD.YYYY\" placeholder=\"Выберете Дату\" [(ngModel)]=\"date\" cancelText=\"Отменить\" doneText=\"Применить\"></ion-datetime>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"gender\">\n      <ion-col size=\"1\" class=\"icons gender\">\n        <i class=\"fas fa-venus-mars\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"gender_label\">Пол</ion-label>\n        <ion-select [interfaceOptions]=\"customActionSheetOptions\" [(ngModel)]=\"gender\" interface=\"action-sheet\" placeholder=\"Не выбрано\" class=\"select_button\" cancelText=\"Отменить\">\n            <ion-select-option value=\"male\">Мужской</ion-select-option>\n            <ion-select-option value=\"female\">Женский</ion-select-option>\n        </ion-select>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton\">\n      <ion-button class=\"logOutButton animated fadeInLeft fast\" (click)=\"Logout()\">Выйти\n        <div class=\"logOutIcon\">\n        </div>\n      </ion-button>\n      <ion-button class=\"saveButton animated fadeInRight fast\" (click)=\"saveSettings()\">Сохранить\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n    <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>\n    </ion-row>\n  </section>\n</ion-content>\n";
     /***/
   },
 
@@ -249,6 +249,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic/angular */
     "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
     /*
       Ключ по которому лежит информация
       в сторейдже о юзере
@@ -258,20 +264,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var STORAGE_KEY_FOR_USER_INFO = 'user_info';
 
     var UserSettingsPage = /*#__PURE__*/function () {
-      function UserSettingsPage(keyboard, authService, storageService, nav) {
+      function UserSettingsPage(keyboard, authService, storageService, nav, http, loading) {
         _classCallCheck(this, UserSettingsPage);
 
         this.keyboard = keyboard;
         this.authService = authService;
         this.storageService = storageService;
         this.nav = nav;
+        this.http = http;
+        this.loading = loading;
+        this.gender = '';
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
       }
 
       _createClass(UserSettingsPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.userSettingsInfo = this.authService.getUser(); // Set hidden to bottom text when keyboard is show
+          this.userSettingsInfo = this.authService.getUser();
+          this.name = this.userSettingsInfo.name;
+          this.email = this.userSettingsInfo.email;
+          this.phone = this.userSettingsInfo.phone;
+          this.date = this.userSettingsInfo.birthDay;
+          this.gender = this.userSettingsInfo.gender;
+          console.log(this.userSettingsInfo); // Set hidden to bottom text when keyboard is show
 
           this.keyboard.onKeyboardWillShow().subscribe(function () {
             document.getElementById('text').style.display = 'none';
@@ -319,6 +334,64 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
+        key: "saveSettings",
+        value: function saveSettings() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            var _this2 = this;
+
+            var loadding, name, email, phone, date, gender;
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                    _context2.next = 2;
+                    return this.loading.create({
+                      cssClass: 'spinerColor',
+                      message: "Сохранение...",
+                      spinner: "lines"
+                    });
+
+                  case 2:
+                    loadding = _context2.sent;
+                    loadding.present();
+                    name = this.name, email = this.email, phone = this.phone, date = this.date, gender = this.gender;
+                    this.data = {
+                      name: name,
+                      email: email,
+                      phone: phone,
+                      date: date,
+                      gender: gender
+                    };
+                    console.log(this.data);
+                    console.log("Request to server....");
+                    this.http.get('https://sc.grekagreka25.had.su/user/update/', {
+                      userId: this.userSettingsInfo.id_user,
+                      name: name,
+                      email: email,
+                      phone: phone,
+                      birthDay: date,
+                      gender: gender
+                    }, {}).then(function (answer) {
+                      loadding.dismiss();
+                      console.log("Request to accepted....");
+                      console.log("Data return....");
+                      var dataParsed = JSON.parse(answer.data);
+                      _this2.userSettingsInfo.name = dataParsed[0].name;
+                      _this2.userSettingsInfo.email = dataParsed[0].email;
+                      _this2.userSettingsInfo.phone = dataParsed[0].phone;
+                      _this2.userSettingsInfo.birthDay = dataParsed[0].birthDay;
+                      _this2.userSettingsInfo.gender = dataParsed[0].gender;
+                    });
+
+                  case 9:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2, this);
+          }));
+        }
+      }, {
         key: "submit",
         value: function submit(e) {
           if (e.key == "Enter") {
@@ -339,6 +412,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"]
+      }, {
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__["HTTP"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"]
       }];
     };
 
@@ -350,7 +427,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! ./user-settings.page.scss */
       "./src/app/main.pages/user/user-settings/user-settings.page.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"]])], UserSettingsPage);
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"], src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"], _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__["HTTP"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"]])], UserSettingsPage);
     /***/
   }
 }]);

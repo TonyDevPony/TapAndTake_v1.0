@@ -10,7 +10,7 @@
         <i class="far fa-user"></i>
       </ion-col>
       <ion-col>
-        <input type="text" class="form__field" (keyup)="submit($event)" placeholder="FullName" name="fullname" id='fullname' [value]="this.userSettingsInfo.name"/> <!--[value]="this.userSettingsInfo.name"-->
+        <input type="text" class="form__field" (keyup)="submit($event)" [(ngModel)]="name" placeholder="FullName" name="fullname" id='fullname' [value]="this.userSettingsInfo.name"/> <!--[value]="this.userSettingsInfo.name"-->
         <label for="fullname" class="form__label">Имя/Фамилия</label>
       </ion-col>
     </ion-row>
@@ -19,7 +19,7 @@
         <i class="far fa-envelope"></i>
       </ion-col>
       <ion-col>
-        <input type="text" class="form__field" (keyup)="submit($event)" placeholder="Email" name="emailInp" id='emailInp'  pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$" [value]="this.userSettingsInfo.email"/> <!--[value]="this.userSettingsInfo.email"-->
+        <input type="text" class="form__field" (keyup)="submit($event)" [(ngModel)]="email" placeholder="Email" name="emailInp" id='emailInp'  pattern="^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$" [value]="this.userSettingsInfo.email"/> <!--[value]="this.userSettingsInfo.email"-->
         <label for="emailInp" class="form__label">Email</label>
       </ion-col>
     </ion-row>
@@ -28,7 +28,7 @@
         <i class="fas fa-mobile-alt"></i>
       </ion-col>
       <ion-col>
-        <input [textMask]="{mask: mask}" type="tel" (keyup)="submit($event)" class="form__field" placeholder="(___)___-___" name="Tellephone" id='tellephone'  pattern="^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" [value]="this.userSettingsInfo.phone"/><!--[value]="this.userSettingsInfo.phone"-->
+        <input [textMask]="{mask: mask}" type="tel" (keyup)="submit($event)" [(ngModel)]="phone" class="form__field" placeholder="(___)___-___" name="Tellephone" id='tellephone'  pattern="^\(\d{3}\)\s\d{3}-\d{2}-\d{2}$" [value]="this.userSettingsInfo.phone"/><!--[value]="this.userSettingsInfo.phone"-->
         <label for="tellephone" class="form__label">Телефон</label>
       </ion-col>
     </ion-row>
@@ -38,7 +38,7 @@
       </ion-col>
       <ion-col>
         <ion-label class="date_label">Дата рождения</ion-label>
-        <ion-datetime displayFormat="MM.DD.YYYY" placeholder="Выберете Дату" cancelText="Отменить" doneText="Применить"></ion-datetime>
+        <ion-datetime displayFormat="MM.DD.YYYY" placeholder="Выберете Дату" [(ngModel)]="date" cancelText="Отменить" doneText="Применить"></ion-datetime>
       </ion-col>
     </ion-row>
     <ion-row class="section_row_item animated fadeInLeft fast" id="gender">
@@ -47,7 +47,7 @@
       </ion-col>
       <ion-col>
         <ion-label class="gender_label">Пол</ion-label>
-        <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Не выбрано" class="select_button" cancelText="Отменить">
+        <ion-select [interfaceOptions]="customActionSheetOptions" [(ngModel)]="gender" interface="action-sheet" placeholder="Не выбрано" class="select_button" cancelText="Отменить">
             <ion-select-option value="male">Мужской</ion-select-option>
             <ion-select-option value="female">Женский</ion-select-option>
         </ion-select>

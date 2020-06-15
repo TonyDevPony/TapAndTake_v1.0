@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n  <section>\n    <ion-row>\n      <h4>Настройки</h4>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"user_name\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-user\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" placeholder=\"FullName\" name=\"fullname\" id='fullname' [value]=\"this.userSettingsInfo.name\"/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"fullname\" class=\"form__label\">Имя/Фамилия</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"email\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-envelope\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" placeholder=\"Email\" name=\"emailInp\" id='emailInp'  pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\" [value]=\"this.userSettingsInfo.email\"/> <!--[value]=\"this.userSettingsInfo.email\"-->\n        <label for=\"emailInp\" class=\"form__label\">Email</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"phone_number\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-mobile-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <input [textMask]=\"{mask: mask}\" type=\"tel\" (keyup)=\"submit($event)\" class=\"form__field\" placeholder=\"(___)___-___\" name=\"Tellephone\" id='tellephone'  pattern=\"^\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}$\" [value]=\"this.userSettingsInfo.phone\"/><!--[value]=\"this.userSettingsInfo.phone\"-->\n        <label for=\"tellephone\" class=\"form__label\">Телефон</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"birthday\">\n      <ion-col size=\"1\" class=\"icons date\">\n        <i class=\"far fa-calendar-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"date_label\">Дата рождения</ion-label>\n        <ion-datetime displayFormat=\"MM.DD.YYYY\" placeholder=\"Выберете Дату\" cancelText=\"Отменить\" doneText=\"Применить\"></ion-datetime>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"gender\">\n      <ion-col size=\"1\" class=\"icons gender\">\n        <i class=\"fas fa-venus-mars\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"gender_label\">Пол</ion-label>\n        <ion-select [interfaceOptions]=\"customActionSheetOptions\" interface=\"action-sheet\" placeholder=\"Не выбрано\" class=\"select_button\" cancelText=\"Отменить\">\n            <ion-select-option value=\"male\">Мужской</ion-select-option>\n            <ion-select-option value=\"female\">Женский</ion-select-option>\n        </ion-select>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton\">\n      <ion-button class=\"logOutButton animated fadeInLeft fast\" (click)=\"Logout()\">Выйти\n        <div class=\"logOutIcon\">\n        </div>\n      </ion-button>\n      <ion-button class=\"saveButton animated fadeInRight fast\" (click)=\"saveSettings()\">Сохранить\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n    <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>\n    </ion-row>\n  </section>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\n\n<ion-content>\n  <section>\n    <ion-row>\n      <h4>Настройки</h4>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"user_name\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-user\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"name\" placeholder=\"FullName\" name=\"fullname\" id='fullname' [value]=\"this.userSettingsInfo.name\"/> <!--[value]=\"this.userSettingsInfo.name\"-->\n        <label for=\"fullname\" class=\"form__label\">Имя/Фамилия</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"email\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"far fa-envelope\"></i>\n      </ion-col>\n      <ion-col>\n        <input type=\"text\" class=\"form__field\" (keyup)=\"submit($event)\" [(ngModel)]=\"email\" placeholder=\"Email\" name=\"emailInp\" id='emailInp'  pattern=\"^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$\" [value]=\"this.userSettingsInfo.email\"/> <!--[value]=\"this.userSettingsInfo.email\"-->\n        <label for=\"emailInp\" class=\"form__label\">Email</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"phone_number\">\n      <ion-col size=\"1\" class=\"icons\">\n        <i class=\"fas fa-mobile-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <input [textMask]=\"{mask: mask}\" type=\"tel\" (keyup)=\"submit($event)\" [(ngModel)]=\"phone\" class=\"form__field\" placeholder=\"(___)___-___\" name=\"Tellephone\" id='tellephone'  pattern=\"^\\(\\d{3}\\)\\s\\d{3}-\\d{2}-\\d{2}$\" [value]=\"this.userSettingsInfo.phone\"/><!--[value]=\"this.userSettingsInfo.phone\"-->\n        <label for=\"tellephone\" class=\"form__label\">Телефон</label>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInRight fast\" id=\"birthday\">\n      <ion-col size=\"1\" class=\"icons date\">\n        <i class=\"far fa-calendar-alt\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"date_label\">Дата рождения</ion-label>\n        <ion-datetime displayFormat=\"MM.DD.YYYY\" placeholder=\"Выберете Дату\" [(ngModel)]=\"date\" cancelText=\"Отменить\" doneText=\"Применить\"></ion-datetime>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"section_row_item animated fadeInLeft fast\" id=\"gender\">\n      <ion-col size=\"1\" class=\"icons gender\">\n        <i class=\"fas fa-venus-mars\"></i>\n      </ion-col>\n      <ion-col>\n        <ion-label class=\"gender_label\">Пол</ion-label>\n        <ion-select [interfaceOptions]=\"customActionSheetOptions\" [(ngModel)]=\"gender\" interface=\"action-sheet\" placeholder=\"Не выбрано\" class=\"select_button\" cancelText=\"Отменить\">\n            <ion-select-option value=\"male\">Мужской</ion-select-option>\n            <ion-select-option value=\"female\">Женский</ion-select-option>\n        </ion-select>\n      </ion-col>\n    </ion-row>\n    <ion-row class=\"rowButton\">\n      <ion-button class=\"logOutButton animated fadeInLeft fast\" (click)=\"Logout()\">Выйти\n        <div class=\"logOutIcon\">\n        </div>\n      </ion-button>\n      <ion-button class=\"saveButton animated fadeInRight fast\" (click)=\"saveSettings()\">Сохранить\n        <div class=\"arrow\">\n        </div>\n      </ion-button>\n    </ion-row>\n    <ion-row class=\"text animated fadeInDown fast\" id=\"text\">\n      <span>Возникли проблемы?&nbsp;</span><span>Тех. поддержка</span>\n    </ion-row>\n  </section>\n</ion-content>\n");
 
 /***/ }),
 
@@ -128,6 +128,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
 /* harmony import */ var src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/fileStorageForUser.service/file-storage-for-user.service */ "./src/app/services/fileStorageForUser.service/file-storage-for-user.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+
 
 
 
@@ -140,15 +142,24 @@ __webpack_require__.r(__webpack_exports__);
 */
 const STORAGE_KEY_FOR_USER_INFO = 'user_info';
 let UserSettingsPage = class UserSettingsPage {
-    constructor(keyboard, authService, storageService, nav) {
+    constructor(keyboard, authService, storageService, nav, http, loading) {
         this.keyboard = keyboard;
         this.authService = authService;
         this.storageService = storageService;
         this.nav = nav;
+        this.http = http;
+        this.loading = loading;
+        this.gender = '';
         this.mask = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/];
     }
     ngOnInit() {
         this.userSettingsInfo = this.authService.getUser();
+        this.name = this.userSettingsInfo.name;
+        this.email = this.userSettingsInfo.email;
+        this.phone = this.userSettingsInfo.phone;
+        this.date = this.userSettingsInfo.birthDay;
+        this.gender = this.userSettingsInfo.gender;
+        console.log(this.userSettingsInfo);
         // Set hidden to bottom text when keyboard is show
         this.keyboard.onKeyboardWillShow().subscribe(() => { document.getElementById('text').style.display = 'none'; });
         this.keyboard.onKeyboardWillHide().subscribe(() => { document.getElementById('text').style.display = 'flex'; });
@@ -174,6 +185,31 @@ let UserSettingsPage = class UserSettingsPage {
             });
         });
     }
+    saveSettings() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const loadding = yield this.loading.create({
+                cssClass: 'spinerColor',
+                message: "Сохранение...",
+                spinner: "lines",
+            });
+            loadding.present();
+            const { name, email, phone, date, gender } = this;
+            this.data = { name, email, phone, date, gender };
+            console.log(this.data);
+            console.log("Request to server....");
+            this.http.get('https://sc.grekagreka25.had.su/user/update/', { userId: this.userSettingsInfo.id_user, name: name, email: email, phone: phone, birthDay: date, gender: gender }, {}).then(answer => {
+                loadding.dismiss();
+                console.log("Request to accepted....");
+                console.log("Data return....");
+                let dataParsed = JSON.parse(answer.data);
+                this.userSettingsInfo.name = dataParsed[0].name;
+                this.userSettingsInfo.email = dataParsed[0].email;
+                this.userSettingsInfo.phone = dataParsed[0].phone;
+                this.userSettingsInfo.birthDay = dataParsed[0].birthDay;
+                this.userSettingsInfo.gender = dataParsed[0].gender;
+            });
+        });
+    }
     submit(e) {
         if (e.key == "Enter") {
             this.keyboard.hide();
@@ -184,7 +220,9 @@ UserSettingsPage.ctorParameters = () => [
     { type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"] },
     { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] },
     { type: src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"] },
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__["HTTP"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"] }
 ];
 UserSettingsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -195,7 +233,9 @@ UserSettingsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_2__["Keyboard"],
         src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
         src_app_services_fileStorageForUser_service_file_storage_for_user_service__WEBPACK_IMPORTED_MODULE_4__["FileStorageForUserService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"],
+        _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_6__["HTTP"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"]])
 ], UserSettingsPage);
 
 

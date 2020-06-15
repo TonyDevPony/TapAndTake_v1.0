@@ -101,6 +101,13 @@ textarea:focus{
         font-size: 10pt;
     }
 }
+textarea:not(:placeholder-shown){
+    ~.label_description {
+        top: -5px;
+        color: #484848;
+        font-size: 10pt;
+    }
+}
 section{ 
     position: relative;
 }

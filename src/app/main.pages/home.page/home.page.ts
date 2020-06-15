@@ -136,12 +136,12 @@ export class HomePage implements OnInit{
     }
   }
 
-  viewFavorites(){
+  viewCoffeeHouses(){
     this.slides.slideTo(0, 600);
     this.changeButtonColor(0);
     return true;
   }
-  viewCoffeeHouses(){
+  viewFavorites(){
     this.slides.slideTo(1, 600);
     this.changeButtonColor(1);
     return true;
