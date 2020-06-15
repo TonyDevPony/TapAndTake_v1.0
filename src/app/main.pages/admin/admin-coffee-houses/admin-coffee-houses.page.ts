@@ -22,13 +22,15 @@ export class AdminCoffeeHousesPage implements OnInit {
     this.user = this.Auth.getUser();
     this.creatorId = this.user.id_user;
 
-    this.getUserCoffehouse();
+    setTimeout(() => {
+      this.getUserCoffehouse();
+    }, 600);
   }
 
   async getUserCoffehouse()
   {
     console.log("Request to server....");
-    await this.http.get('https://sc.grekagreka25.had.su/coffeehouse/userCoffeeHouses/', {creatorId: this.creatorId}, {}).then((answer) => {
+    await this.http.get('https://sc.grekagreka25.had.su/coffeehouse/userCoffeeHouses/', { creatorId: this.creatorId }, {}).then((answer) => {
       console.log("Request to accepted....");
       console.log("Data return....");
       let parsedData = JSON.parse(answer.data);

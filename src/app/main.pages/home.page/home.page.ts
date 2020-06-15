@@ -49,6 +49,7 @@ export class HomePage implements OnInit{
   async ngOnInit() {
     this.userConf = this.authService.getAthConf();
     this.user = this.authService.getUser();
+    
     if(this.networkService.initializeConnection()) {
       this.connecticon = true;
       this.checkUserAndGoRequest();

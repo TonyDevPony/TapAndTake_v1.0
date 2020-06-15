@@ -263,7 +263,9 @@ let AdminCoffeeHousesPage = class AdminCoffeeHousesPage {
     ngOnInit() {
         this.user = this.Auth.getUser();
         this.creatorId = this.user.id_user;
-        this.getUserCoffehouse();
+        setTimeout(() => {
+            this.getUserCoffehouse();
+        }, 600);
     }
     getUserCoffehouse() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {

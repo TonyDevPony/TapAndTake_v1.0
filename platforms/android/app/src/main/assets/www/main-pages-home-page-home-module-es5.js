@@ -41,7 +41,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<p>\n  favorites works!\n</p>\n";
+    __webpack_exports__["default"] = "";
     /***/
   },
 
@@ -461,26 +461,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
-  "./src/app/components/favorites.component/favorites.component.scss":
-  /*!*************************************************************************!*\
-    !*** ./src/app/components/favorites.component/favorites.component.scss ***!
-    \*************************************************************************/
-
-  /*! exports provided: default */
-
-  /***/
-  function srcAppComponentsFavoritesComponentFavoritesComponentScss(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony default export */
-
-
-    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZmF2b3JpdGVzLmNvbXBvbmVudC9mYXZvcml0ZXMuY29tcG9uZW50LnNjc3MifQ== */";
-    /***/
-  },
-
-  /***/
   "./src/app/components/favorites.component/favorites.component.ts":
   /*!***********************************************************************!*\
     !*** ./src/app/components/favorites.component/favorites.component.ts ***!
@@ -511,19 +491,57 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic-native/http/ngx */
+    "./node_modules/@ionic-native/http/ngx/index.js");
+    /* harmony import */
+
+
+    var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/services/auth.service/auth.service */
+    "./src/app/services/auth.service/auth.service.ts");
 
     var FavoritesComponent = /*#__PURE__*/function () {
-      function FavoritesComponent() {
+      function FavoritesComponent(http, Auth) {
         _classCallCheck(this, FavoritesComponent);
+
+        this.http = http;
+        this.Auth = Auth;
+        this.coffeeHouses = [];
+        this.coffeeCups = [];
+        this.countCups = [];
       }
 
       _createClass(FavoritesComponent, [{
         key: "ngOnInit",
-        value: function ngOnInit() {}
+        value: function ngOnInit() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              while (1) {
+                switch (_context2.prev = _context2.next) {
+                  case 0:
+                  case "end":
+                    return _context2.stop();
+                }
+              }
+            }, _callee2);
+          }));
+        }
       }]);
 
       return FavoritesComponent;
     }();
+
+    FavoritesComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"]
+      }, {
+        type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]
+      }];
+    };
 
     FavoritesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
       selector: 'app-favorites',
@@ -531,9 +549,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /*! raw-loader!./favorites.component.html */
       "./node_modules/raw-loader/dist/cjs.js!./src/app/components/favorites.component/favorites.component.html")).default,
       styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
-      /*! ./favorites.component.scss */
-      "./src/app/components/favorites.component/favorites.component.scss")).default]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])], FavoritesComponent);
+      /*! ../coffee-house.component/coffee-house.component.scss */
+      "./src/app/components/coffee-house.component/coffee-house.component.scss")).default]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])], FavoritesComponent);
     /***/
   },
 
@@ -919,13 +937,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(HomePage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
             var _this3 = this;
 
             var message;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context3.prev = _context3.next) {
                   case 0:
                     this.userConf = this.authService.getAthConf();
                     this.user = this.authService.getUser();
@@ -958,10 +976,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 5:
                   case "end":
-                    return _context2.stop();
+                    return _context3.stop();
                 }
               }
-            }, _callee2, this);
+            }, _callee3, this);
           }));
         }
       }, {
@@ -977,13 +995,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "openAlert",
         value: function openAlert(message) {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
             var alert;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
-                    _context3.next = 2;
+                    _context4.next = 2;
                     return this.alertController.create({
                       header: 'Упс...',
                       message: message,
@@ -995,39 +1013,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    alert = _context3.sent;
-                    _context3.next = 5;
+                    alert = _context4.sent;
+                    _context4.next = 5;
                     return alert.present();
 
                   case 5:
-                  case "end":
-                    return _context3.stop();
-                }
-              }
-            }, _callee3, this);
-          }));
-        }
-      }, {
-        key: "presentToast",
-        value: function presentToast(message) {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var toast;
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
-              while (1) {
-                switch (_context4.prev = _context4.next) {
-                  case 0:
-                    _context4.next = 2;
-                    return this.toastController.create({
-                      message: message,
-                      duration: 1200,
-                      cssClass: 'toast'
-                    });
-
-                  case 2:
-                    toast = _context4.sent;
-                    toast.present();
-
-                  case 4:
                   case "end":
                     return _context4.stop();
                 }
@@ -1036,16 +1026,44 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }));
         }
       }, {
-        key: "getUserFromServer",
-        value: function getUserFromServer(dataForServer) {
+        key: "presentToast",
+        value: function presentToast(message) {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-            var _this4 = this;
-
+            var toast;
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
                 switch (_context5.prev = _context5.next) {
                   case 0:
                     _context5.next = 2;
+                    return this.toastController.create({
+                      message: message,
+                      duration: 1200,
+                      cssClass: 'toast'
+                    });
+
+                  case 2:
+                    toast = _context5.sent;
+                    toast.present();
+
+                  case 4:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
+          }));
+        }
+      }, {
+        key: "getUserFromServer",
+        value: function getUserFromServer(dataForServer) {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            var _this4 = this;
+
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                    _context6.next = 2;
                     return this.http.post('https://sc.grekagreka25.had.su/user/get/', dataForServer, {}).then(function (answer) {
                       console.log('Answer from server...');
                       console.log("Answer params: ");
@@ -1064,10 +1082,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 2:
                   case "end":
-                    return _context5.stop();
+                    return _context6.stop();
                 }
               }
-            }, _callee5, this);
+            }, _callee6, this);
           }));
         }
       }, {
@@ -1117,35 +1135,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goUserSettings",
         value: function goUserSettings() {
-          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+          return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
             var _this6 = this;
 
             var message, load;
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+            return regeneratorRuntime.wrap(function _callee7$(_context7) {
               while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context7.prev = _context7.next) {
                   case 0:
                     if (this.connecticon) {
-                      _context6.next = 4;
+                      _context7.next = 4;
                       break;
                     }
 
                     message = '<i class="fas fa-exclamation-circle"></i>&#32;Возможно отсутсвует подключение к интернету, попробуйте еще раз...';
                     this.openAlert(message);
-                    return _context6.abrupt("return", false);
+                    return _context7.abrupt("return", false);
 
                   case 4:
                     if (!this.authService.getUser()) {
-                      _context6.next = 8;
+                      _context7.next = 8;
                       break;
                     }
 
                     this.nav.navigateRoot(['/user-settings']);
-                    _context6.next = 12;
+                    _context7.next = 12;
                     break;
 
                   case 8:
-                    _context6.next = 10;
+                    _context7.next = 10;
                     return this.loadingController.create({
                       cssClass: 'spinerColor',
                       message: "Секунду...",
@@ -1153,7 +1171,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 10:
-                    load = _context6.sent;
+                    load = _context7.sent;
                     setTimeout(function () {
                       load.dismiss();
 
@@ -1162,10 +1180,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 12:
                   case "end":
-                    return _context6.stop();
+                    return _context7.stop();
                 }
               }
-            }, _callee6, this);
+            }, _callee7, this);
           }));
         }
       }, {

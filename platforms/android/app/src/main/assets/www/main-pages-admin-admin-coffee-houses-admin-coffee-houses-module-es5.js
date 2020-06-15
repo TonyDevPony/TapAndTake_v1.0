@@ -446,15 +446,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AdminCoffeeHousesPage, [{
         key: "ngOnInit",
         value: function ngOnInit() {
+          var _this = this;
+
           this.user = this.Auth.getUser();
           this.creatorId = this.user.id_user;
-          this.getUserCoffehouse();
+          setTimeout(function () {
+            _this.getUserCoffehouse();
+          }, 600);
         }
       }, {
         key: "getUserCoffehouse",
         value: function getUserCoffehouse() {
           return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-            var _this = this;
+            var _this2 = this;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
               while (1) {
@@ -470,12 +474,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       var parsedData = JSON.parse(answer.data);
 
                       if (parsedData.status == 'error') {
-                        console.log("data for user ".concat(_this.creatorId, " not found!!!"));
+                        console.log("data for user ".concat(_this2.creatorId, " not found!!!"));
                         return false;
                       }
 
-                      _this.coffeehouses = parsedData;
-                      console.log(_this.coffeehouses);
+                      _this2.coffeehouses = parsedData;
+                      console.log(_this2.coffeehouses);
                     });
 
                   case 3:

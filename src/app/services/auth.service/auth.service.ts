@@ -35,7 +35,7 @@ export class AuthService {
 
   setAuthConf(user_id: number, user_sid: string) {
     this.user_id = user_id;
-    this.user_sid = user_sid;
+    this.user_sid = user_sid;    
   }
 
   getAthConf() {

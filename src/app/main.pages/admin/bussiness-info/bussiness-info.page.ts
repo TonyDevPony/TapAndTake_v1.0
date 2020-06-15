@@ -28,10 +28,22 @@ export class BussinessInfoPage implements OnInit {
       }
     });
     console.log(this.coffehouseId);
+    this.getCoffehouse();
   }
 
   goAdminSettings() {
     alert("__method: goAdminSettings()");
+  }
+
+  async getCoffehouse()
+  {
+    await this.http.get('https://sc.grekagreka25.had.su/coffeehouse/getOne/', { id: this.coffehouseId }, {}).then(answer => {
+            console.log("Request to accepted....");
+            console.log("Data return....");
+            let parsedData = JSON.parse(answer.data);
+            console.log(parsedData);
+          
+    });
   }
 
   async goScanQrPage() {
@@ -44,7 +56,7 @@ export class BussinessInfoPage implements OnInit {
     console.log(this.id_user);
     const loading = await this.loading.create({
       cssClass: 'spinerColor',
-      message: "Вход...",
+      message: "Зачисление напитка...",
       spinner: "lines",
     });
     loading.present();
@@ -55,9 +67,6 @@ export class BussinessInfoPage implements OnInit {
     
   }
 
-  // setClients
-  // https://sc.grekagreka25.had.su/coffeehouse/setClients/
-  // int $userId, int $coffeehouseId
   async requestToSetClients()
   {
     await this.http.get('https://sc.grekagreka25.had.su/coffeehouse/qrCode/', {userId: this.id_user, coffeehouseId: this.coffehouseId}, {})
@@ -68,10 +77,10 @@ export class BussinessInfoPage implements OnInit {
             if(parsedData.status == 'error') 
             {
               console.log('error');
-              return false;
-            } 
-            console.log('success');
-            
+              
+            } else {
+              console.log('success');
+            }
           });
 
   }

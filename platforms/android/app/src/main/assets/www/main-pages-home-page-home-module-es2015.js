@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>\n  favorites works!\n</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("");
 
 /***/ }),
 
@@ -315,19 +315,6 @@ FavoritesComponentModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/components/favorites.component/favorites.component.scss":
-/*!*************************************************************************!*\
-  !*** ./src/app/components/favorites.component/favorites.component.scss ***!
-  \*************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZmF2b3JpdGVzLmNvbXBvbmVudC9mYXZvcml0ZXMuY29tcG9uZW50LnNjc3MifQ== */");
-
-/***/ }),
-
 /***/ "./src/app/components/favorites.component/favorites.component.ts":
 /*!***********************************************************************!*\
   !*** ./src/app/components/favorites.component/favorites.component.ts ***!
@@ -340,19 +327,60 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FavoritesComponent", function() { return FavoritesComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/auth.service/auth.service */ "./src/app/services/auth.service/auth.service.ts");
+
+
 
 
 let FavoritesComponent = class FavoritesComponent {
-    constructor() { }
-    ngOnInit() { }
+    constructor(http, Auth) {
+        this.http = http;
+        this.Auth = Auth;
+        this.coffeeHouses = [];
+        this.coffeeCups = [];
+        this.countCups = [];
+    }
+    ngOnInit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            // let toolbar = <HTMLElement>document.querySelector('#toolbar');
+            // let isScrolling;
+            // document.querySelector('.section_coffee_houses')
+            //         .addEventListener('scroll', function (e) {
+            //             /* 
+            //               Отлавливание остановки скролинга
+            //               Путем создания наперед таймаута
+            //               И с последуйщим срабатыванием ивента 'scroll'
+            //               отменяем текущий таймаут и устанавливаем следуйщий
+            //               если таймаут не удалился, значит скрол остановился
+            //             */
+            //            toolbar.style.display = 'none';
+            //             window.clearTimeout(isScrolling);
+            //             isScrolling = setTimeout( function() {
+            //               toolbar.style.display = 'flex';
+            //             }, 66);
+            //         });
+            // this.getCoffeeHousess();
+            // setTimeout(() => {
+            //   this.user = this.Auth.getAthConf();
+            //   this.creatorId = this.user.user_id;
+            //   this.favoriteCoffehouse = this.getCoffeeHousess();
+            // }, 1600);
+            // this.creatorId = this.user.user_id;
+        });
+    }
 };
+FavoritesComponent.ctorParameters = () => [
+    { type: _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"] },
+    { type: src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"] }
+];
 FavoritesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-favorites',
         template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./favorites.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/favorites.component/favorites.component.html")).default,
-        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./favorites.component.scss */ "./src/app/components/favorites.component/favorites.component.scss")).default]
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ../coffee-house.component/coffee-house.component.scss */ "./src/app/components/coffee-house.component/coffee-house.component.scss")).default]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_2__["HTTP"], src_app_services_auth_service_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"]])
 ], FavoritesComponent);
 
 
